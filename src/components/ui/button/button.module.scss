@@ -1,13 +1,91 @@
 .primary {
-  background-color: red;
+  padding: 6px 28px;
+
+  color: var(--color-light-100);
+
+  background-color: var(--color-accent-500);
+  border: 2px solid var(--color-accent-500);
+  border-radius: 4px;
+
+  &:hover {
+    background-color: var(--color-accent-300);
+  }
+
+  &:active {
+    background-color: var(--color-accent-700);
+  }
+
+  &:focus {
+    background-color: var(--color-accent-500);
+    border: 2px solid var(--color-info-500);
+  }
+
+  &:disabled {
+    color: var(--color-light-900);
+    background-color: var(--color-accent-900);
+  }
 }
 
 .secondary {
-  background-color: green;
+  padding: 6px 28px;
+
+  color: var(--color-light-100);
+
+  background-color: var(--color-dark-300);
+  border: 2px solid var(--color-dark-300);
+  border-radius: 4px;
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:active {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus {
+    background-color: var(--color-dark-300);
+    border: 2px solid var(--color-info-500);
+  }
+
+  &:disabled {
+    color: var(--color-light-900);
+    background-color: var(--color-dark-300);
+  }
 }
 
 .tertiary {
-  background-color: blue;
+  padding: 6px 28px;
+
+  color: var(--color-accent-500);
+
+  background-color: transparent;
+  border: 2px solid var(--color-accent-500);
+  border-radius: 4px;
+
+  &:hover {
+    color: var(--color-accent-700);
+    background-color: var(--color-dark-500);
+    border: 2px solid var(--color-accent-700);
+  }
+
+  &:active {
+    color: var(--color-accent-900);
+    background-color: var(--color-accent-700);
+    border: 2px solid var(--color-accent-700);
+  }
+
+  &:focus {
+    color: var(--color-accent-700);
+    background-color: transparent;
+    border: 2px solid var(--color-info-500);
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+    background-color: transparent;
+    border: 2px solid var(--color-accent-900);
+  }
 }
 
 .link {
