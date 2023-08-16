@@ -89,7 +89,7 @@
 .link2 {
   font: var(--font-family-primary);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-s);
   color: var(--color-info-500);
 }
