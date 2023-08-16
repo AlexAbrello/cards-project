@@ -1,9 +1,20 @@
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
+import type { Meta } from '@storybook/react'
 
-import s from './checkbox.module.css'
+import { CheckboxComponent } from './'
 
-export const CheckboxComponent = () => (
+import s from '@/components/ui/checkbox/checkbox.module.css'
+
+const meta = {
+  title: 'Components/Checkbox',
+  component: CheckboxComponent,
+  tags: ['autodocs'],
+} satisfies Meta<typeof CheckboxComponent>
+
+export default meta
+
+export const TheCheckbox = () => (
   <div className={s.wrapper}>
     <Checkbox.Root className={s.CheckboxRoot} defaultChecked>
       <Checkbox.Indicator className={s.CheckboxIndicator}>
