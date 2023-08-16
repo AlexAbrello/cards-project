@@ -1,0 +1,38 @@
+.CheckboxRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  background-color: var(--color-light-100);
+  border-radius: 1px;
+}
+
+.CheckboxRoot:hover {
+  box-shadow:
+    -5px 5px 7px var(--color-light-900),
+    5px -5px 7px var(--color-light-900),
+    -5px -5px 7px var(--color-light-900),
+    5px 5px 7px var(--color-light-900);
+}
+
+.CheckboxRoot:focus {
+  background-color: transparent;
+}
+
+.CheckboxIndicator {
+  color: var(--color-dark-900);
+}
+
+.Label {
+  margin-left: 10px;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+}
+
+.wrapper {
+  display: flex;
+}
