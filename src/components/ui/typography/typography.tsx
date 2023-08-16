@@ -1,5 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
+import s from './typography.module.css'
+
 export type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
   className?: string
@@ -8,7 +10,7 @@ export type TypographyProps<T extends ElementType = 'p'> = {
 export const Typography = <T extends ElementType = 'p'>(
   props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
 ) => {
-  const { className, as: Component = 'p', ...rest } = props
+  const { variant, className, as: Component = 'p', ...rest } = props
 
-  return <Component className={`${className}`} {...rest} />
+  return <Component className={`${s[variant]} ${className}`} {...rest} />
 }
