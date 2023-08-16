@@ -89,7 +89,32 @@
 }
 
 .link {
-  background-color: yellow;
+  padding: 6px 28px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-accent-500);
+
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:focus {
+    color: var(--color-accent-500);
+    border: 1px solid var(--color-info-500);
+    border-radius: 50px;
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+  }
 }
 
 .fullWidth {
