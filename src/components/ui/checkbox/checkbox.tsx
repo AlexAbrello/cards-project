@@ -1,15 +1,24 @@
-import * as Checkbox from '@radix-ui/react-checkbox'
-import { CheckIcon } from '@radix-ui/react-icons'
+import { ChangeEvent, FC } from 'react'
 
 import s from './checkbox.module.css'
 
-export const CheckboxComponent = () => (
-  <div className={s.wrapper}>
-    <Checkbox.Root className={s.CheckboxRoot} defaultChecked>
-      <Checkbox.Indicator className={s.CheckboxIndicator}>
-        <CheckIcon />
-      </Checkbox.Indicator>
-    </Checkbox.Root>
-    <label className={s.Label}>Accept terms and conditions.</label>
-  </div>
-)
+type CheckboxProps = {
+  label: string
+  checked: boolean
+  callBack: (checked: boolean) => void
+  disabled?: boolean
+}
+
+export const Checkbox: FC<CheckboxProps> = ({ label, callBack, disabled }) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    callBack(e.currentTarget.checked)
+  }
+
+  return (
+    <label className={s.formControl}>
+      <input type="checkbox" name="checkbox" onChange={onChangeHandler} />
+      <span className={`${disabled && s.disabled}`}></span>
+      {label}
+    </label>
+  )
+}

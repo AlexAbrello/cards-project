@@ -1,26 +1,47 @@
-import * as Checkbox from '@radix-ui/react-checkbox'
-import { CheckIcon } from '@radix-ui/react-icons'
+import { FC } from 'react'
+
 import { Meta } from '@storybook/react'
 
-import s from './checkbox.module.css'
-
-import { CheckboxComponent } from '@/components/ui/checkbox/checkbox.tsx'
+import s from '@/components/ui/checkbox/checkbox.module.css'
+import { Checkbox } from '@/components/ui/checkbox/checkbox.tsx'
 
 const meta = {
   title: 'Components/Checkbox',
-  component: CheckboxComponent,
+  component: Checkbox,
   tags: ['autodocs'],
-} satisfies Meta<typeof CheckboxComponent>
+} satisfies Meta<typeof Checkbox>
 
 export default meta
 
-export const TheCheckbox = () => (
-  <div className={s.wrapper}>
-    <Checkbox.Root className={s.CheckboxRoot} defaultChecked>
-      <Checkbox.Indicator className={s.CheckboxIndicator}>
-        <CheckIcon />
-      </Checkbox.Indicator>
-    </Checkbox.Root>
-    <label className={s.Label}>Accept terms and conditions.</label>
-  </div>
-)
+type CheckboxProps = {
+  label: string
+  checked: boolean
+  disabled: boolean
+}
+export const CheckedCheckbox: FC<CheckboxProps> = () => {
+  return (
+    <label className={s.formControl}>
+      <input type="checkbox" name="checkbox" checked={true} />
+      <span></span>
+      Some text
+    </label>
+  )
+}
+export const UncheckedCheckbox: FC<CheckboxProps> = () => {
+  return (
+    <label className={s.formControl}>
+      <input type="checkbox" name="checkbox" checked={false} />
+      <span></span>
+      Some text
+    </label>
+  )
+}
+export const CheckedCheckboxDisabled: FC<CheckboxProps> = () => {
+  return (
+    <label className={s.formControl}>
+      <input type="checkbox" name="checkbox" checked={true} disabled={true} />
+      <span className={s.disabled}></span>
+      Some text
+    </label>
+  )
+}
