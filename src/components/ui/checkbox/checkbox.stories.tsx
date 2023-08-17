@@ -1,10 +1,10 @@
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
-import type { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
-import { CheckboxComponent } from './'
+import s from './checkbox.module.css'
 
-import s from '@/components/ui/checkbox/checkbox.module.css'
+import { CheckboxComponent } from '@/components/ui/checkbox/checkbox.tsx'
 
 const meta = {
   title: 'Components/Checkbox',

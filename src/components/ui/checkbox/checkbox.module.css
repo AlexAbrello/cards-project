@@ -8,7 +8,9 @@
   width: 18px;
   height: 18px;
 
-  background-color: var(--color-light-100);
+  background-color: transparent;
+  border: 2px solid var(--color-light-900);
+  border-radius: 4px;
 }
 
 .CheckboxRoot:hover::before {
@@ -29,7 +31,6 @@
 
 .CheckboxRoot:focus {
   background-color: var(--color-light-100);
-  outline: 2px solid var(--color-light-900);
 }
 
 .CheckboxRoot:focus::after {
@@ -75,7 +76,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
+  width: 18px;
+  height: 18px;
+
   color: var(--color-dark-900);
+
+  background-color: var(--color-light-100);
 }
 
 .Label {
