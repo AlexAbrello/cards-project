@@ -1,15 +1,18 @@
 import { ChangeEvent, FC, useState } from 'react'
 
+import s from './textField.module.scss'
+
 type TextFieldProps = {
   disabled?: boolean
   callBack: (value: string) => void
+  type: 'text' | 'search' | 'password'
 }
 
-export const TextField: FC<TextFieldProps> = ({ callBack }) => {
+export const TextField: FC<TextFieldProps> = ({ callBack, type }) => {
   let [value, setValue] = useState('')
   let [error, setError] = useState<string | null>(null)
 
-  const addItemHandler = () => {
+  const textFieldHandler = () => {
     if (value.trim() !== '') {
       callBack(value)
       setValue('')
@@ -26,9 +29,19 @@ export const TextField: FC<TextFieldProps> = ({ callBack }) => {
       setError(null)
     }
     if (e.charCode === 13) {
-      addItemHandler()
+      textFieldHandler()
     }
   }
 
-  return <input value={value} onChange={onChangeInputHandler} onKeyPress={onKeyPressHandler} />
+  return (
+    <>
+      <input
+        type={type}
+        value={value}
+        onChange={onChangeInputHandler}
+        onKeyPress={onKeyPressHandler}
+      />
+      {error && <div className={s.error}>{error}</div>}
+    </>
+  )
 }
