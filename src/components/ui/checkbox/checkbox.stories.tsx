@@ -18,12 +18,12 @@ type CheckboxProps = {
   checked: boolean
   disabled: boolean
 }
-export const CheckedCheckbox: FC<CheckboxProps> = () => {
+export const CheckboxComponent: FC<CheckboxProps> = () => {
   return (
     <label className={s.formControl}>
       <input type="checkbox" name="checkbox" />
       <span></span>
-      Some text
+      Just the checkbox component
     </label>
   )
 }
@@ -31,9 +31,19 @@ export const CheckedCheckbox: FC<CheckboxProps> = () => {
 export const CheckedCheckboxDisabled: FC<CheckboxProps> = () => {
   return (
     <label className={s.formControl}>
-      <input type="checkbox" name="checkbox" disabled={true} />
+      <input type="checkbox" name="checkbox" checked={true} disabled={true} />
       <span></span>
-      Some text
+      Checked checkbox disabled
+    </label>
+  )
+}
+
+export const UncheckedCheckboxDisabled: FC<CheckboxProps> = () => {
+  return (
+    <label className={s.formControl}>
+      <input type="checkbox" name="checkbox" checked={false} disabled={true} />
+      <span></span>
+      Unchecked checkbox disabled
     </label>
   )
 }

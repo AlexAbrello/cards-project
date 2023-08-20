@@ -96,7 +96,7 @@ label span {
   width: 18px;
   height: 18px;
 
-  color: var(--color-dark-900);
+  color: var(--color-light-100);
 
   background-color: var(--color-dark-100);
   border-radius: 4px;
