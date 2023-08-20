@@ -4,7 +4,6 @@ import s from './checkbox.module.css'
 
 type CheckboxProps = {
   label: string
-  checked: boolean
   callBack: (checked: boolean) => void
   disabled?: boolean
 }
