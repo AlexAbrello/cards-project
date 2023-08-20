@@ -21,26 +21,18 @@ type CheckboxProps = {
 export const CheckedCheckbox: FC<CheckboxProps> = () => {
   return (
     <label className={s.formControl}>
-      <input type="checkbox" name="checkbox" checked={true} />
+      <input type="checkbox" name="checkbox" />
       <span></span>
       Some text
     </label>
   )
 }
-export const UncheckedCheckbox: FC<CheckboxProps> = () => {
-  return (
-    <label className={s.formControl}>
-      <input type="checkbox" name="checkbox" checked={false} />
-      <span></span>
-      Some text
-    </label>
-  )
-}
+
 export const CheckedCheckboxDisabled: FC<CheckboxProps> = () => {
   return (
     <label className={s.formControl}>
-      <input type="checkbox" name="checkbox" checked={true} disabled={true} />
-      <span className={s.disabled}></span>
+      <input type="checkbox" name="checkbox" disabled={true} />
+      <span></span>
       Some text
     </label>
   )

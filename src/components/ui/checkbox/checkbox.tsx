@@ -9,7 +9,7 @@ type CheckboxProps = {
   disabled?: boolean
 }
 
-export const Checkbox: FC<CheckboxProps> = ({ label, callBack, disabled }) => {
+export const Checkbox: FC<CheckboxProps> = ({ label, callBack }) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     callBack(e.currentTarget.checked)
   }
@@ -17,7 +17,7 @@ export const Checkbox: FC<CheckboxProps> = ({ label, callBack, disabled }) => {
   return (
     <label className={s.formControl}>
       <input type="checkbox" name="checkbox" onChange={onChangeHandler} />
-      <span className={`${disabled && s.disabled}`}></span>
+      <span></span>
       {label}
     </label>
   )
