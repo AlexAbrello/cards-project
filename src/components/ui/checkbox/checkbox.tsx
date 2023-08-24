@@ -6,7 +6,7 @@ import { CheckIcon } from '@radix-ui/react-icons'
 import style from './checkbox.module.css'
 
 type CheckboxProps = {
-  variant?: 'primary' | 'disabled'
+  variant?: 'primary'
   label: string
   callBack?: (checked: boolean) => void
   disabled?: boolean
