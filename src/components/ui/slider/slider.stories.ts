@@ -6,11 +6,6 @@ const meta = {
   title: 'Components/Slider',
   component: SliderComponent,
   tags: ['autodocs'],
-  argTypes: {
-    variant: {
-      control: { type: 'radio' },
-    },
-  },
 } satisfies Meta<typeof SliderComponent>
 
 export default meta
