@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useState } from 'react'
 import s from './textField.module.scss'
 
 type TextFieldProps = {
-  variant?: 'primary'
+  variant?: 'primary' | 'error'
   disabled?: boolean
   callBack?: (value: string) => void
   type?: 'text' | 'search' | 'password'
