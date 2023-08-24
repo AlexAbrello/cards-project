@@ -1,0 +1,46 @@
+.tabsRoot {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.tabsList {
+  display: flex;
+}
+
+.tabsTrigger {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 24px;
+
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--color-light-100);
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-300);
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:focus {
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-info-900);
+  }
+
+  &:active {
+    background-color: var(--color-accent-500);
+    border: 1px solid var(--color-accent-500);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-300);
+  }
+}
