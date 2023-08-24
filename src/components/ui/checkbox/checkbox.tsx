@@ -1,23 +1,28 @@
-import { ChangeEvent, FC } from 'react'
+import { FC } from 'react'
 
-import s from './checkbox.module.css'
+import * as Checkbox from '@radix-ui/react-checkbox'
+import { CheckIcon } from '@radix-ui/react-icons'
+
+import style from './checkbox.module.css'
 
 type CheckboxProps = {
+  variant?: 'primary' | 'disabled'
   label: string
-  callBack: (checked: boolean) => void
+  callBack?: (checked: boolean) => void
   disabled?: boolean
 }
 
-export const Checkbox: FC<CheckboxProps> = ({ label, callBack }) => {
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    callBack(e.currentTarget.checked)
-  }
-
+export const CheckboxComponent: FC<CheckboxProps> = ({ disabled, label }) => {
   return (
-    <label className={s.formControl}>
-      <input type="checkbox" name="checkbox" onChange={onChangeHandler} />
-      <span></span>
-      {label}
-    </label>
+    <div className={style.checkboxWrapper}>
+      <Checkbox.Root className={`${disabled ? style.CheckboxRootDisabled : style.CheckboxRoot}`}>
+        <Checkbox.Indicator
+          className={`${disabled ? style.CheckboxIndicatorDisabled : style.CheckboxIndicator}`}
+        >
+          <CheckIcon />
+        </Checkbox.Indicator>
+      </Checkbox.Root>
+      <label className={`${disabled ? style.LabelDisabled : style.Label}`}>{label}</label>
+    </div>
   )
 }
