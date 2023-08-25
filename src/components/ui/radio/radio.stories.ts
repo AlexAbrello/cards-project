@@ -17,7 +17,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Slider: Story = {
+export const RadioButton: Story = {
   args: {
     variant: 'primary',
     label: 'Radio button',
