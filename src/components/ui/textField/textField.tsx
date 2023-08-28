@@ -41,9 +41,9 @@ export const TextField: FC<TextFieldProps> = ({ callBack, type, placeholder, lab
       <label>{label}</label>
       <input
         type={type}
-        value={value}
-        onChange={onChangeInputHandler}
-        onKeyPress={onKeyPressHandler}
+        // value={value}
+        // onChange={onChangeInputHandler}
+        // onKeyPress={onKeyPressHandler}
         placeholder={placeholder}
         className={`${error && s.error}`}
         disabled={disabled}
