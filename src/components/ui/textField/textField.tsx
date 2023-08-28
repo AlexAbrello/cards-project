@@ -1,22 +1,21 @@
-import { ComponentProps, KeyboardEvent, forwardRef, useState } from 'react'
+import { ComponentProps, KeyboardEvent, forwardRef } from 'react'
 
 import s from './textField.module.scss'
 
 type TextFieldProps = {
   variant?: 'primary' | 'error'
   disabled?: boolean
+  error?: boolean
   callBack?: (value: string) => void
-  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   type?: 'text' | 'search' | 'password'
   placeholder: string
   label: string
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
 } & ComponentProps<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ callBack, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ error, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
 
-  let [error, setError] = useState<string | null>(null)
-
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (onEnter && e.key === 'Enter') {
       onEnter(e)
     }
@@ -29,13 +28,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ callBac
       <input
         ref={ref}
         type={type}
-        onKeyPress={onKeyPressHandler}
+        onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className={`${error && s.error}`}
         disabled={disabled}
         {...rest}
       />
-      {error && <div className={`${s.errorText}`}>{error}</div>}
+      {error && <div className={`${s.errorText}`}>Error</div>}
     </>
   )
 })

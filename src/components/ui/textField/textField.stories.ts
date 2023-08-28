@@ -23,5 +23,6 @@ export const TextFieldComponent: Story = {
     disabled: false,
     placeholder: 'Input',
     label: 'Some input text',
+    error: false,
   },
 }
