@@ -17,8 +17,8 @@ export const LoginForm = () => {
 
   return (
    <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField placeholder={'введите e-mail'} {...register('email')} label={'email'} />
-      <TextField placeholder={'введите пароль'} {...register('password')} label={'password'} type='password'/>
+      <TextField {...register('email')} label={'email'} />
+      <TextField {...register('password')} label={'password'} type='password'/>
       <CheckboxComponent {...register('rememberMe')} label={'Remember Me'} />
       <Button type="submit">Submit</Button>
     </form>
