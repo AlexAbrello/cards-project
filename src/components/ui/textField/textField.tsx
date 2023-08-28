@@ -3,9 +3,8 @@ import { ComponentProps, KeyboardEvent, forwardRef } from 'react'
 import s from './textField.module.scss'
 
 type TextFieldProps = {
-  variant?: 'primary' | 'error'
   disabled?: boolean
-  error?: boolean
+  errorMessage?: string
   callBack?: (value: string) => void
   type?: 'text' | 'search' | 'password'
   placeholder: string
@@ -13,7 +12,9 @@ type TextFieldProps = {
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
 } & ComponentProps<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ error, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ errorMessage, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
+
+  const showError = !!errorMessage && errorMessage.length > 0
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (onEnter && e.key === 'Enter') {
@@ -30,11 +31,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ error, 
         type={type}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className={`${error && s.error}`}
+        className={`${showError && s.error}`}
         disabled={disabled}
         {...rest}
       />
-      {error && <div className={`${s.errorText}`}>Error</div>}
+      {showError && <div className={`${s.errorText}`}>{errorMessage}</div>}
     </>
   )
 })
