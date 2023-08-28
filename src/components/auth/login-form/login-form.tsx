@@ -1,4 +1,4 @@
-import { Button, CheckboxComponent, TextField } from '@/components/ui'
+import { Button, TextField } from '@/components/ui'
 import { useForm } from 'react-hook-form'
 
 type FormValues = {
@@ -8,7 +8,6 @@ type FormValues = {
 }
 
 export const LoginForm = () => {
-
   const { register, handleSubmit } = useForm<FormValues>()
 
   const onSubmit = (data: FormValues) => {
@@ -17,12 +16,10 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField {...register('email')} label={'email'} placeholder='Enter e-mail' />
-      <TextField {...register('password')} label={'password'} placeholder='Enter the password' type='password' />
-      <CheckboxComponent {...register('rememberMe')} label={'Remember Me'} />
-      <Button type="submit">Submit</Button>
+      <TextField {...register('email')} label='email' placeholder='Enter e-mail' />
+      <TextField {...register('password')} label='password' placeholder='Enter password' type='password' />
+      {/* <CheckboxComponent {...register('rememberMe')} label='Remember Me' /> */}
+      <Button type='submit'>Submit</Button>
     </form>
   )
 }
-
-

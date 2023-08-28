@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { ComponentProps, KeyboardEvent, forwardRef, useState } from 'react'
 
 import s from './textField.module.scss'
 
@@ -6,49 +6,36 @@ type TextFieldProps = {
   variant?: 'primary' | 'error'
   disabled?: boolean
   callBack?: (value: string) => void
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   type?: 'text' | 'search' | 'password'
   placeholder: string
   label: string
-}
+} & ComponentProps<'input'>
 
-export const TextField: FC<TextFieldProps> = ({ callBack, type, placeholder, label, disabled }) => {
-  let [value, setValue] = useState('')
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ callBack, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
+
   let [error, setError] = useState<string | null>(null)
 
-  const textFieldHandler = () => {
-    if (value.trim() !== '') {
-      callBack?.(value)
-      setValue('')
-    } else {
-      setError('Title is required')
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (onEnter && e.key === 'Enter') {
+      onEnter(e)
     }
-  }
-
-  const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value)
-  }
-  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (error !== null) {
-      setError(null)
-    }
-    if (e.charCode === 13) {
-      textFieldHandler()
-    }
+    onKeyDown?.(e)
   }
 
   return (
     <>
       <label>{label}</label>
       <input
+        ref={ref}
         type={type}
-        // value={value}
-        // onChange={onChangeInputHandler}
-        // onKeyPress={onKeyPressHandler}
+        onKeyPress={onKeyPressHandler}
         placeholder={placeholder}
         className={`${error && s.error}`}
         disabled={disabled}
+        {...rest}
       />
       {error && <div className={`${s.errorText}`}>{error}</div>}
     </>
   )
-}
+})
