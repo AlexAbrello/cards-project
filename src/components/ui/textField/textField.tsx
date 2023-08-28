@@ -12,30 +12,31 @@ type TextFieldProps = {
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
 } & ComponentProps<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ errorMessage, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  ({ errorMessage, onEnter, onKeyDown, type, placeholder, label, disabled, ...rest }, ref) => {
+    const showError = !!errorMessage && errorMessage.length > 0
 
-  const showError = !!errorMessage && errorMessage.length > 0
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (onEnter && e.key === 'Enter') {
-      onEnter(e)
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (onEnter && e.key === 'Enter') {
+        onEnter(e)
+      }
+      onKeyDown?.(e)
     }
-    onKeyDown?.(e)
-  }
 
-  return (
-    <>
-      <label>{label}</label>
-      <input
-        ref={ref}
-        type={type}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        className={`${showError && s.error}`}
-        disabled={disabled}
-        {...rest}
-      />
-      {showError && <div className={`${s.errorText}`}>{errorMessage}</div>}
-    </>
-  )
-})
+    return (
+      <>
+        <label>{label}</label>
+        <input
+          ref={ref}
+          type={type}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          className={`${showError && s.error}`}
+          disabled={disabled}
+          {...rest}
+        />
+        {showError && <div className={`${s.errorText}`}>{errorMessage}</div>}
+      </>
+    )
+  }
+)

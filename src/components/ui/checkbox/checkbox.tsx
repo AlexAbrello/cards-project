@@ -15,10 +15,18 @@ type CheckboxProps = {
   onChange: (checked: boolean) => void
 }
 
-export const CheckboxComponent: FC<CheckboxProps> = ({ disabled, label, onChange, id, required, checked }) => {
+export const CheckboxComponent: FC<CheckboxProps> = ({
+  disabled,
+  label,
+  onChange,
+  id,
+  required,
+  checked,
+}) => {
   return (
     <div className={style.checkboxWrapper}>
-      <Checkbox.Root className={`${disabled ? style.CheckboxRootDisabled : style.CheckboxRoot}`}
+      <Checkbox.Root
+        className={`${disabled ? style.CheckboxRootDisabled : style.CheckboxRoot}`}
         checked={checked}
         onCheckedChange={onChange}
         required={required}
