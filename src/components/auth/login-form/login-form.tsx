@@ -1,5 +1,5 @@
-import { Button, TextField } from '@/components/ui'
-import { useForm } from 'react-hook-form'
+import { Button, CheckboxComponent, TextField } from '@/components/ui'
+import { useController, useForm } from 'react-hook-form'
 
 type FormValues = {
   email: string
@@ -8,17 +8,25 @@ type FormValues = {
 }
 
 export const LoginForm = () => {
-  const { register, handleSubmit } = useForm<FormValues>()
+  const { control, register, handleSubmit } = useForm<FormValues>()
 
   const onSubmit = (data: FormValues) => {
     console.log(data)
   }
 
+  const {
+    field: { value, onChange },
+  } = useController({
+    name: 'rememberMe',
+    control,
+    defaultValue: false,
+  })
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField {...register('email')} label='email' placeholder='Enter e-mail' />
       <TextField {...register('password')} label='password' placeholder='Enter password' type='password' />
-      {/* <CheckboxComponent {...register('rememberMe')} label='Remember Me' /> */}
+      <CheckboxComponent onChange={onChange} checked={value} label='Remember Me' />
       <Button type='submit'>Submit</Button>
     </form>
   )
