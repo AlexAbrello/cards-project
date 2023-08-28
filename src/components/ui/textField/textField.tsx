@@ -7,12 +7,11 @@ type TextFieldProps = {
   disabled?: boolean
   callBack?: (value: string) => void
   type?: 'text' | 'search' | 'password'
-  placeholder?: string
+  placeholder: string
   label: string
 }
 
 export const TextField: FC<TextFieldProps> = ({ callBack, type, placeholder, label, disabled }) => {
-
   let [value, setValue] = useState('')
   let [error, setError] = useState<string | null>(null)
 
@@ -45,7 +44,7 @@ export const TextField: FC<TextFieldProps> = ({ callBack, type, placeholder, lab
         value={value}
         onChange={onChangeInputHandler}
         onKeyPress={onKeyPressHandler}
-        placeholder={label}
+        placeholder={placeholder}
         className={`${error && s.error}`}
         disabled={disabled}
       />
