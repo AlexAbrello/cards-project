@@ -2,7 +2,7 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { Button, ControlledCheckbox, ControlledTextField } from '@/components/ui'
+import { Button, ControlledCheckbox, ControlledRadio, ControlledTextField } from '@/components/ui'
 import { FormValues, loginSchema } from '@/types/login-form/login-shema.ts'
 
 export const LoginForm = () => {
@@ -38,6 +38,7 @@ export const LoginForm = () => {
         placeholder={'Enter password'}
       />
       <ControlledCheckbox name={'rememberMe'} control={control} label={'Remember Me'} />
+      <ControlledRadio name={'radio'} control={control} label={'Radio button'} />
       <Button type="submit">Submit</Button>
     </form>
   )

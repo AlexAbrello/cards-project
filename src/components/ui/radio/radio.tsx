@@ -4,8 +4,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group'
 
 import s from './radio.module.scss'
 
-type RadioProps = {
-  variant?: 'primary'
+export type RadioProps = {
   disabled?: boolean
   label: string
 }
