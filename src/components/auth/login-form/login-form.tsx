@@ -12,8 +12,8 @@ type FormValues = {
 
 export const LoginForm = () => {
   const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(3),
+    email: z.string().email({ message: 'Неподходящий e-mail' }),
+    password: z.string().min(3, { message: 'Пароль должен быть не менее 3х символов' }),
   })
 
   const {
@@ -55,7 +55,7 @@ export const LoginForm = () => {
         type="password"
         errorMessage={errors?.password?.message}
       />
-      <CheckboxComponent onChange={onChange} checked={value} label="Remember Me" />
+      <CheckboxComponent onChange={onChange} checked={value} label={'Remember Me'} />
       <Button type="submit">Submit</Button>
     </form>
   )
