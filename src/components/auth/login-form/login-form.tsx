@@ -1,3 +1,4 @@
+import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
@@ -18,10 +19,9 @@ export const LoginForm = () => {
     console.log(data)
   }
 
-  console.log('errors: ', errors)
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <DevTool control={control} />
       <TextField
         {...register('email')}
         label="email"
