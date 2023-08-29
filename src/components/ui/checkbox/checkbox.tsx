@@ -5,14 +5,14 @@ import { CheckIcon } from '@radix-ui/react-icons'
 
 import style from './checkbox.module.css'
 
-type CheckboxProps = {
+export type CheckboxProps = {
   variant?: 'primary'
-  label: string
+  label?: string
   disabled?: boolean
   checked?: boolean
   required?: boolean
   id?: string
-  onChange: (checked: boolean) => void
+  onChange?: (checked: boolean) => void
 }
 
 export const CheckboxComponent: FC<CheckboxProps> = ({
