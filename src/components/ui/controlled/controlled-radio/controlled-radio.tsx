@@ -6,8 +6,6 @@ export type ControlledRadioProps<T extends FieldValues> = UseControllerProps<T> 
 
 export const ControlledRadio = <T extends FieldValues>({
   name,
-  rules,
-  shouldUnregister,
   control,
   defaultValue,
   ...RadioProps
@@ -16,8 +14,6 @@ export const ControlledRadio = <T extends FieldValues>({
     field: { onChange, value },
   } = useController({
     name,
-    rules,
-    shouldUnregister,
     control,
     defaultValue,
   })
