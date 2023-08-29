@@ -1,17 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import { Button, TextField } from '@/components/ui'
-import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox.tsx'
-
-const loginSchema = z.object({
-  email: z.string().email({ message: 'Неподходящий e-mail' }),
-  password: z.string().min(3, { message: 'Пароль должен быть не менее 3х символов' }),
-  rememberMe: z.boolean().default(false),
-})
-
-type FormValues = z.infer<typeof loginSchema>
+import { Button, ControlledCheckbox, TextField } from '@/components/ui'
+import { FormValues, loginSchema } from '@/types/login-form/login-shema.ts'
 
 export const LoginForm = () => {
   const {
