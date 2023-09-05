@@ -8,6 +8,7 @@ import s from './sign-up-form.module.scss'
 
 import { Button, Card, ControlledTextField } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
+import { FormValues, loginSchema } from '@/types/login-form/login-shema.ts'
 import { signUpSchema, SignUpValues } from '@/types/sign-up-form/sign-up-form-shema.ts'
 
 type SignUpProps = {
@@ -18,8 +19,8 @@ export const SignUp: FC<SignUpProps> = ({ onSubmit }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpValues>({
-    resolver: zodResolver(signUpSchema),
+  } = useForm<FormValues>({
+    resolver: zodResolver(loginSchema),
   })
 
   return (
