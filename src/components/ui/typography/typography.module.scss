@@ -12,11 +12,11 @@
 }
 
 .h2 {
-  @include typography(var(--font-size-xl), var(--line-height-m), var(--font-weight-semi-bold));
+  @include typography(var(--font-size-xl), var(--line-height-m), var(--font-weight-bold));
 }
 
 .h3 {
-  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-medium));
+  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
 }
 
 .subtitle1 {

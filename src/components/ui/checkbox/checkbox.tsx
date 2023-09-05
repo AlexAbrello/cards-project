@@ -6,6 +6,8 @@ import { clsx } from 'clsx'
 
 import style from './checkbox.module.css'
 
+import { Typography } from '@/components/ui/typography'
+
 export type CheckboxProps = {
   variant?: 'primary'
   label?: string
@@ -43,7 +45,9 @@ export const CheckboxComponent: FC<CheckboxProps> = ({
           <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>
-      <label className={classNames.label}>{label}</label>
+      <label className={classNames.label}>
+        <Typography.Body2>{label}</Typography.Body2>
+      </label>
     </div>
   )
 }

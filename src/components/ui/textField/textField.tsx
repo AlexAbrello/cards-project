@@ -2,6 +2,8 @@ import { ComponentProps, FC, KeyboardEvent } from 'react'
 
 import s from './textField.module.scss'
 
+import { Typography } from '@/components/ui/typography'
+
 export type TextFieldProps = {
   disabled?: boolean
   errorMessage?: string
@@ -33,7 +35,9 @@ export const TextField: FC<TextFieldProps> = ({
 
   return (
     <>
-      <label>{label}</label>
+      <label>
+        <Typography.Body2>{label}</Typography.Body2>
+      </label>
       <input
         type={type}
         onKeyDown={handleKeyDown}
