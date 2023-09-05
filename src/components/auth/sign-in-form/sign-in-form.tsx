@@ -1,13 +1,19 @@
+import { FC } from 'react'
+
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import s from './login-form.module.scss'
+import s from './sign-in-form.module.scss'
 
 import { Button, Card, ControlledCheckbox, ControlledTextField } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 import { FormValues, loginSchema } from '@/types/login-form/login-shema.ts'
-export const LoginForm = () => {
+
+type SignInProps = {
+  onSubmit: () => void
+}
+export const SignIn: FC<SignInProps> = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
@@ -15,10 +21,6 @@ export const LoginForm = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
-
-  const onSubmit = (data: FormValues) => {
-    console.log(data)
-  }
 
   return (
     <Card>
@@ -53,9 +55,7 @@ export const LoginForm = () => {
           <Typography.Subtitle2>Submit</Typography.Subtitle2>
         </Button>
       </form>
-      <Button as={'a'} href="#" variant={'link'}>
-        <Typography.Body2>Don't have an account?</Typography.Body2>
-      </Button>
+      <Typography.Body2>Don't have an account?</Typography.Body2>
       <Button as={'a'} href="#" variant={'link'}>
         <Typography.H3>Sign Up</Typography.H3>
       </Button>

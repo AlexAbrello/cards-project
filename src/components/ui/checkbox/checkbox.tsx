@@ -27,13 +27,14 @@ export const CheckboxComponent: FC<CheckboxProps> = ({
   checked,
 }) => {
   const classNames = {
+    wrapper: style.checkboxWrapper,
     root: clsx(style.CheckboxRoot, disabled && style.CheckboxRootDisabled),
     indicator: clsx(style.CheckboxIndicator, disabled && style.CheckboxIndicatorDisabled),
     label: clsx(style.Label, disabled && style.LabelDisabled),
   }
 
   return (
-    <div className={style.checkboxWrapper}>
+    <div className={classNames.wrapper}>
       <Checkbox.Root
         className={classNames.root}
         checked={checked}
