@@ -36,10 +36,3 @@ export const Default: FC<RadioProps> = args => <Radio {...args} />
 Default.args = {
   options: options,
 }
-
-export const Disabled: FC<RadioProps> = args => <Radio {...args} />
-
-Disabled.args = {
-  options: options,
-  disabled: true,
-}
