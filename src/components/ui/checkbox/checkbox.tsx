@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
+import { clsx } from 'clsx'
 
 import style from './checkbox.module.css'
 
@@ -23,22 +24,26 @@ export const CheckboxComponent: FC<CheckboxProps> = ({
   required,
   checked,
 }) => {
+  const classNames = {
+    root: clsx(style.CheckboxRoot, disabled && style.CheckboxRootDisabled),
+    indicator: clsx(style.CheckboxIndicator, disabled && style.CheckboxIndicatorDisabled),
+    label: clsx(style.Label, disabled && style.LabelDisabled),
+  }
+
   return (
     <div className={style.checkboxWrapper}>
       <Checkbox.Root
-        className={`${disabled ? style.CheckboxRootDisabled : style.CheckboxRoot}`}
+        className={classNames.root}
         checked={checked}
         onCheckedChange={onChange}
         required={required}
         id={id}
       >
-        <Checkbox.Indicator
-          className={`${disabled ? style.CheckboxIndicatorDisabled : style.CheckboxIndicator}`}
-        >
+        <Checkbox.Indicator className={classNames.indicator}>
           <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>
-      <label className={`${disabled ? style.LabelDisabled : style.Label}`}>{label}</label>
+      <label className={classNames.label}>{label}</label>
     </div>
   )
 }
