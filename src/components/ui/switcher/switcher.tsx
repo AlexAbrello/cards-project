@@ -17,6 +17,6 @@ export const TabsComponent: FC<TabsProps> = ({ disabled, label }) => (
         {label}
       </Tabs.Trigger>
     </Tabs.List>
-    <Tabs.Content />
+    {/*<Tabs.Content />*/}
   </Tabs.Root>
 )
