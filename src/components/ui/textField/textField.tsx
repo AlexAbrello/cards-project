@@ -6,6 +6,7 @@ import s from './textField.module.scss'
 
 import CloseEye from '@/assets/icons/close-eye.tsx'
 import OpenEye from '@/assets/icons/open-eye.tsx'
+import Search from '@/assets/icons/search.tsx'
 import { Typography } from '@/components/ui/typography'
 
 export type TextFieldProps = {
@@ -74,6 +75,8 @@ export const TextField: FC<TextFieldProps> = ({
           ) : (
             <CloseEye className={classNames.icon} onClick={showPassword} />
           )
+        ) : type === 'search' ? (
+          <Search className={classNames.icon} />
         ) : (
           <></>
         )}
