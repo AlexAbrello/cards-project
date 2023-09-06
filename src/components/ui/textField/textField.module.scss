@@ -60,3 +60,20 @@ label {
   line-height: var(--line-height-m);
   color: var(--color-dark-100);
 }
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+
+  fill: var(--color-dark-100);
+}
+
+.iconDisabled {
+  fill: var(--color-dark-300);
+}
+
+.inputWrapper {
+  position: relative;
+}

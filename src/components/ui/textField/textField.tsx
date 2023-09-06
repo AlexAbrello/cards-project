@@ -1,7 +1,11 @@
-import { ComponentProps, FC, KeyboardEvent } from 'react'
+import { ComponentProps, FC, KeyboardEvent, useState } from 'react'
+
+import { clsx } from 'clsx'
 
 import s from './textField.module.scss'
 
+import CloseEye from '@/assets/icons/close-eye.tsx'
+import OpenEye from '@/assets/icons/open-eye.tsx'
 import { Typography } from '@/components/ui/typography'
 
 export type TextFieldProps = {
@@ -26,6 +30,23 @@ export const TextField: FC<TextFieldProps> = ({
 }) => {
   const showError = !!errorMessage && errorMessage.length > 0
 
+  const [passwordShown, setPasswordShown] = useState(false)
+  const [inputType, setType] = useState(type)
+
+  const showPassword = () => {
+    setPasswordShown(!passwordShown)
+    if (inputType === 'password') {
+      setType('text')
+    } else {
+      setType('password')
+    }
+  }
+
+  const classNames = {
+    icon: clsx(s.icon, disabled && s.iconDisabled),
+    wrapper: s.inputWrapper,
+  }
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (onEnter && e.key === 'Enter') {
       onEnter(e)
@@ -38,14 +59,25 @@ export const TextField: FC<TextFieldProps> = ({
       <label>
         <Typography.Body2>{label}</Typography.Body2>
       </label>
-      <input
-        type={type}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        className={`${showError && s.error}`}
-        disabled={disabled}
-        {...rest}
-      />
+      <div className={classNames.wrapper}>
+        <input
+          type={inputType}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          className={`${showError && s.error}`}
+          disabled={disabled}
+          {...rest}
+        />
+        {type === 'password' ? (
+          passwordShown ? (
+            <OpenEye className={classNames.icon} onClick={showPassword} />
+          ) : (
+            <CloseEye className={classNames.icon} onClick={showPassword} />
+          )
+        ) : (
+          <></>
+        )}
+      </div>
       {showError && <div className={`${s.errorText}`}>{errorMessage}</div>}
     </>
   )
