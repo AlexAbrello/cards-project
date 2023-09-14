@@ -11,6 +11,7 @@ const decksApi = baseApi.injectEndpoints({
             params: args,
           }
         },
+        providesTags: ['Decks'],
       }),
       createDeck: builder.mutation<any, any>({
         query: ({ name }) => {
@@ -20,6 +21,7 @@ const decksApi = baseApi.injectEndpoints({
             body: { name },
           }
         },
+        invalidatesTags: ['Decks'],
       }),
     }
   },
