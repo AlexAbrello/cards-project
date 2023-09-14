@@ -3,14 +3,39 @@ import { baseApi } from '@/services/base-api.ts'
 const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getDecks: builder.query<DecksResponse, void>({
-        query: () => `v1/decks`,
+      getDecks: builder.query<DecksResponse, GetDecksArgs>({
+        query: args => {
+          return {
+            url: `v1/decks`,
+            method: 'GET',
+            params: args,
+          }
+        },
+      }),
+      createDeck: builder.mutation<any, any>({
+        query: ({ name }) => {
+          return {
+            url: `v1/decks`,
+            method: 'POST',
+            body: { name },
+          }
+        },
       }),
     }
   },
 })
 
-export const { useGetDecksQuery } = decksApi
+export const { useGetDecksQuery, useCreateDeckMutation } = decksApi
+
+export type GetDecksArgs = {
+  minCardsCount?: number
+  maxCardsCount?: number
+  name?: string
+  authorId?: string
+  orderBy?: string
+  currentPage?: number
+  itemsPerPage?: number
+}
 
 export type DecksResponse = {
   maxCardsCount: number
