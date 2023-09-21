@@ -48,7 +48,7 @@ export const SignIn: FC<SignInProps> = ({ onSubmit }) => {
           />
         </div>
         <ControlledCheckbox name={'rememberMe'} control={control} label={'Remember me'} />
-        <Button to={'forgot-password'} variant={'link'} type="button">
+        <Button to={'/forgot-password'} variant={'link'} type="button">
           <Typography.Body2>Forgot Password?</Typography.Body2>
         </Button>
         <Button type="submit">
@@ -56,7 +56,7 @@ export const SignIn: FC<SignInProps> = ({ onSubmit }) => {
         </Button>
       </form>
       <Typography.Body2>Do not have an account?</Typography.Body2>
-      <Button to={'sign-up'} variant={'link'}>
+      <Button to={'/sign-up'} variant={'link'}>
         <Typography.H3>Sign Up</Typography.H3>
       </Button>
     </Card>

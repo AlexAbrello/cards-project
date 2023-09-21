@@ -47,7 +47,7 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onSubmit }) => {
         </Button>
       </form>
       <Typography.Body2>Did you remember your password?</Typography.Body2>
-      <Button as={'a'} href="#" variant={'link'}>
+      <Button to={'/login'} variant={'link'}>
         <Typography.H3>Sign In</Typography.H3>
       </Button>
     </Card>

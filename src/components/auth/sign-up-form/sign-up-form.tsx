@@ -62,7 +62,7 @@ export const SignUp: FC<SignUpProps> = ({ onSubmit }) => {
         </Button>
       </form>
       <Typography.Body2>Already have an account?</Typography.Body2>
-      <Button as={'a'} href="#" variant={'link'}>
+      <Button to={'/login'} variant={'link'}>
         <Typography.H3>Sign In</Typography.H3>
       </Button>
     </Card>
