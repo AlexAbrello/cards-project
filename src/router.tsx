@@ -10,6 +10,7 @@ import { ForgotPassPage } from '@/pages/auth/forgot-pass-page.tsx'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
+import { useMeQuery } from '@/services/auth/auth-api.ts'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -48,5 +49,7 @@ const router = createBrowserRouter([
 ])
 
 export const Router = () => {
+  const { data } = useMeQuery()
+
   return <RouterProvider router={router} />
 }
