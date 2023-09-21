@@ -6,12 +6,13 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import { SignIn } from '@/components/auth'
 import { Decks } from '@/pages/decks.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <div>login</div>,
+    element: <SignIn />,
   },
 ]
 
@@ -23,7 +24,7 @@ const privateRoutes: RouteObject[] = [
 ]
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const isAuthenticated = false
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
