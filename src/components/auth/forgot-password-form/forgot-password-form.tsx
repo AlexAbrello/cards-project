@@ -8,10 +8,10 @@ import s from './forgot-password-form.module.scss'
 
 import { Button, Card, ControlledTextField } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
-import { FormValues, loginSchema } from '@/types/login-form/login-shema.ts'
+import { FormValues, registartionShema } from '@/types/login-form/registration-shema.ts'
 
 type ForgotPasswordProps = {
-  onSubmit: () => void
+  onSubmit: (data: FormValues) => void
 }
 export const ForgotPassword: FC<ForgotPasswordProps> = ({ onSubmit }) => {
   const {
@@ -19,7 +19,7 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onSubmit }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registartionShema),
   })
 
   return (
@@ -42,12 +42,12 @@ export const ForgotPassword: FC<ForgotPasswordProps> = ({ onSubmit }) => {
             Enter your email address and we will send you further instructions{' '}
           </Typography.Body2>
         </div>
-        <Button type="submit">
+        <Button type={'submit'}>
           <Typography.Subtitle2>Send Instruction</Typography.Subtitle2>
         </Button>
       </form>
       <Typography.Body2>Did you remember your password?</Typography.Body2>
-      <Button to={'/login'} variant={'link'}>
+      <Button to={'/login'} variant={'link'} type={'button'}>
         <Typography.H3>Sign In</Typography.H3>
       </Button>
     </Card>

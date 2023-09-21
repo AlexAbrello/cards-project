@@ -6,24 +6,24 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { SignIn } from '@/components/auth'
-import { ForgotPassword } from '@/components/auth/forgot-password-form'
-import { SignUp } from '@/components/auth/sign-up-form/sign-up-form.tsx'
-import { Decks } from '@/pages/decks.tsx'
+import { ForgotPassPage } from '@/pages/auth/forgot-pass-page.tsx'
+import { SignInPage } from '@/pages/auth/login-page.tsx'
+import { SignUpPage } from '@/pages/auth/registration-page.tsx'
+import { Decks } from '@/pages/decks/decks.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <SignIn />,
+    element: <SignInPage />,
   },
-  {
-    path: '/sign-up',
-    element: <SignUp />,
-  },
-  {
-    path: '/forgot-password',
-    element: <ForgotPassword />,
-  },
+  // {
+  //   path: '/sign-up',
+  //   element: <SignUpPage />,
+  // },
+  // {
+  //   path: '/forgot-password',
+  //   element: <ForgotPassPage />,
+  // },
 ]
 
 const privateRoutes: RouteObject[] = [

@@ -8,10 +8,10 @@ import s from './sign-up-form.module.scss'
 
 import { Button, Card, ControlledTextField } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
-import { FormValues, loginSchema } from '@/types/login-form/login-shema.ts'
+import { FormValues, registartionShema } from '@/types/login-form/registration-shema.ts'
 
 type SignUpProps = {
-  onSubmit: () => void
+  onSubmit: (data: FormValues) => void
 }
 export const SignUp: FC<SignUpProps> = ({ onSubmit }) => {
   const {
@@ -19,7 +19,7 @@ export const SignUp: FC<SignUpProps> = ({ onSubmit }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registartionShema),
   })
 
   return (
