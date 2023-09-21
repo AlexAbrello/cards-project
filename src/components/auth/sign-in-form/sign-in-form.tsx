@@ -55,7 +55,7 @@ export const SignIn: FC<SignInProps> = ({ onSubmit }) => {
           <Typography.Subtitle2>Submit</Typography.Subtitle2>
         </Button>
       </form>
-      <Typography.Body2>Don't have an account?</Typography.Body2>
+      <Typography.Body2>Do not have an account?</Typography.Body2>
       <Button to={'sign-up'} variant={'link'}>
         <Typography.H3>Sign Up</Typography.H3>
       </Button>
