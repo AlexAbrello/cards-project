@@ -6,7 +6,6 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { ForgotPassPage } from '@/pages/auth/forgot-pass-page.tsx'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
@@ -17,10 +16,10 @@ const publicRoutes: RouteObject[] = [
     path: '/login',
     element: <SignInPage />,
   },
-  // {
-  //   path: '/sign-up',
-  //   element: <SignUpPage />,
-  // },
+  {
+    path: '/sign-up',
+    element: <SignUpPage />,
+  },
   // {
   //   path: '/forgot-password',
   //   element: <ForgotPassPage />,
@@ -35,7 +34,10 @@ const privateRoutes: RouteObject[] = [
 ]
 
 function PrivateRoutes() {
-  const isAuthenticated = false
+  const { data } = useMeQuery()
+
+  console.log(data)
+  const isAuthenticated = !!data
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
@@ -49,7 +51,5 @@ const router = createBrowserRouter([
 ])
 
 export const Router = () => {
-  const { data } = useMeQuery()
-
   return <RouterProvider router={router} />
 }

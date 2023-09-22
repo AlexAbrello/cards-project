@@ -20,8 +20,36 @@ const authApi = baseApi.injectEndpoints({
           }
         },
       }),
+      registration: builder.mutation<RegistrationResponse, RegistrationRequest>({
+        query: ({ email, password }) => {
+          return {
+            url: 'v1/auth/sign-up',
+            method: 'POST',
+            body: { email, password },
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useLoginMutation, useMeQuery } = authApi
+export const { useLoginMutation, useMeQuery, useRegistrationMutation } = authApi
+
+type RegistrationResponse = {
+  avatar: string
+  id: string
+  email: string
+  isEmailVerified: boolean
+  name: string
+  created: string
+  updated: string
+}
+
+type RegistrationRequest = {
+  html: string
+  name: string
+  password: string
+  email: string
+  subject: string
+  sendConfirmationEmail: boolean
+}
