@@ -33,15 +33,6 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
-function PrivateRoutes() {
-  const { data } = useMeQuery()
-
-  console.log(data)
-  const isAuthenticated = !!data
-
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
-}
-
 const router = createBrowserRouter([
   {
     element: <PrivateRoutes />,
@@ -51,5 +42,16 @@ const router = createBrowserRouter([
 ])
 
 export const Router = () => {
+  const { isLoading } = useMeQuery()
+
+  if (isLoading) return <div>Loading...</div>
+
   return <RouterProvider router={router} />
+}
+function PrivateRoutes() {
+  const { data } = useMeQuery()
+
+  const isAuthenticated = data && data?.success !== false
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
