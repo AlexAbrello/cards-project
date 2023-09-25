@@ -6,11 +6,15 @@ import { Typography } from '@/components/ui/typography'
 
 export type AvatarProps = {
   name?: string
-  src: ComponentProps<'img'>['src']
+  src?: ComponentProps<'img'>['src']
   size?: ComponentProps<'img'>['width']
 }
 
-export const Avatar = ({ name, src, size = 36 }: AvatarProps) => {
+export const Avatar = ({
+  name,
+  src = 'https://cdn-icons-png.flaticon.com/128/149/149071.png',
+  size = 36,
+}: AvatarProps) => {
   return name ? (
     <div className={s.wrapper}>
       <Typography.Subtitle1>{name}</Typography.Subtitle1>
