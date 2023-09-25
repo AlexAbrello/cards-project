@@ -59,29 +59,29 @@ export const TextField: FC<TextFieldProps> = ({
     <>
       <label>
         <Typography.Body2>{label}</Typography.Body2>
-      </label>
-      <div className={classNames.wrapper}>
-        <input
-          type={inputType}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          className={`${showError && s.error}`}
-          disabled={disabled}
-          {...rest}
-        />
-        {type === 'password' ? (
-          passwordShown ? (
-            <OpenEye className={classNames.icon} onClick={showPassword} />
+        <div className={classNames.wrapper}>
+          <input
+            type={inputType}
+            onKeyDown={handleKeyDown}
+            placeholder={placeholder}
+            className={`${showError && s.error}`}
+            disabled={disabled}
+            {...rest}
+          />
+          {type === 'password' ? (
+            passwordShown ? (
+              <OpenEye className={classNames.icon} onClick={showPassword} />
+            ) : (
+              <CloseEye className={classNames.icon} onClick={showPassword} />
+            )
+          ) : type === 'search' ? (
+            <Search className={classNames.icon} />
           ) : (
-            <CloseEye className={classNames.icon} onClick={showPassword} />
-          )
-        ) : type === 'search' ? (
-          <Search className={classNames.icon} />
-        ) : (
-          <></>
-        )}
-      </div>
-      {showError && <div className={`${s.errorText}`}>{errorMessage}</div>}
+            <></>
+          )}
+        </div>
+        {showError && <div className={`${s.errorText}`}>{errorMessage}</div>}
+      </label>
     </>
   )
 }

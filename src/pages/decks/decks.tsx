@@ -1,23 +1,60 @@
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import { Body, Button, Cell, Head, HeadCell, Root, Row, TextField } from '@/components/ui'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/services/decks'
+import {
+  Body,
+  Button,
+  Cell,
+  ControlledTextField,
+  Head,
+  HeadCell,
+  Root,
+  Row,
+  SliderComponent,
+  TabsComponent,
+} from '@/components/ui'
+import { Typography } from '@/components/ui/typography'
+import { useGetDecksQuery } from '@/services/decks'
 
 export const Decks = () => {
-  const [cardName, setCardName] = useState('')
   const { data, isLoading } = useGetDecksQuery({
     itemsPerPage: 10,
   })
-  const [createCard] = useCreateDeckMutation()
 
-  const createCardClick = () => createCard({ name: cardName })
+  const { control, handleSubmit } = useForm()
 
   if (isLoading) return <div>Loading...</div>
 
   return (
-    <div>
-      <TextField label={'Card Name'} onChange={e => setCardName(e.currentTarget.value)} />
-      <Button onClick={createCardClick}>Create card</Button>
+    <div style={{ width: '80%', margin: '0 auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', margin: '50px 0 50px 0' }}>
+        <Typography.H2>Decks List</Typography.H2>
+        <Button variant={'primary'}>
+          <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
+        </Button>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          margin: '50px 0 50px 0',
+        }}
+      >
+        <ControlledTextField
+          name={'text'}
+          type={'search'}
+          control={control}
+          placeholder={'input search'}
+        />
+        <div style={{ display: 'flex' }}>
+          <TabsComponent label={'My Cards'} />
+          <TabsComponent label={'All Cards'} />
+        </div>
+        <SliderComponent />
+        <Button variant={'secondary'} className={''}>
+          <Typography.Subtitle2>Clear Filter</Typography.Subtitle2>
+        </Button>
+      </div>
       <Root>
         <Head>
           <Row>
