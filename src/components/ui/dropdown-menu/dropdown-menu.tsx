@@ -7,28 +7,30 @@ import s from './dropdown-menu.module.scss'
 import { Typography } from '@/components/ui/typography'
 
 type DropdownProps = {
-  children?: ReactNode
+  children: ReactNode
+  trigger: ReactNode
 }
 
-export const DropdownComponent: FC<DropdownProps> = ({ children }) => {
+export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button>{children}</button>
+        <button>{trigger}</button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content className={s.dropdownMenuContent}>
           <DropdownMenu.Label></DropdownMenu.Label>
-          <DropdownMenu.Item className={s.dropdownMenuItem}>
-            <Typography.Caption>My Profile</Typography.Caption>
-          </DropdownMenu.Item>
-
-          <DropdownMenu.Separator className={s.dropdownMenuSeparator} />
-
-          <DropdownMenu.Item className={s.dropdownMenuItem}>
-            <Typography.Caption>Log Out</Typography.Caption>
-          </DropdownMenu.Item>
+          {Array.isArray(children) &&
+            children?.map(el => {
+              return (
+                <>
+                  <DropdownMenu.Item className={s.dropdownMenuItem} asChild>
+                    <Typography.Caption>{el}</Typography.Caption>
+                  </DropdownMenu.Item>
+                </>
+              )
+            })}
 
           <DropdownMenu.Arrow className={s.dropdownMenuArrow} />
         </DropdownMenu.Content>

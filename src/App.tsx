@@ -12,8 +12,9 @@ export function App() {
     <Provider store={store}>
       <Header>
         <Logo />
-        <DropdownComponent>
-          <Avatar name={'Alex'} />
+        <DropdownComponent trigger={<Avatar name={'Alex'} />}>
+          <div>My Profile</div>
+          <div>Log Out</div>
         </DropdownComponent>
       </Header>
       <Router />
