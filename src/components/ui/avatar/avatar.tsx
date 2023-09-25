@@ -15,12 +15,10 @@ export const Avatar = ({
   src = 'https://cdn-icons-png.flaticon.com/128/149/149071.png',
   size = 36,
 }: AvatarProps) => {
-  return name ? (
+  return (
     <div className={s.wrapper}>
-      <Typography.Subtitle1>{name}</Typography.Subtitle1>
+      {name && <Typography.Subtitle1>{name}</Typography.Subtitle1>}
       <img className={s.avatar} src={src} alt={`${name} avatar`} width={size} height={size} />
     </div>
-  ) : (
-    <img className={s.avatar} src={src} alt={`${name} avatar`} width={size} height={size} />
   )
 }
