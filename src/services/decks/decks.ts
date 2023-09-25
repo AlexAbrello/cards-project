@@ -13,7 +13,7 @@ const decksApi = baseApi.injectEndpoints({
         },
         providesTags: ['Decks'],
       }),
-      createDeck: builder.mutation<any, any>({
+      createDeck: builder.mutation<CreateDeckResponse, CreateDeckRequest>({
         query: ({ name }) => {
           return {
             url: `v1/decks`,
@@ -28,6 +28,25 @@ const decksApi = baseApi.injectEndpoints({
 })
 
 export const { useGetDecksQuery, useCreateDeckMutation } = decksApi
+
+export type CreateDeckRequest = {
+  name: string
+  isPrivate?: boolean
+}
+
+export type CreateDeckResponse = {
+  author: Author
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover: string
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
+}
 
 export type GetDecksArgs = {
   minCardsCount?: number
