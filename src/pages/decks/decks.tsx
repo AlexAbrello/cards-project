@@ -5,6 +5,7 @@ import {
   Button,
   Cell,
   ControlledTextField,
+  DialogComponent,
   Head,
   HeadCell,
   Root,
@@ -28,9 +29,14 @@ export const Decks = () => {
     <div style={{ width: '80%', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', margin: '30px 0 30px 0' }}>
         <Typography.H2>Decks List</Typography.H2>
-        <Button variant={'primary'}>
-          <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
-        </Button>
+        <DialogComponent
+          trigger={
+            <Button variant={'primary'}>
+              <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
+            </Button>
+          }
+          title={'Create New Deck'}
+        ></DialogComponent>
       </div>
       <div
         style={{

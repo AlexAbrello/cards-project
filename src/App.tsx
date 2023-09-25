@@ -17,11 +17,15 @@ export function App() {
         <Logo />
         <DropdownComponent trigger={<Avatar name={'Alex'} />}>
           <>
-            <ProfileIcon />
+            <div style={{ marginRight: '10px' }}>
+              <ProfileIcon />
+            </div>
             <Typography.Caption>My Profile</Typography.Caption>
           </>
           <>
-            <LogOut />
+            <div style={{ marginRight: '10px' }}>
+              <LogOut />
+            </div>
             <Typography.Caption>Log Out</Typography.Caption>
           </>
         </DropdownComponent>

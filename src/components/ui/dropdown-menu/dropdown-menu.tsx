@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu'
 
 import s from './dropdown-menu.module.scss'
 
@@ -28,6 +29,7 @@ export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
                   <DropdownMenu.Item className={s.dropdownMenuItem} asChild>
                     <Typography.Caption>{el}</Typography.Caption>
                   </DropdownMenu.Item>
+                  <DropdownMenuSeparator className={s.dropdownMenuSeparator} />
                 </>
               )
             })}
