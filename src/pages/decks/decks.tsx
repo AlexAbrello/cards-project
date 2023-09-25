@@ -26,7 +26,7 @@ export const Decks = () => {
 
   return (
     <div style={{ width: '80%', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', margin: '50px 0 50px 0' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', margin: '30px 0 30px 0' }}>
         <Typography.H2>Decks List</Typography.H2>
         <Button variant={'primary'}>
           <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
@@ -37,7 +37,7 @@ export const Decks = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          margin: '50px 0 50px 0',
+          margin: '30px 0 30px 0',
         }}
       >
         <ControlledTextField
@@ -45,6 +45,7 @@ export const Decks = () => {
           type={'search'}
           control={control}
           placeholder={'input search'}
+          style={{ width: '300px' }}
         />
         <div style={{ display: 'flex' }}>
           <TabsComponent label={'My Cards'} />

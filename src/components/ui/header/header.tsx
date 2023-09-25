@@ -7,5 +7,9 @@ type HeaderProps = {
 }
 
 export const Header: FC<HeaderProps> = ({ children }) => {
-  return <header className={s.root}>{children}</header>
+  return (
+    <header className={s.root}>
+      <div className={s.childContainer}>{children}</div>
+    </header>
+  )
 }
