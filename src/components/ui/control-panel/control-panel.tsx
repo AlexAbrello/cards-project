@@ -8,15 +8,19 @@ import { Typography } from '@/components/ui/typography'
 export const ControlPanel = () => {
   const { control, handleSubmit } = useForm()
 
+  const search = () => {}
+
   return (
     <div className={s.wrapper}>
-      <ControlledTextField
-        name={'text'}
-        type={'search'}
-        control={control}
-        placeholder={'input search'}
-        style={{ width: '300px' }}
-      />
+      <form onSubmit={handleSubmit(search)}>
+        <ControlledTextField
+          name={'text'}
+          type={'search'}
+          control={control}
+          placeholder={'input search'}
+          style={{ width: '300px' }}
+        />
+      </form>
       <div style={{ display: 'flex' }}>
         <TabsComponent label={'My Cards'} />
         <TabsComponent label={'All Cards'} />

@@ -1,4 +1,5 @@
 import { ControlPanel } from '@/components/ui/control-panel'
+import { Loader } from '@/components/ui/loader'
 import { CreateDeckComponent } from '@/components/ui/modals/create-deck'
 import { DecksTable } from '@/components/ui/tables/decks-tables'
 import { Typography } from '@/components/ui/typography'
@@ -9,7 +10,7 @@ export const Decks = () => {
     itemsPerPage: 10,
   })
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loader />
 
   return (
     <div style={{ width: '80%', margin: '0 auto' }}>

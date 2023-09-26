@@ -14,16 +14,16 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
       <Head>
         <Row>
           <HeadCell>
-            <Typography.Body2>Name</Typography.Body2>
+            <Typography.Subtitle2>Name</Typography.Subtitle2>
           </HeadCell>
           <HeadCell>
-            <Typography.Body2>Cards</Typography.Body2>
+            <Typography.Subtitle2>Cards</Typography.Subtitle2>
           </HeadCell>
           <HeadCell>
-            <Typography.Body2>Last Update</Typography.Body2>e
+            <Typography.Subtitle2>Last Updated</Typography.Subtitle2>
           </HeadCell>
           <HeadCell>
-            <Typography.Body2>Author by</Typography.Body2>
+            <Typography.Subtitle2>Author by</Typography.Subtitle2>
           </HeadCell>
         </Row>
       </Head>
