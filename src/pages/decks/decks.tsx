@@ -1,6 +1,6 @@
-import { Body, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
 import { ControlPanel } from '@/components/ui/control-panel'
 import { CreateDeckComponent } from '@/components/ui/modals/create-deck'
+import { DecksTable } from '@/components/ui/tables/decks-tables'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks'
 
@@ -18,28 +18,7 @@ export const Decks = () => {
         <CreateDeckComponent />
       </div>
       <ControlPanel />
-      <Root>
-        <Head>
-          <Row>
-            <HeadCell>Name</HeadCell>
-            <HeadCell>Cards</HeadCell>
-            <HeadCell>Last Update</HeadCell>
-            <HeadCell>Author by</HeadCell>
-          </Row>
-        </Head>
-        <Body>
-          {data?.items.map(deck => {
-            return (
-              <Row key={deck.id}>
-                <Cell>{deck.name}</Cell>
-                <Cell>{deck.cardsCount}</Cell>
-                <Cell>{new Date(deck.updated).toLocaleString('en-GB')}</Cell>
-                <Cell>{deck.author.name}</Cell>
-              </Row>
-            )
-          })}
-        </Body>
-      </Root>
+      <DecksTable data={data} />
     </div>
   )
 }
