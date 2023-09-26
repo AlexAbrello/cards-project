@@ -5,7 +5,6 @@ import {
   Button,
   Cell,
   ControlledTextField,
-  DialogComponent,
   Head,
   HeadCell,
   Root,
@@ -13,6 +12,7 @@ import {
   SliderComponent,
   TabsComponent,
 } from '@/components/ui'
+import { CreateDeckComponent } from '@/components/ui/modals/create-deck'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks'
 
@@ -29,14 +29,7 @@ export const Decks = () => {
     <div style={{ width: '80%', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', margin: '30px 0 30px 0' }}>
         <Typography.H2>Decks List</Typography.H2>
-        <DialogComponent
-          trigger={
-            <Button variant={'primary'}>
-              <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
-            </Button>
-          }
-          title={'Create New Deck'}
-        ></DialogComponent>
+        <CreateDeckComponent />
       </div>
       <div
         style={{
