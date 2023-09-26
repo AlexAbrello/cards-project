@@ -10,6 +10,7 @@ import { Loader } from '@/components/ui/loader'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
+import { PageNotFound } from '@/pages/not-found/not-found.tsx'
 import { useMeQuery } from '@/services/auth/auth-api.ts'
 
 const publicRoutes: RouteObject[] = [
@@ -25,6 +26,10 @@ const publicRoutes: RouteObject[] = [
   //   path: '/forgot-password',
   //   element: <ForgotPassPage />,
   // },
+  {
+    path: '*',
+    element: <PageNotFound />,
+  },
 ]
 
 const privateRoutes: RouteObject[] = [
