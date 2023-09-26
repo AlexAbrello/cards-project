@@ -1,17 +1,5 @@
-import { useForm } from 'react-hook-form'
-
-import {
-  Body,
-  Button,
-  Cell,
-  ControlledTextField,
-  Head,
-  HeadCell,
-  Root,
-  Row,
-  SliderComponent,
-  TabsComponent,
-} from '@/components/ui'
+import { Body, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
+import { ControlPanel } from '@/components/ui/control-panel'
 import { CreateDeckComponent } from '@/components/ui/modals/create-deck'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks'
@@ -21,8 +9,6 @@ export const Decks = () => {
     itemsPerPage: 10,
   })
 
-  const { control, handleSubmit } = useForm()
-
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -31,30 +17,7 @@ export const Decks = () => {
         <Typography.H2>Decks List</Typography.H2>
         <CreateDeckComponent />
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          margin: '30px 0 30px 0',
-        }}
-      >
-        <ControlledTextField
-          name={'text'}
-          type={'search'}
-          control={control}
-          placeholder={'input search'}
-          style={{ width: '300px' }}
-        />
-        <div style={{ display: 'flex' }}>
-          <TabsComponent label={'My Cards'} />
-          <TabsComponent label={'All Cards'} />
-        </div>
-        <SliderComponent />
-        <Button variant={'secondary'} className={''}>
-          <Typography.Subtitle2>Clear Filter</Typography.Subtitle2>
-        </Button>
-      </div>
+      <ControlPanel />
       <Root>
         <Head>
           <Row>
