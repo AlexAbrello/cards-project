@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import { Loader } from '@/components/ui/loader'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
 export const Router = () => {
   const { isLoading } = useMeQuery()
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loader />
 
   return <RouterProvider router={router} />
 }
