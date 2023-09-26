@@ -1,3 +1,5 @@
+import s from './decks.module.scss'
+
 import { ControlPanel } from '@/components/ui/control-panel'
 import { Loader } from '@/components/ui/loader'
 import { CreateDeckComponent } from '@/components/ui/modals/create-deck'
@@ -13,8 +15,8 @@ export const Decks = () => {
   if (isLoading) return <Loader />
 
   return (
-    <div style={{ width: '80%', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', margin: '30px 0 30px 0' }}>
+    <div className={s.wrapper}>
+      <div className={s.title}>
         <Typography.H2>Decks List</Typography.H2>
         <CreateDeckComponent />
       </div>
