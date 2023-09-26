@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import s from './control-panel.module.scss'
 
+import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
 import { Button, ControlledTextField, SliderComponent, TabsComponent } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 
@@ -27,7 +28,12 @@ export const ControlPanel = () => {
       </div>
       <SliderComponent />
       <Button variant={'secondary'}>
-        <Typography.Subtitle2>Clear Filter</Typography.Subtitle2>
+        <div style={{ display: 'flex' }}>
+          <DeleteIcon />
+          <div style={{ marginLeft: '10px' }}>
+            <Typography.Subtitle2>Clear Filter</Typography.Subtitle2>
+          </div>
+        </div>
       </Button>
     </div>
   )

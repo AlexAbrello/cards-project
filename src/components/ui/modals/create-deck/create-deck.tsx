@@ -3,22 +3,30 @@ import { useForm } from 'react-hook-form'
 
 import s from './create-deck.module.scss'
 
+import { PlusIcon } from '@/assets/icons/plus.tsx'
 import { Button, ControlledCheckbox, ControlledTextField, DialogComponent } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 
 export const CreateDeckComponent = () => {
   const { control, handleSubmit } = useForm()
 
+  const foo = () => {}
+
   return (
     <DialogComponent
       trigger={
         <Button variant={'primary'}>
-          <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
+          <div style={{ display: 'flex' }}>
+            <PlusIcon />
+            <div style={{ marginLeft: '10px' }}>
+              <Typography.Subtitle2>Add New Deck</Typography.Subtitle2>
+            </div>
+          </div>
         </Button>
       }
       title={'Create New Deck'}
     >
-      <form>
+      <form onSubmit={handleSubmit(foo)}>
         <ControlledTextField name={'deck'} control={control} label={'Deck Name'} type={'text'} />
         <div className={s.checkbox}>
           <ControlledCheckbox name={'private'} control={control} label={'Private Deck'} />

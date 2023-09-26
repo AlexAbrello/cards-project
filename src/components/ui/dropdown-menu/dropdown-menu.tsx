@@ -25,12 +25,12 @@ export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
           {Array.isArray(children) &&
             children?.map(el => {
               return (
-                <>
+                <div key={el.name}>
                   <DropdownMenu.Item className={s.dropdownMenuItem} asChild>
                     <Typography.Caption>{el}</Typography.Caption>
                   </DropdownMenu.Item>
                   <DropdownMenuSeparator className={s.dropdownMenuSeparator} />
-                </>
+                </div>
               )
             })}
 

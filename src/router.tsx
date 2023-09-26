@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import { HeaderComponent } from '@/components/ui/header-component/header-component.tsx'
 import { Loader } from '@/components/ui/loader'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
@@ -48,11 +49,16 @@ const router = createBrowserRouter([
 ])
 
 export const Router = () => {
-  const { isLoading } = useMeQuery()
+  const { data, isLoading } = useMeQuery()
 
   if (isLoading) return <Loader />
 
-  return <RouterProvider router={router} />
+  return (
+    <>
+      <HeaderComponent name={data?.name} />
+      <RouterProvider router={router} />
+    </>
+  )
 }
 function PrivateRoutes() {
   const { data } = useMeQuery()
