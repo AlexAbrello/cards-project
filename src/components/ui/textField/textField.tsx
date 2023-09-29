@@ -44,7 +44,8 @@ export const TextField: FC<TextFieldProps> = ({
   }
 
   const classNames = {
-    icon: clsx(s.icon, disabled && s.iconDisabled),
+    iconPassword: clsx(s.iconPassword, disabled && s.iconDisabled),
+    iconSearch: clsx(s.iconSearch, disabled && s.iconDisabled),
     wrapper: s.inputWrapper,
   }
 
@@ -70,12 +71,12 @@ export const TextField: FC<TextFieldProps> = ({
           />
           {type === 'password' ? (
             passwordShown ? (
-              <OpenEye className={classNames.icon} onClick={showPassword} />
+              <OpenEye className={classNames.iconPassword} onClick={showPassword} />
             ) : (
-              <CloseEye className={classNames.icon} onClick={showPassword} />
+              <CloseEye className={classNames.iconPassword} onClick={showPassword} />
             )
           ) : type === 'search' ? (
-            <Search className={classNames.icon} />
+            <Search className={classNames.iconSearch} />
           ) : (
             <></>
           )}

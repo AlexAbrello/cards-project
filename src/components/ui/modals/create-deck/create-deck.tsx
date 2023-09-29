@@ -41,8 +41,6 @@ export const CreateDeckComponent = () => {
     reset()
   }
 
-  console.log(open)
-
   return (
     <DialogComponent
       open={open}
