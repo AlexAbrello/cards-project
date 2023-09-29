@@ -2,8 +2,6 @@ import { FC } from 'react'
 
 import { clsx } from 'clsx'
 
-import { Select } from '../select'
-
 import s from './pagination.module.scss'
 import { usePagination } from './usePagination'
 
@@ -23,7 +21,7 @@ type PaginationConditionals =
     }
 
 export type PaginationProps = {
-  count?: number
+  count: number
   page: number
   onChange: (page: number) => void
   siblings?: number

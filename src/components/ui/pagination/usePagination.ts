@@ -17,7 +17,7 @@ const DOTS = '...'
 type UsePaginationParamType = {
   count: number
   siblings?: number
-  page: number
+  page?: number
   onChange: (pageNumber: number) => void
 }
 

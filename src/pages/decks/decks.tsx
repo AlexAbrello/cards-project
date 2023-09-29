@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import s from './decks.module.scss'
 
 import { ControlPanel } from '@/components/ui/control-panel'
@@ -9,16 +7,24 @@ import { Pagination } from '@/components/ui/pagination/pagination.tsx'
 import { DecksTable } from '@/components/ui/tables/decks-tables'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks'
+import { decksSlice } from '@/services/decks/decks.slice.ts'
+import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
 export const Decks = () => {
+  const dispatch = useAppDispatch()
+
+  const itemsPerPage = useAppSelector(state => state.deckSlice.itemsPerPage)
+  const currentPage = useAppSelector(state => state.deckSlice.currentPage)
+
+  const setCurrentPage = (currentPage: number) =>
+    dispatch(decksSlice.actions.setCurrentPage(currentPage))
+
   const { data, isLoading } = useGetDecksQuery({
-    itemsPerPage: 10,
+    itemsPerPage,
+    currentPage,
   })
 
-  const [page, setPage] = useState(1)
-
   if (isLoading) return <Loader />
-  console.log(data)
 
   return (
     <div className={s.wrapper}>
@@ -28,7 +34,11 @@ export const Decks = () => {
       </div>
       <ControlPanel />
       <DecksTable data={data} />
-      <Pagination count={data?.pagination?.totalPages} page={page} onChange={setPage} />
+      <Pagination
+        count={data?.pagination.totalPages}
+        page={currentPage}
+        onChange={setCurrentPage}
+      />
     </div>
   )
 }
