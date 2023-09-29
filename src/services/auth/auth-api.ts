@@ -38,11 +38,33 @@ const authApi = baseApi.injectEndpoints({
           }
         },
       }),
+      logout: builder.mutation({
+        query: () => {
+          return {
+            url: 'v1/auth/logout',
+            method: 'POST',
+          }
+        },
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(
+            authApi.util.updateQueryData('me', undefined, () => {
+              return null
+            })
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
+        invalidatesTags: ['Me'],
+      }),
     }
   },
 })
 
-export const { useLoginMutation, useMeQuery, useRegistrationMutation } = authApi
+export const { useLoginMutation, useMeQuery, useRegistrationMutation, useLogoutMutation } = authApi
 
 type MeResponse = {
   avatar: string

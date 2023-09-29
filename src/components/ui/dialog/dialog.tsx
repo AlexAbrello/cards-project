@@ -12,11 +12,20 @@ type DialogProps = {
   title: string
   description?: string
   children?: ReactNode
+  open?: boolean
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const DialogComponent: FC<DialogProps> = ({ trigger, title, description, children }) => {
+export const DialogComponent: FC<DialogProps> = ({
+  trigger,
+  title,
+  description,
+  children,
+  setOpen,
+  open,
+}) => {
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger className={s.dialogTrigger} asChild>
         <button>{trigger}</button>
       </Dialog.Trigger>

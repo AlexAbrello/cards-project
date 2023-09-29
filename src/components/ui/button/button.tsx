@@ -31,6 +31,7 @@ export type ButtonProps = {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
   fullWidth?: boolean
   className?: string
+  disabled?: boolean
 } & ComponentPropsWithoutRef<'button'>
 
 export const Button: FC<ButtonProps> = ({
@@ -39,13 +40,17 @@ export const Button: FC<ButtonProps> = ({
   className,
   to,
   children,
+  disabled,
 }) => {
   return to ? (
     <Link to={to} className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}>
       {children}
     </Link>
   ) : (
-    <button className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}>
+    <button
+      className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
+      disabled={disabled}
+    >
       {children}
     </button>
   )
