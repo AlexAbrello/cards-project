@@ -34,11 +34,13 @@ export const Decks = () => {
       </div>
       <ControlPanel />
       <DecksTable data={data} />
-      <Pagination
-        count={data?.pagination.totalPages}
-        page={currentPage}
-        onChange={setCurrentPage}
-      />
+      <div className={s.pagination}>
+        <Pagination
+          count={data?.pagination.totalPages}
+          page={currentPage}
+          onChange={setCurrentPage}
+        />
+      </div>
     </div>
   )
 }

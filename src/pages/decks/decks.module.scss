@@ -2,8 +2,13 @@
   width: 80%;
   margin: 0 auto;
 }
+
 .title {
   display: flex;
   justify-content: space-between;
-  margin: 30px 0 30px 0;
+  margin: 30px 0;
+}
+
+.pagination {
+  margin-top: 20px;
 }
