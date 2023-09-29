@@ -14,6 +14,7 @@ type DialogProps = {
   children?: ReactNode
   open?: boolean
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  callBack?: () => void
 }
 
 export const DialogComponent: FC<DialogProps> = ({
@@ -23,6 +24,7 @@ export const DialogComponent: FC<DialogProps> = ({
   children,
   setOpen,
   open,
+  callBack,
 }) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -39,7 +41,7 @@ export const DialogComponent: FC<DialogProps> = ({
             <Typography.Subtitle1>{description}</Typography.Subtitle1>
           </Dialog.Description>
           {children}
-          <Dialog.Close asChild>
+          <Dialog.Close onClick={callBack}>
             <button className={s.iconButton} aria-label="Close">
               <CloseIcon />
             </button>

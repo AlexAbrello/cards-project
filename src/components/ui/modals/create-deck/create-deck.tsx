@@ -37,10 +37,17 @@ export const CreateDeckComponent = () => {
     setOpen(false)
   }
 
+  const closeDialogHandler = () => {
+    reset()
+  }
+
+  console.log(open)
+
   return (
     <DialogComponent
       open={open}
       setOpen={setOpen}
+      callBack={closeDialogHandler}
       trigger={
         <Button variant={'primary'}>
           <div style={{ display: 'flex' }}>
@@ -70,7 +77,7 @@ export const CreateDeckComponent = () => {
           </Button>
         </div>
       </form>
-      <DialogClose>
+      <DialogClose onClick={closeDialogHandler}>
         <Button variant={'secondary'} type={'button'}>
           <Typography.Subtitle2>Cancel</Typography.Subtitle2>
         </Button>
