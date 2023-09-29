@@ -40,12 +40,12 @@
   }
 
   &:hover:not(&:disabled) {
-    background-color: var(--color-bg-focus);
+    background-color: var(--color-dark-500);
   }
 
   &.selected {
-    color: var(--color-text-primary-contrast);
-    background-color: var(--color-bg-contrast);
+    color: var(--color-dark-900);
+    background-color: var(--color-light-100);
   }
 }
 

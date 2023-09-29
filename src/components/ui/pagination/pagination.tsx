@@ -7,6 +7,9 @@ import { Select } from '../select'
 import s from './pagination.module.scss'
 import { usePagination } from './usePagination'
 
+import { LeftArrow } from '@/assets/icons/left-arrow.tsx'
+import { RightArrow } from '@/assets/icons/right-arrow.tsx'
+
 type PaginationConditionals =
   | {
       perPage?: null
@@ -121,7 +124,7 @@ const PageButton: FC<PageButtonProps> = ({ onClick, disabled, selected, page }) 
 const PrevButton: FC<NavigationButtonProps> = ({ onClick, disabled }) => {
   return (
     <button className={classNames.item} onClick={onClick} disabled={disabled}>
-      {/*<KeyboardArrowLeft className={classNames.icon} size={16} />*/}
+      <LeftArrow />
     </button>
   )
 }
@@ -129,7 +132,7 @@ const PrevButton: FC<NavigationButtonProps> = ({ onClick, disabled }) => {
 const NextButton: FC<NavigationButtonProps> = ({ onClick, disabled }) => {
   return (
     <button className={classNames.item} onClick={onClick} disabled={disabled}>
-      {/*<KeyboardArrowRight className={classNames.icon} size={16} />*/}
+      <RightArrow />
     </button>
   )
 }
