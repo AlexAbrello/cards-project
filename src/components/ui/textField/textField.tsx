@@ -46,6 +46,7 @@ export const TextField: FC<TextFieldProps> = ({
   const classNames = {
     iconPassword: clsx(s.iconPassword, disabled && s.iconDisabled),
     iconSearch: clsx(s.iconSearch, disabled && s.iconDisabled),
+    inputSearch: clsx(type === 'search' && s.inputSearch),
     wrapper: s.inputWrapper,
   }
 
@@ -65,7 +66,7 @@ export const TextField: FC<TextFieldProps> = ({
             type={inputType}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className={`${showError && s.error}`}
+            className={`${showError && s.error} ${classNames.inputSearch}`}
             disabled={disabled}
             {...rest}
           />

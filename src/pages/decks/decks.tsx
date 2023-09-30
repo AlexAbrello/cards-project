@@ -4,6 +4,7 @@ import { ControlPanel } from '@/components/ui/control-panel'
 import { Loader } from '@/components/ui/loader'
 import { CreateDeckComponent } from '@/components/ui/modals/create-deck'
 import { Pagination } from '@/components/ui/pagination/pagination.tsx'
+import { SelectComponent } from '@/components/ui/select/select.tsx'
 import { DecksTable } from '@/components/ui/tables/decks-tables'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks'
@@ -40,6 +41,11 @@ export const Decks = () => {
           page={currentPage}
           onChange={setCurrentPage}
         />
+        <SelectComponent placeholder={'something'}>
+          <div>10</div>
+          <div>20</div>
+          <div>30</div>
+        </SelectComponent>
       </div>
     </div>
   )
