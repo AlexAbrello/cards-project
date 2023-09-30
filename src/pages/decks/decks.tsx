@@ -20,6 +20,9 @@ export const Decks = () => {
   const setCurrentPage = (currentPage: number) =>
     dispatch(decksSlice.actions.setCurrentPage(currentPage))
 
+  const setItemsPerPage = (itemsPerPage: number) =>
+    dispatch(decksSlice.actions.setItemsPerPage(itemsPerPage))
+
   const { data, isLoading } = useGetDecksQuery({
     itemsPerPage,
     currentPage,
@@ -41,7 +44,7 @@ export const Decks = () => {
           page={currentPage}
           onChange={setCurrentPage}
         />
-        <SelectComponent placeholder={'something'}>
+        <SelectComponent placeholder={'10'} onChange={setItemsPerPage}>
           <div>10</div>
           <div>20</div>
           <div>30</div>

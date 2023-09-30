@@ -4,28 +4,34 @@ import * as Select from '@radix-ui/react-select'
 
 import s from './select.module.scss'
 
+import { DownArrow } from '@/assets/icons/down-arrow.tsx'
+
 type SelectProps = {
   children: ReactNode
   placeholder: string
+  onChange: (value: string) => void
 }
 
-export const SelectComponent: FC<SelectProps> = ({ children, placeholder }) => {
+export const SelectComponent: FC<SelectProps> = ({ children, placeholder, onChange }) => {
   return (
-    <Select.Root>
+    <Select.Root onValueChange={onChange}>
       <Select.Trigger className={s.trigger}>
         <Select.Value placeholder={placeholder} />
-        <Select.Icon />
+        <Select.Icon className={s.icon}>
+          <DownArrow />
+        </Select.Icon>
       </Select.Trigger>
 
       <Select.Portal>
         <Select.Content className={s.content} position="popper">
-          <Select.ScrollUpButton />
           <Select.Viewport className={s.viewPort}>
             {Array.isArray(children) &&
-              children?.map((child, index) => {
+              children.map((child, index) => {
                 return (
                   <Select.Group key={index}>
-                    <Select.Item className={s.item}>{child}</Select.Item>
+                    <Select.Item value={child.props.children}>
+                      <Select.ItemText>{child}</Select.ItemText>
+                    </Select.Item>
                   </Select.Group>
                 )
               })}
