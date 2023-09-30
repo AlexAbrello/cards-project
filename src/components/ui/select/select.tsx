@@ -8,7 +8,7 @@ import { DownArrow } from '@/assets/icons/down-arrow.tsx'
 
 type SelectProps = {
   children: ReactNode
-  placeholder: string
+  placeholder: string | number
   onChange: (value: string) => void
 }
 

@@ -43,15 +43,7 @@ const classNames = {
   },
 }
 
-export const Pagination: FC<PaginationProps> = ({
-  onChange,
-  count,
-  page,
-  perPage = null,
-  perPageOptions,
-  onPerPageChange,
-  siblings,
-}) => {
+export const Pagination: FC<PaginationProps> = ({ onChange, count, page, siblings }) => {
   const {
     paginationRange,
     isLastPage,
@@ -66,8 +58,6 @@ export const Pagination: FC<PaginationProps> = ({
     siblings,
   })
 
-  const showPerPageSelect = !!perPage && !!perPageOptions && !!onPerPageChange
-
   return (
     <div className={classNames.root}>
       <div className={classNames.container}>
@@ -81,16 +71,6 @@ export const Pagination: FC<PaginationProps> = ({
 
         <NextButton onClick={handleNextPageClicked} disabled={isLastPage} />
       </div>
-
-      {/*{showPerPageSelect && (*/}
-      {/*  <PerPageSelect*/}
-      {/*    {...{*/}
-      {/*      perPage,*/}
-      {/*      perPageOptions,*/}
-      {/*      onPerPageChange,*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*)}*/}
     </div>
   )
 }
@@ -160,34 +140,3 @@ const MainPaginationButtons: FC<MainPaginationButtonsProps> = ({
     </>
   )
 }
-
-// export type PerPageSelectProps = {
-//   perPage: number
-//   perPageOptions: number[]
-//   onPerPageChange: (itemPerPage: number) => void
-// }
-//
-// export const PerPageSelect: FC<PerPageSelectProps> = ({
-//   perPage,
-//   perPageOptions,
-//   onPerPageChange,
-// }) => {
-//   const selectOptions = perPageOptions.map(value => ({
-//     label: value,
-//     value,
-//   }))
-//
-//   return (
-//     <div className={classNames.selectBox}>
-//       Показать
-//       <Select
-//         className={classNames.select}
-//         value={perPage}
-//         options={selectOptions}
-//         onChange={onPerPageChange}
-//         variant="pagination"
-//       />
-//       на странице
-//     </div>
-//   )
-// }
