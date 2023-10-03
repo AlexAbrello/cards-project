@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Pagination } from '@/components/ui/pagination/pagination.tsx'
 import { SelectComponent } from '@/components/ui/select/select.tsx'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
-import { useAppDispatch } from '@/services/store.ts'
+import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
 type PaginationProps = {
   count: number
