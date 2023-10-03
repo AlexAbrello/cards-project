@@ -34,6 +34,7 @@ const decksApi = baseApi.injectEndpoints({
                 {
                   currentPage: state.deckSlice.currentPage,
                   itemsPerPage: state.deckSlice.itemsPerPage,
+                  name: state.deckSlice.searchByName,
                 },
                 draft => {
                   draft.items.unshift(response?.data)
@@ -59,6 +60,7 @@ const decksApi = baseApi.injectEndpoints({
               {
                 currentPage: state.deckSlice.currentPage,
                 itemsPerPage: state.deckSlice.itemsPerPage,
+                name: state.deckSlice.searchByName,
               },
               draft => {
                 draft.items = draft.items.filter(el => el.id !== id)

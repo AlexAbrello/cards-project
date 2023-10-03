@@ -48,7 +48,15 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
                 <Typography.Body2>{deck.author.name}</Typography.Body2>
               </Cell>
               <Cell>
-                <Button onClick={() => deleteDeck({ id: deck.id })}>
+                <Button
+                  onClick={() =>
+                    deleteDeck({ id: deck.id })
+                      .unwrap()
+                      .catch(e => {
+                        alert(e.message)
+                      })
+                  }
+                >
                   <Typography.Body2>Delete</Typography.Body2>
                 </Button>
               </Cell>

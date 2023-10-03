@@ -12,8 +12,13 @@ import { useAppSelector } from '@/services/store.ts'
 export const Decks = () => {
   const itemsPerPage = useAppSelector(state => state.deckSlice.itemsPerPage)
   const currentPage = useAppSelector(state => state.deckSlice.currentPage)
+  const searchByName = useAppSelector(state => state.deckSlice.searchByName)
 
-  const { currentData: data, isLoading } = useGetDecksQuery({ itemsPerPage, currentPage })
+  const { currentData: data, isLoading } = useGetDecksQuery({
+    itemsPerPage,
+    currentPage,
+    name: searchByName,
+  })
 
   if (isLoading) return <Loader />
 
