@@ -41,6 +41,7 @@ export const Button: FC<ButtonProps> = ({
   to,
   children,
   disabled,
+  ...rest
 }) => {
   return to ? (
     <Link to={to} className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}>
@@ -50,6 +51,7 @@ export const Button: FC<ButtonProps> = ({
     <button
       className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
       disabled={disabled}
+      {...rest}
     >
       {children}
     </button>
