@@ -1,4 +1,5 @@
 import { baseApi } from '@/services/base-api.ts'
+import { RootState } from '@/services/store.ts'
 
 const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -13,12 +14,62 @@ const decksApi = baseApi.injectEndpoints({
         },
         providesTags: ['Decks'],
       }),
-      createDeck: builder.mutation<CreateDeckResponse, CreateDeckRequest>({
+      createDeck: builder.mutation<Deck, CreateDeckRequest>({
         query: body => {
           return {
             url: `v1/decks`,
             method: 'POST',
             body,
+          }
+        },
+        async onQueryStarted(_, { dispatch, queryFulfilled, getState }) {
+          const state = getState() as RootState
+
+          try {
+            const response = await queryFulfilled
+
+            dispatch(
+              decksApi.util.updateQueryData(
+                'getDecks',
+                {
+                  currentPage: state.deckSlice.currentPage,
+                  itemsPerPage: state.deckSlice.itemsPerPage,
+                },
+                draft => {
+                  draft.items.unshift(response?.data)
+                }
+              )
+            )
+          } catch (error) {
+            console.log(error)
+          }
+        },
+        invalidatesTags: ['Decks'],
+      }),
+      deleteDeck: builder.mutation<void, { id: string }>({
+        query: data => ({
+          url: `v1/decks/${data.id}`,
+          method: 'DELETE',
+        }),
+        async onQueryStarted({ id }, { dispatch, queryFulfilled, getState }) {
+          const state = getState() as RootState
+          const patchResult = dispatch(
+            decksApi.util.updateQueryData(
+              'getDecks',
+              {
+                currentPage: state.deckSlice.currentPage,
+                itemsPerPage: state.deckSlice.itemsPerPage,
+              },
+              draft => {
+                draft.items = draft.items.filter(el => el.id !== id)
+              }
+            )
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
           }
         },
         invalidatesTags: ['Decks'],
@@ -27,25 +78,11 @@ const decksApi = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation } = decksApi
+export const { useGetDecksQuery, useCreateDeckMutation, useDeleteDeckMutation } = decksApi
 
 export type CreateDeckRequest = {
   name: string
   isPrivate?: boolean
-}
-
-export type CreateDeckResponse = {
-  author: Author
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
-  shots: number
-  cover: string
-  rating: number
-  created: string
-  updated: string
-  cardsCount: number
 }
 
 export type GetDecksArgs = {

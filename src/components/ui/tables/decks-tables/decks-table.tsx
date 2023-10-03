@@ -1,14 +1,16 @@
 import { FC } from 'react'
 
-import { Body, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
+import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
-import { DecksResponse } from '@/services/decks'
+import { DecksResponse, useDeleteDeckMutation } from '@/services/decks'
 
 type DecksProps = {
   data?: DecksResponse
 }
 
 export const DecksTable: FC<DecksProps> = ({ data }) => {
+  const [deleteDeck] = useDeleteDeckMutation()
+
   return (
     <Root>
       <Head>
@@ -44,6 +46,11 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
               </Cell>
               <Cell>
                 <Typography.Body2>{deck.author.name}</Typography.Body2>
+              </Cell>
+              <Cell>
+                <button onClick={() => deleteDeck({ id: deck.id })}>
+                  <Typography.Body2>Delete</Typography.Body2>
+                </button>
               </Cell>
             </Row>
           )

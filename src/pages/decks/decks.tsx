@@ -13,7 +13,7 @@ export const Decks = () => {
   const itemsPerPage = useAppSelector(state => state.deckSlice.itemsPerPage)
   const currentPage = useAppSelector(state => state.deckSlice.currentPage)
 
-  const { data, isLoading } = useGetDecksQuery({
+  const { currentData: data, isLoading } = useGetDecksQuery({
     itemsPerPage,
     currentPage,
   })
