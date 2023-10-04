@@ -15,6 +15,7 @@ export const Decks = () => {
   const searchByName = useAppSelector(state => state.deckSlice.searchByName)
   const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
+  const authorId = useAppSelector(state => state.deckSlice.authorId)
 
   const { currentData: data, isLoading } = useGetDecksQuery({
     itemsPerPage,
@@ -22,6 +23,7 @@ export const Decks = () => {
     name: searchByName,
     minCardsCount,
     maxCardsCount,
+    authorId,
   })
 
   if (isLoading) return <Loader />

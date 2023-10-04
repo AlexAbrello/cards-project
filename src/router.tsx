@@ -13,6 +13,8 @@ import { SignUpPage } from '@/pages/auth/registration-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
 import { PageNotFound } from '@/pages/not-found/not-found.tsx'
 import { useMeQuery } from '@/services/auth/auth-api.ts'
+import { authSlice } from '@/services/auth/auth.slice.ts'
+import { useAppDispatch } from '@/services/store.ts'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -63,7 +65,14 @@ export const Router = () => {
 function PrivateRoutes() {
   const { data } = useMeQuery()
 
+  const dispatch = useAppDispatch()
+  const setUserId = (id: string) => dispatch(authSlice.actions.setUserId(id))
+
   const isAuthenticated = data && data?.success !== false
+
+  if (isAuthenticated) {
+    setUserId(data.id)
+  }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

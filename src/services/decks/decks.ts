@@ -37,6 +37,7 @@ const decksApi = baseApi.injectEndpoints({
                   name: state.deckSlice.searchByName,
                   minCardsCount: state.deckSlice.minCardsCount,
                   maxCardsCount: state.deckSlice.maxCardsCount,
+                  authorId: state.deckSlice.authorId,
                 },
                 draft => {
                   draft.items.unshift(response?.data)
@@ -65,6 +66,7 @@ const decksApi = baseApi.injectEndpoints({
                 name: state.deckSlice.searchByName,
                 minCardsCount: state.deckSlice.minCardsCount,
                 maxCardsCount: state.deckSlice.maxCardsCount,
+                authorId: state.deckSlice.authorId,
               },
               draft => {
                 draft.items = draft.items.filter(el => el.id !== id)

@@ -18,6 +18,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({ minCardsCount, maxCardsCou
   const [debounceId, setDebounceId] = useState<number | null>(null)
   const dispatch = useAppDispatch()
   const setSearchByName = (name: string) => dispatch(decksSlice.actions.setSearchByName(name))
+  const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
   useEffect(() => {
     if (debounceId) {
@@ -28,6 +29,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({ minCardsCount, maxCardsCou
       setDebounceId(
         setTimeout(() => {
           setSearchByName(searchName)
+          setCurrentPage(1)
         }, 700) as unknown as number
       )
     }

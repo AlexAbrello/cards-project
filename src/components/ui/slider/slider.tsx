@@ -20,6 +20,7 @@ export const SliderComponent: FC<SliderProps> = ({ minCardsCount, maxCardsCount 
 
   const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
   const setMaxCardsCount = (value: number) => dispatch(decksSlice.actions.setMaxCardsCount(value))
+  const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
   useEffect(() => {
     if (debounceId) {
@@ -30,6 +31,7 @@ export const SliderComponent: FC<SliderProps> = ({ minCardsCount, maxCardsCount 
       setTimeout(() => {
         setMinCardsCount(minValue)
         setMaxCardsCount(maxValue)
+        setCurrentPage(1)
       }, 700) as unknown as number
     )
   }, [minValue, maxValue])
