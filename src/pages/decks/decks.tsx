@@ -13,11 +13,15 @@ export const Decks = () => {
   const itemsPerPage = useAppSelector(state => state.deckSlice.itemsPerPage)
   const currentPage = useAppSelector(state => state.deckSlice.currentPage)
   const searchByName = useAppSelector(state => state.deckSlice.searchByName)
+  const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
 
   const { currentData: data, isLoading } = useGetDecksQuery({
     itemsPerPage,
     currentPage,
     name: searchByName,
+    minCardsCount,
+    maxCardsCount,
   })
 
   if (isLoading) return <Loader />
@@ -28,7 +32,7 @@ export const Decks = () => {
         <Typography.H2>Decks List</Typography.H2>
         <CreateDeckComponent />
       </div>
-      <ControlPanel />
+      <ControlPanel minCardsCount={minCardsCount} maxCardsCount={maxCardsCount} />
       {data && (
         <>
           <DecksTable data={data} />

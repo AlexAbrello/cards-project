@@ -9,10 +9,11 @@ import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch } from '@/services/store.ts'
 
 type ControlPanelProps = {
-  name: string
+  minCardsCount: number
+  maxCardsCount: number
 }
 
-export const ControlPanel: FC<ControlPanelProps> = () => {
+export const ControlPanel: FC<ControlPanelProps> = ({ minCardsCount, maxCardsCount }) => {
   const [searchName, setName] = useState('')
   const [debounceId, setDebounceId] = useState<number | null>(null)
   const dispatch = useAppDispatch()
@@ -45,7 +46,7 @@ export const ControlPanel: FC<ControlPanelProps> = () => {
         <TabsComponent label={'My Cards'} />
         <TabsComponent label={'All Cards'} />
       </div>
-      <SliderComponent />
+      <SliderComponent minCardsCount={minCardsCount} maxCardsCount={maxCardsCount} />
       <Button variant={'secondary'}>
         <div style={{ display: 'flex' }}>
           <DeleteIcon />

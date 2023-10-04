@@ -1,18 +1,42 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
-type SliderProps = {}
+import { decksSlice } from '@/services/decks/decks.slice.ts'
+import { useAppDispatch } from '@/services/store.ts'
 
-export const SliderComponent: FC<SliderProps> = () => {
-  const [minValue, setMinValue] = useState(0)
-  const [maxValue, setManValue] = useState(100)
+type SliderProps = {
+  minCardsCount: number
+  maxCardsCount: number
+}
+
+export const SliderComponent: FC<SliderProps> = ({ minCardsCount, maxCardsCount }) => {
+  const dispatch = useAppDispatch()
+  const [debounceId, setDebounceId] = useState<number | null>(null)
+  const [minValue, setMinValue] = useState(minCardsCount)
+  const [maxValue, setMaxValue] = useState(maxCardsCount)
+
+  const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
+  const setMaxCardsCount = (value: number) => dispatch(decksSlice.actions.setMaxCardsCount(value))
+
+  useEffect(() => {
+    if (debounceId) {
+      clearTimeout(debounceId)
+    }
+
+    setDebounceId(
+      setTimeout(() => {
+        setMinCardsCount(minValue)
+        setMaxCardsCount(maxValue)
+      }, 700) as unknown as number
+    )
+  }, [minValue, maxValue])
 
   const changeValueHandler = (value: number[]) => {
     setMinValue(value[0])
-    setManValue(value[1])
+    setMaxValue(value[1])
   }
 
   return (
@@ -23,7 +47,7 @@ export const SliderComponent: FC<SliderProps> = () => {
       <Slider.Root
         className={s.sliderRoot}
         defaultValue={[minValue, maxValue]}
-        max={100}
+        max={52}
         step={1}
         onValueChange={changeValueHandler}
       >
