@@ -43,8 +43,10 @@ export const ControlPanel: FC<ControlPanelProps> = ({ minCardsCount, maxCardsCou
         label={'Search by Deck Name'}
       />
       <div style={{ display: 'flex' }}>
-        <TabsComponent label={'My Cards'} />
-        <TabsComponent label={'All Cards'} />
+        <TabsComponent>
+          <Typography.Body2>My Decks</Typography.Body2>
+          <Typography.Body2>All Decks</Typography.Body2>
+        </TabsComponent>
       </div>
       <SliderComponent minCardsCount={minCardsCount} maxCardsCount={maxCardsCount} />
       <Button variant={'secondary'}>

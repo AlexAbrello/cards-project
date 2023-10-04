@@ -9,7 +9,6 @@
 
 .tabsTrigger {
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: center;
 
@@ -30,15 +29,15 @@
   &:focus {
     background-color: var(--color-accent-500);
   }
+}
 
-  &:active {
-    background-color: var(--color-accent-500);
-    border: 1px solid var(--color-accent-500);
-  }
+.tabsTrigger[data-state='active'] {
+  background-color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-500);
+}
 
-  &:disabled {
-    color: var(--color-dark-300);
-    background-color: var(--color-dark-700);
-    border: 1px solid var(--color-dark-300);
-  }
+.tabsTrigger[data-disabled] {
+  color: var(--color-dark-300);
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-300);
 }
