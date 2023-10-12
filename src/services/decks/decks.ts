@@ -82,11 +82,57 @@ const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
+      editDeck: builder.mutation<Deck, EditDeckRequest>({
+        query: data => ({
+          url: `v1/decks/${data.id}`,
+          method: 'PATCH',
+          body: data.request,
+        }),
+        async onQueryStarted({ id, request }, { dispatch, queryFulfilled, getState }) {
+          const state = getState() as RootState
+
+          const patchResult = dispatch(
+            decksApi.util.updateQueryData(
+              'getDecks',
+              {
+                currentPage: state.deckSlice.currentPage,
+                itemsPerPage: state.deckSlice.itemsPerPage,
+                name: state.deckSlice.searchByName,
+                minCardsCount: state.deckSlice.minCardsCount,
+                maxCardsCount: state.deckSlice.maxCardsCount,
+                authorId: state.deckSlice.authorId,
+              },
+              draft => {
+                draft.items = draft.items.map(el =>
+                  el.id === id ? { ...el, name: request.name } : el
+                )
+              }
+            )
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
+        invalidatesTags: ['Decks'],
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation, useDeleteDeckMutation } = decksApi
+export const {
+  useGetDecksQuery,
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useEditDeckMutation,
+} = decksApi
+
+export type EditDeckRequest = {
+  id: string
+  request: CreateDeckRequest
+}
 
 export type CreateDeckRequest = {
   name: string

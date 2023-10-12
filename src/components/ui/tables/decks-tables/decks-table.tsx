@@ -1,8 +1,12 @@
 import { FC } from 'react'
 
+import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
+import { Play } from '@/assets/icons/play.tsx'
 import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
+import { EditDeckComponent } from '@/components/ui/modals/edit-deck'
 import { Typography } from '@/components/ui/typography'
 import { DecksResponse, useDeleteDeckMutation } from '@/services/decks'
+import { useAppSelector } from '@/services/store.ts'
 
 type DecksProps = {
   data?: DecksResponse
@@ -10,6 +14,7 @@ type DecksProps = {
 
 export const DecksTable: FC<DecksProps> = ({ data }) => {
   const [deleteDeck] = useDeleteDeckMutation()
+  const userId = useAppSelector(state => state.authSlice.userId)
 
   return (
     <Root>
@@ -27,6 +32,7 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
           <HeadCell>
             <Typography.Subtitle2>Author by</Typography.Subtitle2>
           </HeadCell>
+          <HeadCell />
         </Row>
       </Head>
       <Body>
@@ -48,17 +54,36 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
                 <Typography.Body2>{deck.author.name}</Typography.Body2>
               </Cell>
               <Cell>
-                <Button
-                  onClick={() =>
-                    deleteDeck({ id: deck.id })
-                      .unwrap()
-                      .catch(e => {
-                        alert(e.message)
-                      })
-                  }
-                >
-                  <Typography.Body2>Delete</Typography.Body2>
+                <Button variant={'secondary'} style={{ marginRight: '5px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Play />
+                  </div>
                 </Button>
+                {deck.author.id === userId && (
+                  <>
+                    <EditDeckComponent id={deck.id} />
+                    <Button
+                      variant={'secondary'}
+                      onClick={() =>
+                        deleteDeck({ id: deck.id })
+                          .unwrap()
+                          .catch(e => {
+                            alert(e.message)
+                          })
+                      }
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <DeleteIcon />
+                      </div>
+                    </Button>
+                  </>
+                )}
               </Cell>
             </Row>
           )
