@@ -73,4 +73,24 @@ export type Card = {
   updated: string
 }
 
+export type GetDeckByIdResponse = {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover: string
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
+} & Author
+
+export type GetDeckByIdArgs = {
+  id?: string
+  cover?: string
+  name?: string
+  isPrivate?: boolean
+}
+
 export type DeckCardsResponse = PaginatedEntity<Card>

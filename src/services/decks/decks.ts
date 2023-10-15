@@ -5,6 +5,8 @@ import {
   DeckCardsResponse,
   DecksResponse,
   EditDeckRequest,
+  GetDeckByIdArgs,
+  GetDeckByIdResponse,
   GetDeckCardsArgs,
   GetDecksArgs,
 } from '@/services/decks/types.ts'
@@ -127,6 +129,16 @@ const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
+      getDeckById: builder.query<GetDeckByIdResponse, GetDeckByIdArgs>({
+        query: ({ id, ...args }) => {
+          return {
+            url: `v1/decks/${id}`,
+            method: 'GET',
+            params: { ...args },
+          }
+        },
+        providesTags: ['Decks'],
+      }),
       getDeckCards: builder.query<DeckCardsResponse, GetDeckCardsArgs>({
         query: ({ id, ...args }) => {
           return {
@@ -147,4 +159,5 @@ export const {
   useDeleteDeckMutation,
   useEditDeckMutation,
   useGetDeckCardsQuery,
+  useGetDeckByIdQuery,
 } = decksApi
