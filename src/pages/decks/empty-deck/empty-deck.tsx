@@ -6,7 +6,7 @@ import { CreateCardComponent } from '@/components/ui/modals/create-card/create-c
 import { Typography } from '@/components/ui/typography'
 
 type EmptyDeckProps = {
-  deckName: string
+  deckName: string | undefined
 }
 
 export const EmptyDeck: FC<EmptyDeckProps> = ({ deckName }) => {
