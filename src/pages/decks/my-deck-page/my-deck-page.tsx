@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import s from './my-deck-page.module.scss'
 
-import { Body, Cell, Head, HeadCell, Root, Row, TextField } from '@/components/ui'
+import { TextField } from '@/components/ui'
 import { BackButton } from '@/components/ui/back-button'
 import { Loader } from '@/components/ui/loader'
 import { CreateCardComponent } from '@/components/ui/modals/create-card/create-card.tsx'

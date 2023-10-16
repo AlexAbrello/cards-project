@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { Body, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
+import { Grade } from '@/components/ui/grade/grade.tsx'
 import { Typography } from '@/components/ui/typography'
 import { DeckCardsResponse } from '@/services/decks/types.ts'
 
@@ -43,7 +44,9 @@ export const CardsTable: FC<CardsTableProps> = ({ data }) => {
                   {new Date(card.updated).toLocaleString('en-GB')}
                 </Typography.Body2>
               </Cell>
-              <Cell>{card.grade}</Cell>
+              <Cell>
+                <Grade grade={card.grade} />
+              </Cell>
             </Row>
           )
         })}
