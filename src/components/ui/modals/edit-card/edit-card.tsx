@@ -5,7 +5,6 @@ import { DialogClose } from '@radix-ui/react-dialog'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { PlusIcon } from '@/assets/icons/plus.tsx'
 import { Write } from '@/assets/icons/write.tsx'
 import { Button, ControlledTextField, DialogComponent } from '@/components/ui'
 import s from '@/components/ui/modals/create-deck/create-deck.module.scss'

@@ -29,6 +29,16 @@ export const MyDeck = () => {
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
 
+  const { id } = useParams()
+
+  const { currentData: data, isLoading: gettingCardsLoading } = useGetDeckCardsQuery({
+    id,
+    itemsPerPage,
+    currentPage,
+    question: searchByName,
+  })
+  const { data: deckData, isLoading } = useGetDeckByIdQuery({ id })
+
   useEffect(() => {
     if (debounceId) {
       clearTimeout(debounceId)
@@ -43,15 +53,6 @@ export const MyDeck = () => {
       )
     }
   }, [searchName])
-  const { id } = useParams()
-
-  const { currentData: data, isLoading: gettingCardsLoading } = useGetDeckCardsQuery({
-    id,
-    itemsPerPage,
-    currentPage,
-    question: searchByName,
-  })
-  const { data: deckData, isLoading } = useGetDeckByIdQuery({ id })
 
   if (isLoading || gettingCardsLoading) return <Loader />
   if (data?.items.length === 0) return <EmptyDeck deckName={deckData?.name} deckId={deckData?.id} />
