@@ -5,7 +5,8 @@ import { Play } from '@/assets/icons/play.tsx'
 import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
 import { EditDeckComponent } from '@/components/ui/modals/edit-deck'
 import { Typography } from '@/components/ui/typography'
-import { DecksResponse, useDeleteDeckMutation } from '@/services/decks'
+import { useDeleteDeckMutation } from '@/services/decks'
+import { DecksResponse } from '@/services/decks/types.ts'
 import { useAppSelector } from '@/services/store.ts'
 
 type DecksProps = {
@@ -37,10 +38,15 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
       </Head>
       <Body>
         {data?.items.map(deck => {
+          const path =
+            deck.author.id === userId ? `/my-deck/${deck.id}` : `/friends-deck/${deck.id}`
+
           return (
             <Row key={deck.id}>
               <Cell>
-                <Typography.Body2>{deck.name}</Typography.Body2>
+                <Button to={path}>
+                  <Typography.Body2>{deck.name}</Typography.Body2>
+                </Button>
               </Cell>
               <Cell>
                 <Typography.Body2>{deck.cardsCount}</Typography.Body2>

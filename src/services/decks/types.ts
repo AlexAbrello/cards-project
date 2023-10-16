@@ -24,12 +24,6 @@ export type DecksResponse = {
   maxCardsCount: number
 } & PaginatedEntity<Deck>
 
-export type Pagination = {
-  totalPages: number
-  currentPage: number
-  itemsPerPage: number
-  totalItems: number
-}
 export type Author = {
   id: string
   name: string
