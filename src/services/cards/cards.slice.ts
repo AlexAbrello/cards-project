@@ -4,6 +4,7 @@ const initialState = {
   itemsPerPage: 10,
   currentPage: 1,
   searchByName: '',
+  deckId: '',
 }
 
 export const cardsSlice = createSlice({
@@ -18,6 +19,9 @@ export const cardsSlice = createSlice({
     },
     setSearchByName: (state, action: PayloadAction<string>) => {
       state.searchByName = action.payload
+    },
+    setDeckId: (state, action: PayloadAction<string>) => {
+      state.deckId = action.payload
     },
   },
 })

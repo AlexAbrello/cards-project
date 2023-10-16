@@ -18,7 +18,10 @@ import { useGetDeckByIdQuery } from '@/services/decks'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
 export const MyDeck = () => {
+  const { id } = useParams()
+
   const dispatch = useAppDispatch()
+
   const [searchName, setName] = useState('')
   const [debounceId, setDebounceId] = useState<number | null>(null)
 
@@ -28,8 +31,7 @@ export const MyDeck = () => {
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
-
-  const { id } = useParams()
+  const setDeckId = (id: string) => dispatch(cardsSlice.actions.setDeckId(id))
 
   const { currentData: data, isLoading: gettingCardsLoading } = useGetDeckCardsQuery({
     id,
@@ -54,6 +56,10 @@ export const MyDeck = () => {
     }
   }, [searchName])
 
+  useEffect(() => {
+    id && setDeckId(id)
+  }, [])
+
   if (isLoading || gettingCardsLoading) return <Loader />
   if (data?.items.length === 0) return <EmptyDeck deckName={deckData?.name} deckId={deckData?.id} />
 
@@ -64,24 +70,28 @@ export const MyDeck = () => {
         <Typography.H2>{deckData?.name}</Typography.H2>
         <CreateCardComponent id={deckData?.id} />
       </div>
-      <TextField
-        onChange={e => setName(e.currentTarget.value)}
-        type={'search'}
-        placeholder={'input search'}
-        label={'Search by Card Name'}
-      />
-      <div className={s.table}>
-        <CardsTable data={data} />
-      </div>
-      <div className={s.pagination}>
-        <PaginationPanel
-          count={data?.pagination.totalPages}
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          setItemsPerPage={setItemsPerPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </div>
+      {data && (
+        <>
+          <TextField
+            onChange={e => setName(e.currentTarget.value)}
+            type={'search'}
+            placeholder={'input search'}
+            label={'Search by Card Name'}
+          />
+          <div className={s.table}>
+            <CardsTable data={data} />
+          </div>
+          <div className={s.pagination}>
+            <PaginationPanel
+              count={data?.pagination.totalPages}
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+              setItemsPerPage={setItemsPerPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+        </>
+      )}
     </div>
   )
 }
