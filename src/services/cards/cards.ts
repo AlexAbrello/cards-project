@@ -114,7 +114,6 @@ const cardsApi = baseApi.injectEndpoints({
           )
 
           try {
-            debugger
             await queryFulfilled
           } catch {
             patchResult.undo()

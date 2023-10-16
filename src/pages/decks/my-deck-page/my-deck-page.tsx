@@ -70,7 +70,7 @@ export const MyDeck = () => {
         <Typography.H2>{deckData?.name}</Typography.H2>
         <CreateCardComponent id={deckData?.id} />
       </div>
-      {data && (
+      {data ? (
         <>
           <TextField
             onChange={e => setName(e.currentTarget.value)}
@@ -91,6 +91,8 @@ export const MyDeck = () => {
             />
           </div>
         </>
+      ) : (
+        <Loader />
       )}
     </div>
   )

@@ -81,7 +81,7 @@ export const EditCardComponent: FC<CreateCardProps> = ({ id }) => {
         />
         <div className={s.submitButton}>
           <Button type={'submit'}>
-            <Typography.Subtitle2>Add New Card</Typography.Subtitle2>
+            <Typography.Subtitle2>Edit Card</Typography.Subtitle2>
           </Button>
         </div>
       </form>

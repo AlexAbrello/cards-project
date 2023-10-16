@@ -44,7 +44,7 @@ export const Decks = () => {
         <CreateDeckComponent />
       </div>
       <ControlPanel minCardsCount={minCardsCount} maxCardsCount={maxCardsCount} />
-      {data && (
+      {data ? (
         <>
           <DecksTable data={data} />
           <div className={s.pagination}>
@@ -57,6 +57,8 @@ export const Decks = () => {
             />
           </div>
         </>
+      ) : (
+        <Loader />
       )}
     </div>
   )

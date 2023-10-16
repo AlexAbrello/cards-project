@@ -17,17 +17,25 @@ export const TabsComponent: FC<TabsProps> = ({ disabled, children }) => {
   const dispatch = useAppDispatch()
   const userId = useAppSelector(state => state.authSlice.userId)
   const authorId = useAppSelector(state => state.deckSlice.authorId)
+  const setCurrentPage = (value: number) => {
+    dispatch(decksSlice.actions.setCurrentPage(value))
+  }
   const setAuthor = (id: string) => {
     authorId === ''
       ? dispatch(decksSlice.actions.setAuthor(id))
       : dispatch(decksSlice.actions.setAuthor(''))
   }
 
+  const onChangeTabsHandler = () => {
+    setAuthor(userId)
+    setCurrentPage(1)
+  }
+
   return (
     <Tabs.Root
       className={s.tabsRoot}
-      defaultValue="All Decks"
-      onValueChange={() => setAuthor(userId)}
+      defaultValue={authorId ? 'My Decks' : 'All Decks'}
+      onValueChange={onChangeTabsHandler}
     >
       <Tabs.List className={s.tabsList}>
         {Array.isArray(children) &&
