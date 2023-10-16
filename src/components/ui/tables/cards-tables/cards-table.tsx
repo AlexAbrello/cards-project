@@ -1,8 +1,11 @@
 import { FC } from 'react'
 
-import { Body, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
+import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
+import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
 import { Grade } from '@/components/ui/grade/grade.tsx'
+import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card.tsx'
 import { Typography } from '@/components/ui/typography'
+import { useDeleteCardMutation } from '@/services/cards'
 import { DeckCardsResponse } from '@/services/decks/types.ts'
 
 type CardsTableProps = {
@@ -10,6 +13,8 @@ type CardsTableProps = {
 }
 
 export const CardsTable: FC<CardsTableProps> = ({ data }) => {
+  const [deleteCard] = useDeleteCardMutation()
+
   return (
     <Root>
       <Head>
@@ -46,6 +51,29 @@ export const CardsTable: FC<CardsTableProps> = ({ data }) => {
               </Cell>
               <Cell>
                 <Grade grade={card.grade} />
+              </Cell>
+              <Cell>
+                <EditCardComponent id={card.id} />
+                <Button
+                  variant={'secondary'}
+                  onClick={() =>
+                    deleteCard({ id: card.id })
+                      .unwrap()
+                      .catch(e => {
+                        alert(e.message)
+                      })
+                  }
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <DeleteIcon />
+                  </div>
+                </Button>
               </Cell>
             </Row>
           )

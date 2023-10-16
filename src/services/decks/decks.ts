@@ -1,15 +1,11 @@
 import { baseApi } from '@/services/base-api.ts'
 import {
-  Card,
-  CreateCardArgs,
   CreateDeckRequest,
   Deck,
-  DeckCardsResponse,
   DecksResponse,
   EditDeckRequest,
   GetDeckByIdArgs,
   GetDeckByIdResponse,
-  GetDeckCardsArgs,
   GetDecksArgs,
 } from '@/services/decks/types.ts'
 import { RootState } from '@/services/store.ts'
@@ -141,50 +137,6 @@ const decksApi = baseApi.injectEndpoints({
         },
         providesTags: ['Decks'],
       }),
-      getDeckCards: builder.query<DeckCardsResponse, GetDeckCardsArgs>({
-        query: ({ id, ...args }) => {
-          return {
-            url: `v1/decks/${id}/cards`,
-            method: 'GET',
-            params: { ...args },
-          }
-        },
-        providesTags: ['Decks', 'Cards'],
-      }),
-      createCard: builder.mutation<Card, CreateCardArgs>({
-        query: ({ id, ...args }) => {
-          return {
-            url: `v1/decks/${id}/cards`,
-            method: 'POST',
-            body: { ...args },
-          }
-        },
-        async onQueryStarted({ id }, { dispatch, queryFulfilled, getState }) {
-          const state = getState() as RootState
-
-          try {
-            const response = await queryFulfilled
-
-            dispatch(
-              decksApi.util.updateQueryData(
-                'getDeckCards',
-                {
-                  id,
-                  currentPage: state.cardsSlice.currentPage,
-                  itemsPerPage: state.cardsSlice.itemsPerPage,
-                  question: state.cardsSlice.searchByName,
-                },
-                draft => {
-                  draft.items.unshift(response?.data)
-                }
-              )
-            )
-          } catch (error) {
-            console.log(error)
-          }
-        },
-        invalidatesTags: ['Decks', 'Cards'],
-      }),
     }
   },
 })
@@ -194,7 +146,5 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useEditDeckMutation,
-  useGetDeckCardsQuery,
   useGetDeckByIdQuery,
-  useCreateCardMutation,
 } = decksApi

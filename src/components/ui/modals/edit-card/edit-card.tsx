@@ -6,10 +6,11 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { PlusIcon } from '@/assets/icons/plus.tsx'
+import { Write } from '@/assets/icons/write.tsx'
 import { Button, ControlledTextField, DialogComponent } from '@/components/ui'
 import s from '@/components/ui/modals/create-deck/create-deck.module.scss'
 import { Typography } from '@/components/ui/typography'
-import { useCreateCardMutation } from '@/services/cards'
+import { useEditCardMutation } from '@/services/cards'
 
 const createCardSchema = z.object({
   question: z.string({ required_error: 'Введите вопрос' }).nonempty('Enter a question'),
@@ -22,8 +23,8 @@ type CreateCardProps = {
   id: string | undefined
 }
 
-export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
-  const [create] = useCreateCardMutation()
+export const EditCardComponent: FC<CreateCardProps> = ({ id }) => {
+  const [edit] = useEditCardMutation()
   const [open, setOpen] = useState<boolean>(false)
   const {
     control,
@@ -35,7 +36,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
   })
 
   const createCard = (data: CreateCardForm) => {
-    create({ id, question: data.question, answer: data.answer })
+    edit({ id, question: data.question, answer: data.answer })
     reset()
     setOpen(false)
   }
@@ -50,16 +51,19 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
       setOpen={setOpen}
       callBack={closeDialogHandler}
       trigger={
-        <Button variant={'primary'}>
-          <div style={{ display: 'flex' }}>
-            <PlusIcon />
-            <div style={{ marginLeft: '10px' }}>
-              <Typography.Subtitle2>Add New Card</Typography.Subtitle2>
-            </div>
+        <Button variant={'secondary'} style={{ marginRight: '5px' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Write />
           </div>
         </Button>
       }
-      title={'Create New Card'}
+      title={'Edit Card'}
     >
       <form onSubmit={handleSubmit(createCard)}>
         <ControlledTextField

@@ -12,8 +12,9 @@ import { PaginationPanel } from '@/components/ui/pagination-panel'
 import { CardsTable } from '@/components/ui/tables/cards-tables'
 import { Typography } from '@/components/ui/typography'
 import { EmptyDeck } from '@/pages/decks/empty-deck/empty-deck.tsx'
+import { useGetDeckCardsQuery } from '@/services/cards'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
-import { useGetDeckByIdQuery, useGetDeckCardsQuery } from '@/services/decks'
+import { useGetDeckByIdQuery } from '@/services/decks'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
 export const MyDeck = () => {
