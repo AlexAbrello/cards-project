@@ -159,7 +159,31 @@ const decksApi = baseApi.injectEndpoints({
             body: { ...args },
           }
         },
-        invalidatesTags: ['Decks'],
+        async onQueryStarted({ id }, { dispatch, queryFulfilled, getState }) {
+          const state = getState() as RootState
+
+          try {
+            const response = await queryFulfilled
+
+            dispatch(
+              decksApi.util.updateQueryData(
+                'getDeckCards',
+                {
+                  id,
+                  currentPage: state.cardsSlice.currentPage,
+                  itemsPerPage: state.cardsSlice.itemsPerPage,
+                  question: state.cardsSlice.searchByName,
+                },
+                draft => {
+                  draft.items.unshift(response?.data)
+                }
+              )
+            )
+          } catch (error) {
+            console.log(error)
+          }
+        },
+        invalidatesTags: ['Decks', 'Cards'],
       }),
     }
   },

@@ -44,7 +44,7 @@ export const MyDeck = () => {
   }, [searchName])
   const { id } = useParams()
 
-  const { data, isLoading: gettingCardsLoading } = useGetDeckCardsQuery({
+  const { currentData: data, isLoading: gettingCardsLoading } = useGetDeckCardsQuery({
     id,
     itemsPerPage,
     currentPage,
