@@ -7,9 +7,10 @@ import { Typography } from '@/components/ui/typography'
 
 type EmptyDeckProps = {
   deckName: string | undefined
+  deckId: string | undefined
 }
 
-export const EmptyDeck: FC<EmptyDeckProps> = ({ deckName }) => {
+export const EmptyDeck: FC<EmptyDeckProps> = ({ deckName, deckId }) => {
   return (
     <div className={s.root}>
       <div className={s.title}>
@@ -19,7 +20,7 @@ export const EmptyDeck: FC<EmptyDeckProps> = ({ deckName }) => {
         <Typography.Body1 className={s.text}>
           This deck is empty. Click add new card to fill this deck
         </Typography.Body1>
-        <CreateCardComponent />
+        <CreateCardComponent id={deckId} />
       </div>
     </div>
   )

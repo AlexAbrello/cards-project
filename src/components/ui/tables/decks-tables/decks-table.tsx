@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import s from './decks-table.module.scss'
+
 import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
 import { Play } from '@/assets/icons/play.tsx'
 import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
@@ -44,7 +46,7 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
           return (
             <Row key={deck.id}>
               <Cell>
-                <Button to={path}>
+                <Button to={path} variant={'link'} className={s.link}>
                   <Typography.Body2>{deck.name}</Typography.Body2>
                 </Button>
               </Cell>

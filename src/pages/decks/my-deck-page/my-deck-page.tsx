@@ -11,7 +11,7 @@ export const MyDeck = () => {
   const { data: deckData, isLoading } = useGetDeckByIdQuery({ id })
 
   if (isLoading || gettingCardsLoading) return <Loader />
-  if (data?.items.length === 0) return <EmptyDeck deckName={deckData?.name} />
+  if (data?.items.length === 0) return <EmptyDeck deckName={deckData?.name} deckId={deckData?.id} />
 
   return <div>My Deck</div>
 }

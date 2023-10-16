@@ -1,5 +1,7 @@
 import { baseApi } from '@/services/base-api.ts'
 import {
+  Card,
+  CreateCardArgs,
   CreateDeckRequest,
   Deck,
   DeckCardsResponse,
@@ -149,6 +151,16 @@ const decksApi = baseApi.injectEndpoints({
         },
         providesTags: ['Decks', 'Cards'],
       }),
+      createCard: builder.mutation<Card, CreateCardArgs>({
+        query: ({ id, ...args }) => {
+          return {
+            url: `v1/decks/${id}/cards`,
+            method: 'POST',
+            body: { ...args },
+          }
+        },
+        invalidatesTags: ['Decks'],
+      }),
     }
   },
 })
@@ -160,4 +172,5 @@ export const {
   useEditDeckMutation,
   useGetDeckCardsQuery,
   useGetDeckByIdQuery,
+  useCreateCardMutation,
 } = decksApi
