@@ -19,7 +19,7 @@ const createCardSchema = z.object({
 export type CreateCardForm = z.infer<typeof createCardSchema>
 
 type CreateCardProps = {
-  id: string
+  id: string | undefined
 }
 
 export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {

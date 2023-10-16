@@ -7,7 +7,8 @@ import { PaginationPanel } from '@/components/ui/pagination-panel'
 import { DecksTable } from '@/components/ui/tables/decks-tables'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks'
-import { useAppSelector } from '@/services/store.ts'
+import { decksSlice } from '@/services/decks/decks.slice.ts'
+import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
 export const Decks = () => {
   const itemsPerPage = useAppSelector(state => state.deckSlice.itemsPerPage)
@@ -16,6 +17,14 @@ export const Decks = () => {
   const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
   const authorId = useAppSelector(state => state.deckSlice.authorId)
+
+  const dispatch = useAppDispatch()
+
+  const setCurrentPage = (currentPage: number) =>
+    dispatch(decksSlice.actions.setCurrentPage(currentPage))
+
+  const setItemsPerPage = (itemsPerPage: number) =>
+    dispatch(decksSlice.actions.setItemsPerPage(itemsPerPage))
 
   const { currentData: data, isLoading } = useGetDecksQuery({
     itemsPerPage,
@@ -43,6 +52,8 @@ export const Decks = () => {
               count={data?.pagination.totalPages}
               currentPage={currentPage}
               itemsPerPage={itemsPerPage}
+              setCurrentPage={setCurrentPage}
+              setItemsPerPage={setItemsPerPage}
             />
           </div>
         </>

@@ -2,24 +2,22 @@ import { FC } from 'react'
 
 import { Pagination } from '@/components/ui/pagination/pagination.tsx'
 import { SelectComponent } from '@/components/ui/select/select.tsx'
-import { decksSlice } from '@/services/decks/decks.slice.ts'
-import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
 type PaginationProps = {
   count: number
   currentPage: number
   itemsPerPage: number
+  setCurrentPage: (currentPage: number) => void
+  setItemsPerPage: (itemsPerPage: number) => void
 }
 
-export const PaginationPanel: FC<PaginationProps> = ({ count, currentPage, itemsPerPage }) => {
-  const dispatch = useAppDispatch()
-
-  const setCurrentPage = (currentPage: number) =>
-    dispatch(decksSlice.actions.setCurrentPage(currentPage))
-
-  const setItemsPerPage = (itemsPerPage: number) =>
-    dispatch(decksSlice.actions.setItemsPerPage(itemsPerPage))
-
+export const PaginationPanel: FC<PaginationProps> = ({
+  count,
+  currentPage,
+  itemsPerPage,
+  setCurrentPage,
+  setItemsPerPage,
+}) => {
   return (
     <>
       <Pagination count={count} page={currentPage} onChange={setCurrentPage} />
@@ -30,7 +28,7 @@ export const PaginationPanel: FC<PaginationProps> = ({ count, currentPage, items
           <div>20</div>
           <div>30</div>
         </SelectComponent>
-        <span> decks on page</span>
+        <span> elements on page</span>
       </div>
     </>
   )
