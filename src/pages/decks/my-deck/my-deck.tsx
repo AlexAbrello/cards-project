@@ -9,9 +9,8 @@ import { DropdownComponent, TextField } from '@/components/ui'
 import { BackButton } from '@/components/ui/back-button'
 import { Loader } from '@/components/ui/loader'
 import { CreateCardComponent } from '@/components/ui/modals/create-card/create-card.tsx'
-import { EditDeckComponent } from '@/components/ui/modals/edit-deck'
 import { PaginationPanel } from '@/components/ui/pagination-panel'
-import { CardsTable, MyCardsTable } from '@/components/ui/tables/cards-tables/my-cards-table'
+import { MyCardsTable } from '@/components/ui/tables/cards-tables/my-cards-table'
 import { Typography } from '@/components/ui/typography'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useDeleteDeckMutation } from '@/services/decks'
@@ -72,7 +71,8 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
                     <Typography.Caption>Learn</Typography.Caption>
                   </div>
                   <div>
-                    <EditDeckComponent id={deckData.id} />
+                    <Typography.Caption>Edit</Typography.Caption>
+                    {/*<EditDeckComponent id={deckData.id} />*/}
                   </div>
                   <div onClick={() => onDeleteHandler(deckData.id)}>
                     <Typography.Caption>Delete</Typography.Caption>
