@@ -40,13 +40,10 @@ export const DecksTable: FC<DecksProps> = ({ data }) => {
       </Head>
       <Body>
         {data?.items.map(deck => {
-          const path =
-            deck.author.id === userId ? `/my-deck/${deck.id}` : `/friends-deck/${deck.id}`
-
           return (
             <Row key={deck.id}>
               <Cell>
-                <Button to={path} variant={'link'} className={s.link}>
+                <Button to={`/deck/${deck.id}`} variant={'link'} className={s.link}>
                   <Typography.Body2>{deck.name}</Typography.Body2>
                 </Button>
               </Cell>

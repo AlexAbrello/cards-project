@@ -5,24 +5,25 @@ import s from './empty-deck.module.scss'
 import { BackButton } from '@/components/ui/back-button'
 import { CreateCardComponent } from '@/components/ui/modals/create-card/create-card.tsx'
 import { Typography } from '@/components/ui/typography'
+import { GetDeckByIdResponse } from '@/services/decks/types.ts'
 
 type EmptyDeckProps = {
-  deckName: string | undefined
-  deckId: string | undefined
+  deckData?: GetDeckByIdResponse
+  userId: string
 }
 
-export const EmptyDeck: FC<EmptyDeckProps> = ({ deckName, deckId }) => {
+export const EmptyDeck: FC<EmptyDeckProps> = ({ deckData }) => {
   return (
     <div className={s.root}>
       <BackButton />
       <div className={s.title}>
-        <Typography.H2>{deckName}</Typography.H2>
+        <Typography.H2>{deckData?.name}</Typography.H2>
       </div>
       <div className={s.body}>
         <Typography.Body1 className={s.text}>
           This deck is empty. Click add new card to fill this deck
         </Typography.Body1>
-        <CreateCardComponent id={deckId} />
+        <CreateCardComponent id={deckData?.id} />
       </div>
     </div>
   )

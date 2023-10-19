@@ -10,8 +10,8 @@ import { HeaderComponent } from '@/components/ui/header-component/header-compone
 import { Loader } from '@/components/ui/loader'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
+import { Deck } from '@/pages/decks/deck-page/deck-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
-import { MyDeck } from '@/pages/decks/my-deck-page/my-deck-page.tsx'
 import { PageNotFound } from '@/pages/not-found/not-found.tsx'
 import { useMeQuery } from '@/services/auth/auth-api.ts'
 import { authSlice } from '@/services/auth/auth.slice.ts'
@@ -42,8 +42,8 @@ const privateRoutes: RouteObject[] = [
     element: <Decks />,
   },
   {
-    path: '/my-deck/:id',
-    element: <MyDeck />,
+    path: '/deck/:id',
+    element: <Deck />,
   },
 ]
 

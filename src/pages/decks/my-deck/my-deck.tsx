@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react'
-
-import { useParams } from 'react-router-dom'
-
-import s from './my-deck-page.module.scss'
+import { FC, useEffect, useState } from 'react'
 
 import { TextField } from '@/components/ui'
 import { BackButton } from '@/components/ui/back-button'
@@ -11,35 +7,27 @@ import { CreateCardComponent } from '@/components/ui/modals/create-card/create-c
 import { PaginationPanel } from '@/components/ui/pagination-panel'
 import { CardsTable } from '@/components/ui/tables/cards-tables'
 import { Typography } from '@/components/ui/typography'
-import { EmptyDeck } from '@/pages/decks/empty-deck/empty-deck.tsx'
-import { useGetDeckCardsQuery } from '@/services/cards'
+import s from '@/pages/decks/deck-page/deck-page.module.scss'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
-import { useGetDeckByIdQuery } from '@/services/decks'
-import { useAppDispatch, useAppSelector } from '@/services/store.ts'
+import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
+import { useAppDispatch } from '@/services/store.ts'
 
-export const MyDeck = () => {
-  const { id } = useParams()
+type MyDeckProps = {
+  data?: DeckCardsResponse
+  deckData?: GetDeckByIdResponse
+  itemsPerPage: number
+  currentPage: number
+}
 
+export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentPage }) => {
   const dispatch = useAppDispatch()
 
   const [searchName, setName] = useState('')
   const [debounceId, setDebounceId] = useState<number | null>(null)
 
-  const itemsPerPage = useAppSelector(state => state.cardsSlice.itemsPerPage)
-  const currentPage = useAppSelector(state => state.cardsSlice.currentPage)
-  const searchByName = useAppSelector(state => state.cardsSlice.searchByName)
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
-  const setDeckId = (id: string) => dispatch(cardsSlice.actions.setDeckId(id))
-
-  const { currentData: data, isLoading: gettingCardsLoading } = useGetDeckCardsQuery({
-    id,
-    itemsPerPage,
-    currentPage,
-    question: searchByName,
-  })
-  const { data: deckData, isLoading } = useGetDeckByIdQuery({ id })
 
   useEffect(() => {
     if (debounceId) {
@@ -55,13 +43,6 @@ export const MyDeck = () => {
       )
     }
   }, [searchName])
-
-  useEffect(() => {
-    id && setDeckId(id)
-  }, [])
-
-  if (isLoading || gettingCardsLoading) return <Loader />
-  if (data?.items.length === 0) return <EmptyDeck deckName={deckData?.name} deckId={deckData?.id} />
 
   return (
     <div className={s.wrapper}>
