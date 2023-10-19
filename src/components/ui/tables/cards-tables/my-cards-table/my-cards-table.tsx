@@ -8,11 +8,11 @@ import { Typography } from '@/components/ui/typography'
 import { useDeleteCardMutation } from '@/services/cards'
 import { DeckCardsResponse } from '@/services/decks/types.ts'
 
-type CardsTableProps = {
+export type CardsTableProps = {
   data?: DeckCardsResponse
 }
 
-export const CardsTable: FC<CardsTableProps> = ({ data }) => {
+export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
   const [deleteCard] = useDeleteCardMutation()
 
   return (

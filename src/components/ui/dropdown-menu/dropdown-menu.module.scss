@@ -1,7 +1,7 @@
 .dropdownMenuContent {
   will-change: transform, opacity;
 
-  min-width: 220px;
+  width: 150px;
   padding: 5px;
 
   background-color: var(--color-dark-700);
@@ -31,6 +31,7 @@
   display: flex;
   align-items: center;
 
+  width: 140px;
   padding: 5px 10px;
 
   font-size: 13px;

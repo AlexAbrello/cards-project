@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { Loader } from '@/components/ui/loader'
 import { EmptyDeck } from '@/pages/decks/empty-deck/empty-deck.tsx'
+import { FriendDeck } from '@/pages/decks/friend-deck/friend-deck.tsx'
 import { MyDeck } from '@/pages/decks/my-deck'
 import { useGetDeckCardsQuery } from '@/services/cards'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
@@ -47,7 +48,12 @@ export const Deck = () => {
           currentPage={currentPage}
         />
       ) : (
-        <div>div</div>
+        <FriendDeck
+          deckData={deckData}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          data={data}
+        />
       )}
     </>
   )

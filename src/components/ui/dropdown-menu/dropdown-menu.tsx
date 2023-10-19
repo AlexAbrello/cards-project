@@ -15,22 +15,21 @@ type DropdownProps = {
 export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
+      <DropdownMenu.Trigger>
         <button>{trigger}</button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content className={s.dropdownMenuContent}>
-          <DropdownMenu.Label></DropdownMenu.Label>
           {Array.isArray(children) &&
-            children?.map(el => {
+            children?.map((el, index) => {
               return (
-                <div key={el.name}>
-                  <DropdownMenu.Item className={s.dropdownMenuItem} asChild>
+                <>
+                  <DropdownMenu.Item className={s.dropdownMenuItem} key={index}>
                     <Typography.Caption>{el}</Typography.Caption>
                   </DropdownMenu.Item>
                   <DropdownMenuSeparator className={s.dropdownMenuSeparator} />
-                </div>
+                </>
               )
             })}
 

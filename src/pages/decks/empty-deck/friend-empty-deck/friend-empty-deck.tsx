@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import s from './friend-emprty-deck.module.scss'
+import s from './friend-empty-deck.module.scss'
 
 import { BackButton } from '@/components/ui/back-button'
 import { Typography } from '@/components/ui/typography'

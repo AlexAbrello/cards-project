@@ -1,1 +1,0 @@
-import * from './friend-emprty-deck'

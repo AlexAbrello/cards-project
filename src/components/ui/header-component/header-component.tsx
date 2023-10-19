@@ -19,18 +19,18 @@ export const HeaderComponent: FC<HeaderComponentProps> = ({ name }) => {
       <Logo />
       {name && (
         <DropdownComponent trigger={<Avatar name={name} />}>
-          <>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ marginRight: '10px' }}>
               <ProfileIcon />
             </div>
             <Typography.Caption>My Profile</Typography.Caption>
-          </>
-          <>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', width: '140px' }} onClick={logOut}>
             <div style={{ marginRight: '10px' }}>
               <LogOut />
             </div>
-            <Typography.Caption onClick={logOut}>Log Out</Typography.Caption>
-          </>
+            <Typography.Caption>Log Out</Typography.Caption>
+          </div>
         </DropdownComponent>
       )}
     </Header>

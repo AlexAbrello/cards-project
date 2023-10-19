@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { FriendEmptyDeck } from '@/pages/decks/empty-deck/friend-emprty-deck/friend-emprty-deck.tsx'
+import { FriendEmptyDeck } from '@/pages/decks/empty-deck/friend-empty-deck/friend-empty-deck.tsx'
 import { MyEmptyDeck } from '@/pages/decks/empty-deck/my-empty-deck'
 import { GetDeckByIdResponse } from '@/services/decks/types.ts'
 
