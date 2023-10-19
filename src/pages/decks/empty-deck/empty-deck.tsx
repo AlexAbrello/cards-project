@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import { FriendEmptyDeck } from '@/pages/decks/empty-deck/friend-emprty-deck/friend-emprty-deck.tsx'
 import { MyEmptyDeck } from '@/pages/decks/empty-deck/my-empty-deck'
 import { GetDeckByIdResponse } from '@/services/decks/types.ts'
 
@@ -9,5 +10,13 @@ type EmptyDeckProps = {
 }
 
 export const EmptyDeck: FC<EmptyDeckProps> = ({ deckData, userId }) => {
-  return <>{deckData?.userId === userId ? <MyEmptyDeck deckData={deckData} /> : <div>div</div>}</>
+  return (
+    <>
+      {deckData?.userId === userId ? (
+        <MyEmptyDeck deckData={deckData} />
+      ) : (
+        <FriendEmptyDeck deckData={deckData} />
+      )}
+    </>
+  )
 }
