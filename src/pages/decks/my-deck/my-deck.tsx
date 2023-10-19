@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 
+import s from './my-deck.module.scss'
+
 import { TextField } from '@/components/ui'
 import { BackButton } from '@/components/ui/back-button'
 import { Loader } from '@/components/ui/loader'
@@ -7,7 +9,6 @@ import { CreateCardComponent } from '@/components/ui/modals/create-card/create-c
 import { PaginationPanel } from '@/components/ui/pagination-panel'
 import { CardsTable } from '@/components/ui/tables/cards-tables'
 import { Typography } from '@/components/ui/typography'
-import s from '@/pages/decks/deck-page/deck-page.module.scss'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
 import { useAppDispatch } from '@/services/store.ts'
