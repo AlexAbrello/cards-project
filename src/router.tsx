@@ -12,6 +12,7 @@ import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
 import { Deck } from '@/pages/decks/deck-page/deck-page.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
+import { Learn } from '@/pages/learn'
 import { PageNotFound } from '@/pages/not-found/not-found.tsx'
 import { useMeQuery } from '@/services/auth/auth-api.ts'
 import { authSlice } from '@/services/auth/auth.slice.ts'
@@ -44,6 +45,10 @@ const privateRoutes: RouteObject[] = [
   {
     path: '/deck/:id',
     element: <Deck />,
+  },
+  {
+    path: '/deck/:id/learn',
+    element: <Learn />,
   },
 ]
 

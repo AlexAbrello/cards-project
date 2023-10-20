@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import s from './my-deck.module.scss'
 
 import { ContextMenu } from '@/assets/icons/context-menu.tsx'
-import { DropdownComponent, TextField } from '@/components/ui'
+import { Button, DropdownComponent, TextField } from '@/components/ui'
 import { BackButton } from '@/components/ui/back-button'
 import { Loader } from '@/components/ui/loader'
 import { CreateCardComponent } from '@/components/ui/modals/create-card/create-card.tsx'
@@ -61,14 +61,16 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
     <div className={s.wrapper}>
       <BackButton />
       <div className={s.title}>
-        {deckData && (
+        {deckData && data && (
           <>
             <div style={{ display: 'flex' }}>
               <Typography.H2>{deckData.name}</Typography.H2>
               <div style={{ marginLeft: '10px' }}>
                 <DropdownComponent trigger={<ContextMenu />}>
                   <div>
-                    <Typography.Caption>Learn</Typography.Caption>
+                    <Button to={`/deck/${deckData.id}/learn`}>
+                      <Typography.Caption>Learn</Typography.Caption>
+                    </Button>
                   </div>
                   <div>
                     <Typography.Caption>Edit</Typography.Caption>

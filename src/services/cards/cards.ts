@@ -20,6 +20,15 @@ const cardsApi = baseApi.injectEndpoints({
         },
         providesTags: ['Decks', 'Cards'],
       }),
+      getRandomCards: builder.query<Card, getRandomCardsArgs>({
+        query: ({ id, ...args }) => {
+          return {
+            url: `v1/decks/${id}/learn`,
+            method: 'GET',
+            params: { ...args },
+          }
+        },
+      }),
       createCard: builder.mutation<Card, CreateCardArgs>({
         query: ({ id, ...args }) => {
           return {
@@ -130,4 +139,5 @@ export const {
   useCreateCardMutation,
   useDeleteCardMutation,
   useEditCardMutation,
+  useGetRandomCardsQuery,
 } = cardsApi
