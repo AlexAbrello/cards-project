@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 
 import s from './back-button.module.scss'
@@ -6,7 +8,7 @@ import { ArrowBack } from '@/assets/icons/arrow-back.tsx'
 import { Button } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 
-export const BackButton = () => {
+export const BackButton = memo(() => {
   const navigate = useNavigate()
 
   return (
@@ -19,4 +21,4 @@ export const BackButton = () => {
       </div>
     </Button>
   )
-}
+})

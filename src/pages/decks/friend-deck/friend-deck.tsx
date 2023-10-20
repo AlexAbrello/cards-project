@@ -51,7 +51,7 @@ export const FriendDeck: FC<FriendDeckProps> = ({ deckData, data, itemsPerPage, 
         {deckData && (
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
             <Typography.H2>{deckData.name}</Typography.H2>
-            <Button variant={'primary'}>
+            <Button to={`/deck/${deckData.id}/learn`} variant={'primary'}>
               <Typography.Body2>Learn</Typography.Body2>
             </Button>
           </div>
