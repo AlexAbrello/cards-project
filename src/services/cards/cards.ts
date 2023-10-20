@@ -1,4 +1,5 @@
 import { baseApi } from '@/services/base-api.ts'
+import { getRandomCardsArgs, sendAnswerArgs } from '@/services/cards/types.ts'
 import {
   Card,
   CreateCardArgs,
@@ -28,6 +29,7 @@ const cardsApi = baseApi.injectEndpoints({
             params: { ...args },
           }
         },
+        providesTags: ['Decks', 'Cards'],
       }),
       createCard: builder.mutation<Card, CreateCardArgs>({
         query: ({ id, ...args }) => {
@@ -130,6 +132,16 @@ const cardsApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks', 'Cards'],
       }),
+      sendAnswer: builder.mutation<void, sendAnswerArgs>({
+        query: ({ id, ...args }) => {
+          return {
+            url: `v1/decks/${id}/learn`,
+            method: 'POST',
+            body: { ...args },
+          }
+        },
+        invalidatesTags: ['Decks', 'Cards'],
+      }),
     }
   },
 })
@@ -140,4 +152,5 @@ export const {
   useDeleteCardMutation,
   useEditCardMutation,
   useGetRandomCardsQuery,
+  useSendAnswerMutation,
 } = cardsApi

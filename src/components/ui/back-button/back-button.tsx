@@ -15,7 +15,7 @@ export const BackButton = () => {
         <div style={{ marginRight: '10px' }}>
           <ArrowBack />
         </div>
-        <Typography.Body2>Back to Deck List</Typography.Body2>
+        <Typography.Body2>Back to Previous Page</Typography.Body2>
       </div>
     </Button>
   )

@@ -5,12 +5,8 @@ import { clsx } from 'clsx'
 
 import s from './radio.module.scss'
 
-type Option = {
-  value: string
-}
-
 export type RadioProps = {
-  options?: Option[]
+  options?: string[]
   label?: string
   disabled?: boolean
   onChange?: (checked: string) => void
@@ -27,12 +23,12 @@ export const Radio: FC<RadioProps> = ({ options, disabled, onChange }) => {
 
   return (
     <RadioGroup.Root className={classNames.root} onValueChange={onChange} disabled={disabled}>
-      {options?.map(option => (
-        <div className={classNames.wrapper} key={option.value}>
-          <RadioGroup.Item value={option.value} className={classNames.item}>
+      {options?.map((option, index) => (
+        <div className={classNames.wrapper} key={index}>
+          <RadioGroup.Item value={(index + 1).toString()} className={classNames.item}>
             <RadioGroup.Indicator className={classNames.indicator} />
           </RadioGroup.Item>
-          <label className={classNames.label}>{option.value}</label>
+          <label className={classNames.label}>{option}</label>
         </div>
       ))}
     </RadioGroup.Root>
