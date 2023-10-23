@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 
 import { TextField } from '@/components/ui'
+import { useDebounce } from '@/hooks/useDebounce.ts'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch } from '@/services/store.ts'
 
@@ -9,26 +10,18 @@ type SearchComponentProps = {
 }
 export const SearchComponent: FC<SearchComponentProps> = ({ label }) => {
   const [searchName, setName] = useState('')
-  const [debounceId, setDebounceId] = useState<number | null>(null)
+  const debouncedSearchName = useDebounce(searchName, 700)
   const dispatch = useAppDispatch()
 
   const setSearchByName = (name: string) => dispatch(decksSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
   useEffect(() => {
-    if (debounceId) {
-      clearTimeout(debounceId)
+    if (debouncedSearchName) {
+      setSearchByName(debouncedSearchName)
+      setCurrentPage(1)
     }
-
-    if (searchName) {
-      setDebounceId(
-        setTimeout(() => {
-          setSearchByName(searchName)
-          setCurrentPage(1)
-        }, 700) as unknown as number
-      )
-    }
-  }, [searchName])
+  }, [debouncedSearchName])
 
   return (
     <TextField
