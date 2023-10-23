@@ -43,7 +43,7 @@ export const DecksTable = () => {
           </Root>
           <div className={s.pagination}>
             <Pagination
-              count={data.pagination.totalItems}
+              count={data.pagination.totalPages}
               page={currentPage}
               onChange={setCurrentPage}
             />

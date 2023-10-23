@@ -1,19 +1,16 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
 import { decksSlice } from '@/services/decks/decks.slice.ts'
-import { useAppDispatch } from '@/services/store.ts'
+import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
-type SliderProps = {
-  minCardsCount: number
-  maxCardsCount: number
-}
-
-export const SliderComponent: FC<SliderProps> = ({ minCardsCount, maxCardsCount }) => {
+export const SliderComponent = () => {
   const dispatch = useAppDispatch()
+  const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
   const [debounceId, setDebounceId] = useState<number | null>(null)
   const [minValue, setMinValue] = useState(minCardsCount)
   const [maxValue, setMaxValue] = useState(maxCardsCount)
