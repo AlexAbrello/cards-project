@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import s from './control-panel.module.scss'
 
@@ -6,17 +6,16 @@ import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
 import { Button, SliderComponent, TabsComponent, TextField } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
-import { useAppDispatch } from '@/services/store.ts'
+import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
-type ControlPanelProps = {
-  minCardsCount: number
-  maxCardsCount: number
-}
-
-export const ControlPanel: FC<ControlPanelProps> = ({ minCardsCount, maxCardsCount }) => {
+export const ControlPanel = () => {
   const [searchName, setName] = useState('')
   const [debounceId, setDebounceId] = useState<number | null>(null)
   const dispatch = useAppDispatch()
+
+  const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
+
   const setSearchByName = (name: string) => dispatch(decksSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
@@ -34,6 +33,8 @@ export const ControlPanel: FC<ControlPanelProps> = ({ minCardsCount, maxCardsCou
       )
     }
   }, [searchName])
+
+  console.log('control panel')
 
   return (
     <div className={s.wrapper}>

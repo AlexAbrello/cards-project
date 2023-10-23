@@ -1,99 +1,66 @@
-import { FC } from 'react'
-
 import s from './decks-table.module.scss'
 
-import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
-import { Play } from '@/assets/icons/play.tsx'
-import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
-import { EditDeckComponent } from '@/components/ui/modals/edit-deck'
-import { Typography } from '@/components/ui/typography'
-import { useDeleteDeckMutation } from '@/services/decks'
-import { DecksResponse } from '@/services/decks/types.ts'
-import { useAppSelector } from '@/services/store.ts'
+import { Root } from '@/components/ui'
+import { Loader } from '@/components/ui/loader'
+import { Pagination } from '@/components/ui/pagination/pagination.tsx'
+import { SelectComponent } from '@/components/ui/select/select.tsx'
+import { TableBody } from '@/components/ui/tables/tableBody.tsx'
+import { TableHeader } from '@/components/ui/tables/tableHeader.tsx'
+import { useGetDecksQuery } from '@/services/decks'
+import { decksSlice } from '@/services/decks/decks.slice.ts'
+import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
-type DecksProps = {
-  data?: DecksResponse
-}
+export const DecksTable = () => {
+  const tableHeaders = ['Name', 'Cards', 'Last Updated', 'Author by', '']
 
-export const DecksTable: FC<DecksProps> = ({ data }) => {
-  const [deleteDeck] = useDeleteDeckMutation()
-  const userId = useAppSelector(state => state.authSlice.userId)
+  const { itemsPerPage, currentPage, searchByName, minCardsCount, maxCardsCount, authorId } =
+    useAppSelector(state => state.deckSlice)
+
+  const dispatch = useAppDispatch()
+
+  const setCurrentPage = (currentPage: number) =>
+    dispatch(decksSlice.actions.setCurrentPage(currentPage))
+
+  const setItemsPerPage = (itemsPerPage: number) =>
+    dispatch(decksSlice.actions.setItemsPerPage(itemsPerPage))
+
+  const { currentData: data } = useGetDecksQuery({
+    itemsPerPage,
+    currentPage,
+    name: searchByName,
+    minCardsCount,
+    maxCardsCount,
+    authorId,
+  })
 
   return (
-    <Root>
-      <Head>
-        <Row>
-          <HeadCell>
-            <Typography.Subtitle2>Name</Typography.Subtitle2>
-          </HeadCell>
-          <HeadCell>
-            <Typography.Subtitle2>Cards</Typography.Subtitle2>
-          </HeadCell>
-          <HeadCell>
-            <Typography.Subtitle2>Last Updated</Typography.Subtitle2>
-          </HeadCell>
-          <HeadCell>
-            <Typography.Subtitle2>Author by</Typography.Subtitle2>
-          </HeadCell>
-          <HeadCell />
-        </Row>
-      </Head>
-      <Body>
-        {data?.items.map(deck => {
-          return (
-            <Row key={deck.id}>
-              <Cell>
-                <Button to={`/deck/${deck.id}`} variant={'link'} className={s.link}>
-                  <Typography.Body2>{deck.name}</Typography.Body2>
-                </Button>
-              </Cell>
-              <Cell>
-                <Typography.Body2>{deck.cardsCount}</Typography.Body2>
-              </Cell>
-              <Cell>
-                <Typography.Body2>
-                  {new Date(deck.updated).toLocaleString('en-GB')}
-                </Typography.Body2>
-              </Cell>
-              <Cell>
-                <Typography.Body2>{deck.author.name}</Typography.Body2>
-              </Cell>
-              <Cell>
-                <Button variant={'secondary'} style={{ marginRight: '5px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Play />
-                  </div>
-                </Button>
-                {deck.author.id === userId && (
-                  <>
-                    <EditDeckComponent id={deck.id} />
-                    <Button
-                      variant={'secondary'}
-                      onClick={() =>
-                        deleteDeck({ id: deck.id })
-                          .unwrap()
-                          .catch(e => {
-                            alert(e.message)
-                          })
-                      }
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <DeleteIcon />
-                      </div>
-                    </Button>
-                  </>
-                )}
-              </Cell>
-            </Row>
-          )
-        })}
-      </Body>
-    </Root>
+    <>
+      {data ? (
+        <>
+          <Root>
+            <TableHeader headers={tableHeaders} />
+            <TableBody data={data.items} />
+          </Root>
+          <div className={s.pagination}>
+            <Pagination
+              count={data.pagination.totalItems}
+              page={currentPage}
+              onChange={setCurrentPage}
+            />
+            <div>
+              <span>Show </span>
+              <SelectComponent placeholder={itemsPerPage} onChange={setItemsPerPage}>
+                <div>10</div>
+                <div>20</div>
+                <div>30</div>
+              </SelectComponent>
+              <span> elements on page</span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <Loader />
+      )}
+    </>
   )
 }

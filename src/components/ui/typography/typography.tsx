@@ -4,6 +4,7 @@ import {
   ElementType,
   FC,
   JSXElementConstructor,
+  memo,
   ReactNode,
 } from 'react'
 
@@ -32,28 +33,30 @@ export type TypographyProps<Ttag extends ReactTag> = {
 const createTypographyComponent = <T extends ReactTag>(
   basicClassName: Component
 ): FC<TypographyProps<T>> => {
-  return ({ children, color, component, className, style, mr, ml, mt, mb, mx, my, ...rest }) => {
-    const Component = component || COMPONENTS[basicClassName] || 'span'
+  return memo(
+    ({ children, color, component, className, style, mr, ml, mt, mb, mx, my, ...rest }) => {
+      const Component = component || COMPONENTS[basicClassName] || 'span'
 
-    const classNames = clsx(s[basicClassName], className)
+      const classNames = clsx(s[basicClassName], className)
 
-    const styles = {
-      ...(mr && { marginRight: mr }),
-      ...(ml && { marginLeft: ml }),
-      ...(mt && { marginTop: mt }),
-      ...(mb && { marginBottom: mb }),
-      ...(mx && { marginRight: mx, marginLeft: mx }),
-      ...(my && { marginTop: my, marginBottom: my }),
-      ...(color && { color }),
-      ...style,
+      const styles = {
+        ...(mr && { marginRight: mr }),
+        ...(ml && { marginLeft: ml }),
+        ...(mt && { marginTop: mt }),
+        ...(mb && { marginBottom: mb }),
+        ...(mx && { marginRight: mx, marginLeft: mx }),
+        ...(my && { marginTop: my, marginBottom: my }),
+        ...(color && { color }),
+        ...style,
+      }
+
+      return (
+        <Component className={classNames} style={styles} {...rest}>
+          {children}
+        </Component>
+      )
     }
-
-    return (
-      <Component className={classNames} style={styles} {...rest}>
-        {children}
-      </Component>
-    )
-  }
+  )
 }
 
 export const Typography = {

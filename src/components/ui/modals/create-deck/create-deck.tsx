@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogClose } from '@radix-ui/react-dialog'
@@ -40,6 +40,8 @@ export const CreateDeckComponent = () => {
   const closeDialogHandler = () => {
     reset()
   }
+
+  console.log('render CreateDeckComponent')
 
   return (
     <DialogComponent
