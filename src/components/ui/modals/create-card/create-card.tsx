@@ -67,8 +67,8 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
     setAnswerImgError('')
   }
 
-  const questionSrc = questionPreview 
-  const answerSrc = answerPreview 
+  const questionSrc = questionPreview
+  const answerSrc = answerPreview
 
   const [format, setFormat] = useState('Text')
   const {
@@ -81,7 +81,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
   })
 
   const createCard = (data: CreateCardForm) => {
-    create({ id, question: data.question, answer: data.answer })
+    create({ id, question: data.question, answer: data.answer, questionImg: data.questionImg, answerImg: data.answerImg })
     reset()
     setOpen(false)
   }

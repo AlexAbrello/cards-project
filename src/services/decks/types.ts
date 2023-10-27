@@ -91,8 +91,8 @@ export type CreateCardArgs = {
   id?: string
   question: string
   answer: string
-  // questionImg?: string
-  // answerImg?: string
+  questionImg?: string
+  answerImg?: string
   // questionVideo?: string
   // answerVideo?: string
 }
