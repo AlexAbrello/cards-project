@@ -15,7 +15,7 @@ export const SliderComponent = () => {
   const [minValue, setMinValue] = useState(minCardsCount)
   const [maxValue, setMaxValue] = useState(maxCardsCount)
 
-  const debouncedSearchName = useDebounce([minValue, maxValue], 700)
+  const debouncedSearchName = useDebounce(minValue || maxValue, 700)
 
 
   const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
