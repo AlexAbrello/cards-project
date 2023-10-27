@@ -9,13 +9,14 @@ import { DownArrow } from '@/assets/icons/down-arrow.tsx'
 type SelectProps = {
   children: ReactNode
   placeholder: string | number
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
+  className?: string
 }
 
-export const SelectComponent: FC<SelectProps> = ({ children, placeholder, onChange }) => {
+export const SelectComponent: FC<SelectProps> = ({ children, placeholder, onChange, className }) => {
   return (
     <Select.Root onValueChange={onChange}>
-      <Select.Trigger className={s.trigger}>
+      <Select.Trigger className={`${s.trigger} ${className}`}>
         <Select.Value placeholder={placeholder} />
         <Select.Icon className={s.icon}>
           <DownArrow />

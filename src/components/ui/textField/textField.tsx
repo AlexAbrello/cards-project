@@ -13,7 +13,7 @@ export type TextFieldProps = {
   disabled?: boolean
   errorMessage?: string
   callBack?: (value: string) => void
-  type?: 'text' | 'search' | 'password'
+  type?: 'text' | 'search' | 'password' | 'file'
   placeholder?: string
   label?: string
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void

@@ -1,40 +1,29 @@
-import { ChangeEvent } from 'react'
+import { FC, ReactNode } from 'react'
 
-import s from './input-with-type-file.module.scss'
+import s from './input-file.module.scss'
 import { Typography } from '../../typography'
 import { ImageIcon } from '@/assets/icons/image'
 
 type InputProps = {
-   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void
-   name: string
-   errorMessage?: string
    imageSrc?: string | null
-   register: any
+   children: ReactNode
 }
-export const InputWithTypeFile = ({
-   handleFileChange,
-   register,
-   name,
-   imageSrc,
-   errorMessage,
-}: InputProps) => {
+export const InputWithTypeFile: FC<InputProps> = ({ imageSrc, children }) => {
    return (
       <>
-         {imageSrc && <img className={s.coverPreview} src={imageSrc} alt={'image'} />}
-         <div className={s.inputFileWrapper}>
-            <div className={s.changeCover}>
-               <ImageIcon />
-               <Typography.Subtitle2>Change Cover</Typography.Subtitle2>
-               <input
-                  type={'file'}
-                  {...register(name)}
-                  name={name}
-                  className={s.inputFile}
-                  onChange={handleFileChange}
-               />
-            </div>
-            {errorMessage ? <div className={s.errorMessage}>{errorMessage}</div> : null}
+         {imageSrc
+            ? <img className={s.coverPreview} src={imageSrc} alt={'image'} />
+
+            : <div className={s.inputFileWrapper}>
+               <div className={s.changeCover}>
+                  <ImageIcon />
+                  <Typography.Subtitle2>Cover Preview</Typography.Subtitle2>
+               </div>
+            </div>}
+         <div className={s.children}>
+            {children}
          </div>
+
       </>
    )
 }
