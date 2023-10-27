@@ -4,10 +4,9 @@ import * as Slider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
-import { debounce, useDebounce } from '@/hooks/useDebounce.ts'
+import { useDebounce } from '@/hooks/useDebounce.ts'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
-import { after } from 'node:test'
 
 export const SliderComponent = () => {
   const dispatch = useAppDispatch()
@@ -37,9 +36,7 @@ export const SliderComponent = () => {
     setMaxValue(value[1])
   }
 
-  const debounceChangeValueHandler = debounce(changeValueHandler, 50)
-
-  console.log('slider')
+  //const debounceChangeValueHandler = debounce(changeValueHandler, 50)
 
   return (
     <div className={s.wrapper}>
@@ -51,7 +48,7 @@ export const SliderComponent = () => {
         defaultValue={[minValue, maxValue]}
         max={52}
         step={1}
-        onValueChange={debounceChangeValueHandler}
+        onValueChange={changeValueHandler}
       >
         <Slider.Track className={s.sliderTrack}>
           <Slider.Range className={s.sliderRange} />
