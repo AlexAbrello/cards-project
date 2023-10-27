@@ -14,11 +14,14 @@ export const SliderComponent = () => {
   const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
   const [minValue, setMinValue] = useState(minCardsCount)
   const [maxValue, setMaxValue] = useState(maxCardsCount)
-  const debouncedSearchName = useDebounce(minValue || maxValue, 700)
+
+  const debouncedSearchName = useDebounce([minValue, maxValue], 700)
+
 
   const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
   const setMaxCardsCount = (value: number) => dispatch(decksSlice.actions.setMaxCardsCount(value))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
+
 
   useEffect(() => {
     if (debouncedSearchName) {

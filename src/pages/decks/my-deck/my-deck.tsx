@@ -12,6 +12,7 @@ import { CreateCardComponent } from '@/components/ui/modals/create-card/create-c
 import { PaginationPanel } from '@/components/ui/pagination-panel'
 import { MyCardsTable } from '@/components/ui/tables/cards-tables/my-cards-table'
 import { Typography } from '@/components/ui/typography'
+import { useDebounce } from '@/hooks/useDebounce.ts'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useDeleteDeckMutation } from '@/services/decks'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
@@ -25,37 +26,32 @@ type MyDeckProps = {
 }
 
 export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentPage }) => {
+  const [deleteDeck] = useDeleteDeckMutation()
+  const [searchName, setName] = useState('')
+
+  const debouncedSearchName = useDebounce(searchName, 700)
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const [searchName, setName] = useState('')
-  const [debounceId, setDebounceId] = useState<number | null>(null)
-
-  const [deleteDeck] = useDeleteDeckMutation()
-
-  const onDeleteHandler = (id: string) => {
-    deleteDeck({ id })
-    navigate('/')
-  }
 
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
 
+  
   useEffect(() => {
-    if (debounceId) {
-      clearTimeout(debounceId)
+    if (debouncedSearchName) {
+      setSearchByName(debouncedSearchName)
+      setCurrentPage(1)
     }
+  }, [debouncedSearchName])
 
-    if (searchName) {
-      setDebounceId(
-        setTimeout(() => {
-          setSearchByName(searchName)
-          setCurrentPage(1)
-        }, 700) as unknown as number
-      )
-    }
-  }, [searchName])
+
+  const onDeleteHandler = (id: string) => {
+    deleteDeck({ id })
+    navigate('/')
+  }
 
   return (
     <div className={s.wrapper}>
