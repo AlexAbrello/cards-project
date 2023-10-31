@@ -39,10 +39,14 @@ export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
           return (
             <Row key={card.id}>
               <Cell>
-                <Typography.Body2>{card.question}</Typography.Body2>
+                {card.questionImg
+                  ? <img src={card.questionImg} style={{ width: '120px', height: '50px' }} />
+                  : <Typography.Body2>{card.question}</Typography.Body2>}
               </Cell>
               <Cell>
-                <Typography.Body2>{card.answer}</Typography.Body2>
+                {card.answerImg
+                  ? <img src={card.answerImg} style={{ width: '120px', height: '50px' }} />
+                  : <Typography.Body2>{card.answer}</Typography.Body2>}
               </Cell>
               <Cell>
                 <Typography.Body2>
