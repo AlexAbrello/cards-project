@@ -39,6 +39,7 @@ const cardsApi = baseApi.injectEndpoints({
           formData.append('answer', args.answer)
           args.questionImg && formData.append('questionImg', args.questionImg)
           formData.append('question', args.question)
+          debugger
           return {
             url: `v1/decks/${id}/cards`,
             method: 'POST',

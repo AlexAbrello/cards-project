@@ -7,8 +7,10 @@ import { ImageIcon } from '@/assets/icons/image'
 type InputProps = {
    imageSrc?: string | null
    children: ReactNode
+   errorMessage?: string
+   
 }
-export const InputWithTypeFile: FC<InputProps> = ({ imageSrc, children }) => {
+export const InputWithTypeFile: FC<InputProps> = ({ imageSrc, children, errorMessage }) => {
    return (
       <>
          {imageSrc
@@ -19,6 +21,7 @@ export const InputWithTypeFile: FC<InputProps> = ({ imageSrc, children }) => {
                   <ImageIcon />
                   <Typography.Subtitle2>Cover Preview</Typography.Subtitle2>
                </div>
+               {errorMessage && <div>{errorMessage}</div>}
             </div>}
          <div className={s.children}>
             {children}

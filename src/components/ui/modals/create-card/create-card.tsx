@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogClose } from '@radix-ui/react-dialog'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { PlusIcon } from '@/assets/icons/plus.tsx'
@@ -12,6 +12,7 @@ import { Typography } from '@/components/ui/typography'
 import { useCreateCardMutation } from '@/services/cards'
 import { SelectComponent } from '../../select/select'
 import { InputWithTypeFile } from '../../controlled/controlled-input-file/input-file'
+import { log } from 'console'
 
 const createCardSchema = z.object({
   question: z.string({ required_error: 'Введите вопрос' }).nonempty('Enter a question'),
@@ -27,6 +28,7 @@ type CreateCardProps = {
 }
 
 export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
+
   const [create] = useCreateCardMutation()
   const [open, setOpen] = useState<boolean>(false)
 
@@ -34,6 +36,42 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
   const [answerPreview, setAnswerPreview] = useState('')
   const [answerImgError, setAnswerImgError] = useState('')
   const [questionImgError, setQuestionImgError] = useState('')
+
+  const [format, setFormat] = useState('Text')
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateCardForm>({
+    resolver: zodResolver(createCardSchema),
+  })
+
+  const createCard = (data: CreateCardForm) => {
+    debugger
+
+    create({
+      id,
+      question: data.question,
+      answer: data.answer,
+      questionImg: questionSrc,
+      answerImg: answerSrc,
+    })
+      .unwrap()
+      .catch((e) => {
+        alert('Error, ' + e)
+      })
+    closeDialogHandler()
+    setOpen(false)
+  }
+
+  const closeDialogHandler = () => {
+    reset()
+    setQuestionPreview('')
+    setAnswerPreview('')
+    setFormat('Text')
+  }
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const question = event.currentTarget.id === 'questionImg'
@@ -69,26 +107,6 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
 
   const questionSrc = questionPreview
   const answerSrc = answerPreview
-
-  const [format, setFormat] = useState('Text')
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<CreateCardForm>({
-    resolver: zodResolver(createCardSchema),
-  })
-
-  const createCard = (data: CreateCardForm) => {
-    create({ id, question: data.question, answer: data.answer, questionImg: data.questionImg, answerImg: data.answerImg })
-    reset()
-    setOpen(false)
-  }
-
-  const closeDialogHandler = () => {
-    reset()
-  }
 
   return (
     <DialogComponent
@@ -130,7 +148,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
             />
           </>
           : <>
-            <InputWithTypeFile imageSrc={questionSrc}>
+            <InputWithTypeFile imageSrc={questionSrc} errorMessage={questionImgError}>
               <ControlledTextField
                 name={'questionImg'}
                 control={control}
@@ -139,7 +157,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
                 onChange={handleImageChange}
               />
             </InputWithTypeFile>
-            <InputWithTypeFile imageSrc={answerSrc}>
+            <InputWithTypeFile imageSrc={answerSrc} errorMessage={answerImgError}>
               <ControlledTextField
                 name={'answerImg'}
                 control={control}
