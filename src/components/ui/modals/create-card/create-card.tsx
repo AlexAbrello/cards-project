@@ -53,6 +53,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
 
   const createCard = (data: CreateCardForm) => {
 
+
     create({
       id,
       question: data.question || data.questionImg[0].name,
@@ -181,8 +182,6 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
           <Typography.Subtitle2>Cancel</Typography.Subtitle2>
         </Button>
       </DialogClose>
-
-      
     </DialogComponent>
   )
 }

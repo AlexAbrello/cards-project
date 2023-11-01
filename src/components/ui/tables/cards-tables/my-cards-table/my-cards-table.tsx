@@ -1,22 +1,18 @@
 import { FC } from 'react'
 
-import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
 import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
 import { Grade } from '@/components/ui/grade/grade.tsx'
 import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card.tsx'
 import { Typography } from '@/components/ui/typography'
-import { useDeleteCardMutation } from '@/services/cards'
 import { DeckCardsResponse } from '@/services/decks/types.ts'
-import { errorOptions } from '@/components/ui/notifications/options'
-import { toast } from 'react-toastify'
-import "react-toastify/dist/ReactToastify.css"
+
+import { DeleteCard } from '@/components/ui/modals/delete-card/delete-card'
 
 export type CardsTableProps = {
   data?: DeckCardsResponse
 }
 
 export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
-  const [deleteCard] = useDeleteCardMutation()
 
   return (
     <Root>
@@ -61,26 +57,7 @@ export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
               </Cell>
               <Cell>
                 <EditCardComponent id={card.id} />
-                <Button
-                  variant={'secondary'}
-                  onClick={() =>
-                    deleteCard({ id: card.id })
-                      .unwrap()
-                      .catch(() => {
-                        toast.error('Something went wrong, try again', errorOptions)
-                      })
-                  }
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <DeleteIcon />
-                  </div>
-                </Button>
+                <DeleteCard id={card.id} />
               </Cell>
             </Row>
           )
