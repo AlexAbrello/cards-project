@@ -12,10 +12,13 @@ import { useCreateCardMutation } from '@/services/cards'
 import { SelectComponent } from '../../select/select'
 import { InputWithTypeFile } from '../../controlled/controlled-input-file/input-file'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
+import { errorOptions, successOptions } from '../../notifications/options'
 
 const createCardSchema = z.object({
-  question: z.string().optional(),
-  answer: z.string().optional(),
+  question: z.string().nonempty(),
+  answer: z.string().nonempty(),
   questionImg: z.any(),
   answerImg: z.any(),
 })
@@ -49,7 +52,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
   })
 
   const createCard = (data: CreateCardForm) => {
-   
+
     create({
       id,
       question: data.question || data.questionImg[0].name,
@@ -58,8 +61,11 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
       answerImg: data.answerImg && data.answerImg[0],
     })
       .unwrap()
-      .catch((e) => {
-        alert('Error: ' + e)
+      .then(data => {
+        toast.success(`Card ${data.question} id created successfully`, successOptions)
+      })
+      .catch(() => {
+        toast.error('Something went wrong, try again', errorOptions)
       })
     closeDialogHandler()
     setOpen(false)
@@ -175,6 +181,8 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
           <Typography.Subtitle2>Cancel</Typography.Subtitle2>
         </Button>
       </DialogClose>
+
+      
     </DialogComponent>
   )
 }

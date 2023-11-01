@@ -7,6 +7,9 @@ import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card.ts
 import { Typography } from '@/components/ui/typography'
 import { useDeleteCardMutation } from '@/services/cards'
 import { DeckCardsResponse } from '@/services/decks/types.ts'
+import { errorOptions } from '@/components/ui/notifications/options'
+import { toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
 
 export type CardsTableProps = {
   data?: DeckCardsResponse
@@ -63,8 +66,8 @@ export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
                   onClick={() =>
                     deleteCard({ id: card.id })
                       .unwrap()
-                      .catch(e => {
-                        alert(e.message)
+                      .catch(() => {
+                        toast.error('Something went wrong, try again', errorOptions)
                       })
                   }
                 >
