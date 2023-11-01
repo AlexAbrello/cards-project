@@ -41,15 +41,19 @@ export const TableBody: FC<DecksProps> = ({ data }) => {
               <Typography.Body2>{deck.author.name}</Typography.Body2>
             </Cell>
             <Cell>
-              <Button to={`/deck/${deck.id}/learn`} variant={'secondary'} style={{ marginRight: '5px' }}>
-                <Play />
-              </Button>
-              {deck.author.id === userId && (
-                <>
-                  <EditDeckComponent id={deck.id} />
-                  <DeleteButton id={deck.id} callBack={deleteDeck} description={description} />
-                </>
-              )}
+              <div style={{ display: 'flex' }}>
+                <Button to={`/deck/${deck.id}/learn`} variant={'secondary'}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Play />
+                  </div>
+                </Button>
+                {deck.author.id === userId && (
+                  <>
+                    <EditDeckComponent id={deck.id} />
+                    <DeleteButton id={deck.id} callBack={deleteDeck} description={description} />
+                  </>
+                )}
+              </div>
             </Cell>
           </Row>
         )
