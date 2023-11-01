@@ -9,6 +9,7 @@ import { Typography } from '@/components/ui/typography'
 import { useDeleteDeckMutation } from '@/services/decks'
 import { Deck } from '@/services/decks/types.ts'
 import { useAppSelector } from '@/services/store.ts'
+import { DeleteButton } from '../modals/delete-button/delete-button'
 
 type DecksProps = {
   data: Deck[]
@@ -18,13 +19,7 @@ export const TableBody: FC<DecksProps> = ({ data }) => {
   const [deleteDeck] = useDeleteDeckMutation()
   const userId = useAppSelector(state => state.authSlice.userId)
 
-  const handleDeleteDeck = (id: string) => {
-    deleteDeck({ id })
-      .unwrap()
-      .catch(e => {
-        alert(e.message)
-      })
-  }
+  const description = 'Do you really want to delete thic deck and all cards into?'
 
   return (
     <Body>
@@ -46,25 +41,13 @@ export const TableBody: FC<DecksProps> = ({ data }) => {
               <Typography.Body2>{deck.author.name}</Typography.Body2>
             </Cell>
             <Cell>
-              <Button variant={'secondary'} style={{ marginRight: '5px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Play />
-                </div>
+              <Button to={`/deck/${deck.id}/learn`} variant={'secondary'} style={{ marginRight: '5px' }}>
+                <Play />
               </Button>
               {deck.author.id === userId && (
                 <>
                   <EditDeckComponent id={deck.id} />
-                  <Button variant={'secondary'} onClick={() => handleDeleteDeck(deck.id)}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <DeleteIcon />
-                    </div>
-                  </Button>
+                  <DeleteButton id={deck.id} callBack={deleteDeck} description={description} />
                 </>
               )}
             </Cell>

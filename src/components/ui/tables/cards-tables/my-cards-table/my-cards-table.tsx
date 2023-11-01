@@ -6,13 +6,17 @@ import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card.ts
 import { Typography } from '@/components/ui/typography'
 import { DeckCardsResponse } from '@/services/decks/types.ts'
 
-import { DeleteCard } from '@/components/ui/modals/delete-card/delete-card'
+import { DeleteButton } from '@/components/ui/modals/delete-button/delete-button'
+import { useDeleteCardMutation } from '@/services/cards'
 
 export type CardsTableProps = {
   data?: DeckCardsResponse
 }
 
 export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
+
+  const [deleteCard] = useDeleteCardMutation()
+  const description = 'Do you really want do delete this card?'
 
   return (
     <Root>
@@ -57,7 +61,7 @@ export const MyCardsTable: FC<CardsTableProps> = ({ data }) => {
               </Cell>
               <Cell>
                 <EditCardComponent id={card.id} />
-                <DeleteCard id={card.id} />
+                <DeleteButton id={card.id} callBack={deleteCard} description={description} />
               </Cell>
             </Row>
           )

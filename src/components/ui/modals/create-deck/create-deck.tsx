@@ -11,6 +11,9 @@ import { PlusIcon } from '@/assets/icons/plus.tsx'
 import { Button, ControlledCheckbox, ControlledTextField, DialogComponent } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 import { useCreateDeckMutation } from '@/services/decks'
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { errorOptions, successOptions } from '../../notifications/options'
 
 const createDeckSchema = z.object({
   name: z.string({ required_error: 'Введите имя для колоды' }).nonempty('Enter deck name'),
@@ -33,6 +36,13 @@ export const CreateDeckComponent = () => {
 
   const CreateDeck = (data: CreateDeckForm) => {
     create(data)
+      .unwrap()
+      .then(data => {
+        toast.success(`Deck ${data.name} was created successfully`, successOptions)
+      })
+      .catch(() => {
+        toast.error('Something went wrong, try again later', errorOptions)
+      })
     reset()
     setOpen(false)
   }

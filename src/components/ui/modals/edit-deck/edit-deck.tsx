@@ -51,7 +51,7 @@ export const EditDeckComponent: FC<EditDeckProps> = ({ id }) => {
       setOpen={setOpen}
       callBack={closeDialogHandler}
       trigger={
-        <Button variant={'secondary'} style={{ marginRight: '5px' }}>
+        <Button variant={'secondary'} style={{ marginLeft: '5px' }}>
           <div
             style={{
               display: 'flex',
