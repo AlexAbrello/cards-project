@@ -19,7 +19,9 @@ export const TableBody: FC<DecksProps> = ({ data }) => {
   const [deleteDeck] = useDeleteDeckMutation()
   const userId = useAppSelector(state => state.authSlice.userId)
 
-  const description = 'Do you really want to delete thic deck and all cards into?'
+  const description = 'Do you really want to delete this deck and all cards into?'
+
+  console.log(data)
 
   return (
     <Body>
@@ -43,7 +45,7 @@ export const TableBody: FC<DecksProps> = ({ data }) => {
             <Cell>
               <div style={{ display: 'flex' }}>
                 <Button to={`/deck/${deck.id}/learn`} variant={'secondary'}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Play />
                   </div>
                 </Button>

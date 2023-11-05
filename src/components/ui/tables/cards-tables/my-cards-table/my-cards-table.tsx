@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Body, Button, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
+import { Body, Cell, Head, HeadCell, Root, Row } from '@/components/ui'
 import { Grade } from '@/components/ui/grade/grade.tsx'
 import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card.tsx'
 import { Typography } from '@/components/ui/typography'

@@ -9,13 +9,13 @@ type SearchComponentProps = {
   label: string
 }
 export const SearchComponent: FC<SearchComponentProps> = ({ label }) => {
+
   const [searchName, setName] = useState('')
   const debouncedSearchName = useDebounce(searchName, 700)
   const dispatch = useAppDispatch()
 
   const setSearchByName = (name: string) => dispatch(decksSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
-
 
   useEffect(() => {
     if (debouncedSearchName) {

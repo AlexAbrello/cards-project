@@ -9,6 +9,7 @@ import { TableHeader } from '@/components/ui/tables/tableHeader.tsx'
 import { useGetDecksQuery } from '@/services/decks'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
+import { Typography } from '../../typography'
 
 export const DecksTable = () => {
   const tableHeaders = ['Name', 'Cards', 'Last Updated', 'Author by', '']
@@ -36,28 +37,32 @@ export const DecksTable = () => {
   return (
     <>
       {data ? (
-        <>
-          <Root>
-            <TableHeader headers={tableHeaders} />
-            <TableBody data={data.items} />
-          </Root>
-          <div className={s.pagination}>
-            <Pagination
-              count={data.pagination.totalPages}
-              page={currentPage}
-              onChange={setCurrentPage}
-            />
-            <div>
-              <span>Show </span>
-              <SelectComponent placeholder={itemsPerPage} onChange={setItemsPerPage}>
-                <div>10</div>
-                <div>20</div>
-                <div>30</div>
-              </SelectComponent>
-              <span> elements on page</span>
+        data.items.length > 0
+          ? <>
+            <Root>
+              <TableHeader headers={tableHeaders} />
+              <TableBody data={data.items} />
+            </Root>
+            <div className={s.pagination}>
+              <Pagination
+                count={data.pagination.totalPages}
+                page={currentPage}
+                onChange={setCurrentPage}
+              />
+              <div>
+                <span>Show </span>
+                <SelectComponent placeholder={itemsPerPage} onChange={setItemsPerPage}>
+                  <div>10</div>
+                  <div>20</div>
+                  <div>30</div>
+                </SelectComponent>
+                <span> elements on page</span>
+              </div>
             </div>
+          </>
+          : <div style={{ display: 'flex', justifyContent: 'center', marginTop: '100px' }}>
+            <Typography.H2>Ooops! There no decks with that name...</Typography.H2>
           </div>
-        </>
       ) : (
         <Loader />
       )}
