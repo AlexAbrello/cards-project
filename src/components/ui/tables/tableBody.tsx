@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { DeleteIcon } from '@/assets/icons/delete-icon.tsx'
 import { Play } from '@/assets/icons/play.tsx'
 import { Body, Button, Cell, Row } from '@/components/ui'
 import { EditDeckComponent } from '@/components/ui/modals/edit-deck'

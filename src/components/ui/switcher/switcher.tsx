@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useCallback } from 'react'
 
 import * as Tabs from '@radix-ui/react-tabs'
 
@@ -26,10 +26,10 @@ export const TabsComponent: FC<TabsProps> = ({ disabled, children }) => {
       : dispatch(decksSlice.actions.setAuthor(''))
   }
 
-  const onChangeTabsHandler = () => {
+  const onChangeTabsHandler = useCallback(() => {
     setAuthor(userId)
     setCurrentPage(1)
-  }
+  }, [])
 
   return (
     <Tabs.Root

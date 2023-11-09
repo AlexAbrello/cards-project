@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
 
@@ -14,29 +14,28 @@ export const SliderComponent = () => {
   const [minValue, setMinValue] = useState(minCardsCount)
   const [maxValue, setMaxValue] = useState(maxCardsCount)
 
-
   const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
   const setMaxCardsCount = (value: number) => dispatch(decksSlice.actions.setMaxCardsCount(value))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMinCardsCount(minValue)
-      setMaxCardsCount(maxValue)
-      setCurrentPage(1)
-    }, 700) // Задержка в 300 миллисекунд
-
-    return () => {
-      clearTimeout(timer)
+    if (minValue !== minCardsCount || maxValue !== maxCardsCount) {
+      const timer = setTimeout(() => {
+        setMinCardsCount(minValue);
+        setMaxCardsCount(maxValue);
+        setCurrentPage(1)
+      }, 700);
+  
+      return () => {
+        clearTimeout(timer);
+      };
     }
-  }, [minValue, maxValue])
+  }, [minValue, maxValue]);
 
-  const changeValueHandler = (value: number[]) => {
+  const changeValueHandler = useCallback((value: number[]) => {
     setMinValue(value[0])
     setMaxValue(value[1])
-  }
-
-  //const debounceChangeValueHandler = debounce(changeValueHandler, 50)
+  }, [minValue, maxValue])
 
   return (
     <div className={s.wrapper}>

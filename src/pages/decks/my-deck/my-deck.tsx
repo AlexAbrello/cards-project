@@ -36,7 +36,7 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
 
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchByName(searchName)
@@ -53,6 +53,8 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
     deleteDeck({ id })
     navigate('/')
   }
+
+
 
   return (
     <div className={s.wrapper}>

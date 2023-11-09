@@ -10,6 +10,7 @@ import { useGetDecksQuery } from '@/services/decks'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 import { Typography } from '../../typography'
+import { useCallback } from 'react'
 
 export const DecksTable = () => {
   const tableHeaders = ['Name', 'Cards', 'Last Updated', 'Author by', '']
@@ -19,11 +20,11 @@ export const DecksTable = () => {
 
   const dispatch = useAppDispatch()
 
-  const setCurrentPage = (currentPage: number) =>
-    dispatch(decksSlice.actions.setCurrentPage(currentPage))
+  const setCurrentPage = useCallback((currentPage: number) =>
+    dispatch(decksSlice.actions.setCurrentPage(currentPage)), [])
 
-  const setItemsPerPage = (itemsPerPage: number) =>
-    dispatch(decksSlice.actions.setItemsPerPage(itemsPerPage))
+  const setItemsPerPage = useCallback((itemsPerPage: number) =>
+    dispatch(decksSlice.actions.setItemsPerPage(itemsPerPage)), [])
 
   const { currentData: data } = useGetDecksQuery({
     itemsPerPage,
@@ -35,6 +36,7 @@ export const DecksTable = () => {
   })
 
   return (
+  
     <>
       {data ? (
         data.items.length > 0

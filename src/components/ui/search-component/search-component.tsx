@@ -16,16 +16,18 @@ export const SearchComponent: FC<SearchComponentProps> = ({ label }) => {
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearchByName(searchName)
-      setCurrentPage(1)
-    }, 700) // Задержка в 300 миллисекунд
+    if (searchName !== '') {
+      const timer = setTimeout(() => {
+        console.log('searchComponent')
+        setSearchByName(searchName)
+        setCurrentPage(1)
+      }, 700)
 
-    return () => {
-      clearTimeout(timer)
+      return () => {
+        clearTimeout(timer)
+      }
     }
   }, [searchName])
-
 
   return (
     <TextField
