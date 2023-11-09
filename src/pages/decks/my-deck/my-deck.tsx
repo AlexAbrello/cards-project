@@ -12,7 +12,6 @@ import { CreateCardComponent } from '@/components/ui/modals/create-card/create-c
 import { PaginationPanel } from '@/components/ui/pagination-panel'
 import { MyCardsTable } from '@/components/ui/tables/cards-tables/my-cards-table'
 import { Typography } from '@/components/ui/typography'
-import { useDebounce } from '@/hooks/useDebounce.ts'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useDeleteDeckMutation } from '@/services/decks'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
@@ -29,8 +28,6 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
   const [deleteDeck] = useDeleteDeckMutation()
   const [searchName, setName] = useState('')
 
-  const debouncedSearchName = useDebounce(searchName, 700)
-
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -41,11 +38,15 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
 
   
   useEffect(() => {
-    if (debouncedSearchName) {
-      setSearchByName(debouncedSearchName)
+    const timer = setTimeout(() => {
+      setSearchByName(searchName)
       setCurrentPage(1)
+    }, 700) // Задержка в 300 миллисекунд
+
+    return () => {
+      clearTimeout(timer)
     }
-  }, [debouncedSearchName])
+  }, [searchName])
 
 
   const onDeleteHandler = (id: string) => {

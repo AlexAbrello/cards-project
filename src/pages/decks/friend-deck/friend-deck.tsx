@@ -23,24 +23,19 @@ export const FriendDeck: FC<FriendDeckProps> = ({ deckData, data, itemsPerPage, 
   const dispatch = useAppDispatch()
 
   const [searchName, setName] = useState('')
-  const [debounceId, setDebounceId] = useState<number | null>(null)
 
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
 
   useEffect(() => {
-    if (debounceId) {
-      clearTimeout(debounceId)
-    }
+    const timer = setTimeout(() => {
+      setSearchByName(searchName)
+      setCurrentPage(1)
+    }, 700) // Задержка в 300 миллисекунд
 
-    if (searchName) {
-      setDebounceId(
-        setTimeout(() => {
-          setSearchByName(searchName)
-          setCurrentPage(1)
-        }, 700) as unknown as number
-      )
+    return () => {
+      clearTimeout(timer)
     }
   }, [searchName])
 

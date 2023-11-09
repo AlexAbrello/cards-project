@@ -4,7 +4,6 @@ import * as Slider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
-import { useDebounce } from '@/hooks/useDebounce.ts'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 
@@ -15,21 +14,22 @@ export const SliderComponent = () => {
   const [minValue, setMinValue] = useState(minCardsCount)
   const [maxValue, setMaxValue] = useState(maxCardsCount)
 
-  const debouncedSearchName = useDebounce(minValue || maxValue, 700)
-
 
   const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
   const setMaxCardsCount = (value: number) => dispatch(decksSlice.actions.setMaxCardsCount(value))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
-
   useEffect(() => {
-    if (debouncedSearchName) {
+    const timer = setTimeout(() => {
       setMinCardsCount(minValue)
       setMaxCardsCount(maxValue)
       setCurrentPage(1)
+    }, 700) // Задержка в 300 миллисекунд
+
+    return () => {
+      clearTimeout(timer)
     }
-  }, [debouncedSearchName])
+  }, [minValue, maxValue])
 
   const changeValueHandler = (value: number[]) => {
     setMinValue(value[0])

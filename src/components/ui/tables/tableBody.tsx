@@ -21,8 +21,6 @@ export const TableBody: FC<DecksProps> = ({ data }) => {
 
   const description = 'Do you really want to delete this deck and all cards into?'
 
-  console.log(data)
-
   return (
     <Body>
       {data.map(deck => {
