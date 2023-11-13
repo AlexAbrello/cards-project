@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react'
 
 import s from './friend-deck.module.scss'
 
@@ -11,6 +11,7 @@ import { Typography } from '@/components/ui/typography'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
 import { useAppDispatch } from '@/services/store.ts'
+import { useDebounce } from '@/hooks/useDebounce'
 
 type FriendDeckProps = {
   data?: DeckCardsResponse
@@ -22,22 +23,14 @@ type FriendDeckProps = {
 export const FriendDeck: FC<FriendDeckProps> = ({ deckData, data, itemsPerPage, currentPage }) => {
   const dispatch = useAppDispatch()
 
-  const [searchName, setName] = useState('')
-
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearchByName(searchName)
-      setCurrentPage(1)
-    }, 700) // Задержка в 300 миллисекунд
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [searchName])
+  const onSearchHandler = useCallback(useDebounce((e: ChangeEvent<HTMLInputElement>) => {
+    setSearchByName(e.target.value)
+    setCurrentPage(1)
+  }, 700), [dispatch])
 
   return (
     <div className={s.wrapper}>
@@ -55,7 +48,7 @@ export const FriendDeck: FC<FriendDeckProps> = ({ deckData, data, itemsPerPage, 
       {data ? (
         <>
           <TextField
-            onChange={e => setName(e.currentTarget.value)}
+            onChange={onSearchHandler}
             type={'search'}
             placeholder={'input search'}
             label={'Search by Card Name'}
