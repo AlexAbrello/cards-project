@@ -32,7 +32,6 @@ export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
                 </>
               )
             })}
-
           <DropdownMenu.Arrow className={s.dropdownMenuArrow} />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

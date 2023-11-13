@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { HeaderComponent } from '@/components/ui/header-component/header-component.tsx'
+import { Layout } from '@/components/ui/header-component/header-component.tsx'
 import { Loader } from '@/components/ui/loader'
 import { SignInPage } from '@/pages/auth/login-page.tsx'
 import { SignUpPage } from '@/pages/auth/registration-page.tsx'
@@ -17,6 +17,7 @@ import { PageNotFound } from '@/pages/not-found/not-found.tsx'
 import { useMeQuery } from '@/services/auth/auth-api.ts'
 import { authSlice } from '@/services/auth/auth.slice.ts'
 import { useAppDispatch } from '@/services/store.ts'
+import { Profile } from './pages/profile-page/profile-page'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -31,16 +32,16 @@ const publicRoutes: RouteObject[] = [
   //   path: '/forgot-password',
   //   element: <ForgotPassPage />,
   // },
-  {
-    path: '*',
-    element: <PageNotFound />,
-  },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
     path: '/',
     element: <Decks />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />
   },
   {
     path: '/deck/:id',
@@ -54,22 +55,28 @@ const privateRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    element: <PrivateRoutes />,
-    children: privateRoutes,
+    element: <Layout />,
+    children: [
+      ...publicRoutes,
+      {
+        element: <PrivateRoutes />,
+        children: privateRoutes
+      },
+      {
+        path: '*',
+        element: <PageNotFound />,
+      },
+    ],
   },
-  ...publicRoutes,
 ])
 
 export const Router = () => {
-  const { data, isLoading } = useMeQuery()
+  const { isLoading } = useMeQuery()
 
   if (isLoading) return <Loader />
 
   return (
-    <>
-      <HeaderComponent name={data?.name} />
-      <RouterProvider router={router} />
-    </>
+    <RouterProvider router={router} />
   )
 }
 function PrivateRoutes() {
@@ -78,7 +85,7 @@ function PrivateRoutes() {
   const dispatch = useAppDispatch()
   const setUserId = (id: string) => dispatch(authSlice.actions.setUserId(id))
 
-  const isAuthenticated = data && data?.success !== false
+  const isAuthenticated = data 
 
   if (isAuthenticated) {
     setUserId(data.id)

@@ -12,13 +12,15 @@ export type AvatarProps = {
 
 export const Avatar = ({
   name,
-  src = 'https://cdn-icons-png.flaticon.com/128/149/149071.png',
+  src,
   size = 36,
 }: AvatarProps) => {
   return (
     <div className={s.wrapper}>
       {name && <Typography.Subtitle1>{name}</Typography.Subtitle1>}
-      <img className={s.avatar} src={src} alt={`${name} avatar`} width={size} height={size} />
+      {src
+        ? <img className={s.avatar} src={src} alt={`${name} avatar`} width={size} height={size} />
+        : <img className={s.avatar} src='https://cdn-icons-png.flaticon.com/128/149/149071.png' alt={`${name} avatar`} width={size} height={size} />}
     </div>
   )
 }

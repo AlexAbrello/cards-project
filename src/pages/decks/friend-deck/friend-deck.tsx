@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useCallback } from 'react'
 
 import s from './friend-deck.module.scss'
 

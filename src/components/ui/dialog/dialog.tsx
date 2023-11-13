@@ -26,7 +26,6 @@ export const DialogComponent: FC<DialogProps> = ({
   open,
   callBack,
 }) => {
-  console.log('render DialogComponent')
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>

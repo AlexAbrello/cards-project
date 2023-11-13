@@ -13,6 +13,7 @@ import { Typography } from '../../typography'
 import { useCallback } from 'react'
 
 export const DecksTable = () => {
+  
   const tableHeaders = ['Name', 'Cards', 'Last Updated', 'Author by', '']
 
   const { itemsPerPage, currentPage, searchByName, minCardsCount, maxCardsCount, authorId } =
@@ -36,7 +37,6 @@ export const DecksTable = () => {
   })
 
   return (
-  
     <>
       {data ? (
         data.items.length > 0
