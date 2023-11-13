@@ -9,7 +9,10 @@ import { useAppDispatch, useAppSelector } from '@/services/store.ts'
 import { useDebounce } from '@/hooks/useDebounce'
 
 export const SliderComponent = () => {
-  const dispatch = useAppDispatch()
+
+  
+const dispatch = useAppDispatch()
+
   const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
 

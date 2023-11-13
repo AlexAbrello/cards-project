@@ -1,4 +1,4 @@
-export const useDebounce = <F extends (...args: any[]) => void>(callback: F, delay: number) => {
+export const useDebounce = <F extends (...args: any) => void>(callback: F, delay: number) => {
    let timeoutId: ReturnType<typeof setTimeout> | null = null;
  
    return (...args: Parameters<F>) => {
