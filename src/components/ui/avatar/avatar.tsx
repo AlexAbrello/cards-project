@@ -12,7 +12,7 @@ export type AvatarProps = {
 
 export const Avatar = ({
   name,
-  src,
+  src = 'https://cdn-icons-png.flaticon.com/128/149/149071.png',
   size = 36,
 }: AvatarProps) => {
   return (

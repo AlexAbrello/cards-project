@@ -26,7 +26,6 @@ export const SignUp: FC<SignUpProps> = ({ onSubmit }) => {
     <Card>
       <Typography.H1>Sign Up</Typography.H1>
       <form className={s.root} onSubmit={handleSubmit(onSubmit)}>
-        <DevTool control={control} />
         <div>
           <ControlledTextField
             name={'email'}

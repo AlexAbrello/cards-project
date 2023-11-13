@@ -24,7 +24,6 @@ export const SignIn: FC<SignInProps> = ({ onSubmit }) => {
 
   return (
     <>
-      <DevTool control={control} />
       <Card>
         <Typography.H1>Sign In</Typography.H1>
         <form className={s.root} onSubmit={handleSubmit(onSubmit)}>
