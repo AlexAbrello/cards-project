@@ -29,7 +29,7 @@ export const TabsComponent: FC<TabsProps> = ({ disabled, children }) => {
   const onChangeTabsHandler = useCallback(() => {
     setAuthor(userId)
     setCurrentPage(1)
-  }, [])
+  }, [authorId])
 
   return (
     <Tabs.Root

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
 
@@ -6,45 +6,32 @@ import s from './slider.module.scss'
 
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
+import { useDebounce } from '@/hooks/useDebounce'
 
 export const SliderComponent = () => {
   const dispatch = useAppDispatch()
   const minCardsCount = useAppSelector(state => state.deckSlice.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.deckSlice.maxCardsCount)
-  const [minValue, setMinValue] = useState(minCardsCount)
-  const [maxValue, setMaxValue] = useState(maxCardsCount)
 
   const setMinCardsCount = (value: number) => dispatch(decksSlice.actions.setMinCardsCount(value))
   const setMaxCardsCount = (value: number) => dispatch(decksSlice.actions.setMaxCardsCount(value))
   const setCurrentPage = (value: number) => dispatch(decksSlice.actions.setCurrentPage(value))
 
-  useEffect(() => {
-    if (minValue !== minCardsCount || maxValue !== maxCardsCount) {
-      const timer = setTimeout(() => {
-        setMinCardsCount(minValue);
-        setMaxCardsCount(maxValue);
-        setCurrentPage(1)
-      }, 700);
-  
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [minValue, maxValue]);
-
-  const changeValueHandler = useCallback((value: number[]) => {
-    setMinValue(value[0])
-    setMaxValue(value[1])
-  }, [minValue, maxValue])
+  const changeValueHandler = useCallback(useDebounce((value: number[]) => {
+    setMinCardsCount(value[0])
+    setMaxCardsCount(value[1])
+    setCurrentPage(1)
+  }, 700
+  ), [minCardsCount, maxCardsCount])
 
   return (
     <div className={s.wrapper}>
       <div className={s.valueWrapper}>
-        <span className={s.value}>{minValue}</span>
+        <span className={s.value}>{minCardsCount}</span>
       </div>
       <Slider.Root
         className={s.sliderRoot}
-        defaultValue={[minValue, maxValue]}
+        defaultValue={[minCardsCount, maxCardsCount]}
         max={52}
         step={1}
         onValueChange={changeValueHandler}
@@ -56,7 +43,7 @@ export const SliderComponent = () => {
         <Slider.Thumb className={s.sliderThumb} />
       </Slider.Root>
       <div className={s.valueWrapper}>
-        <span className={s.value}>{maxValue}</span>
+        <span className={s.value}>{maxCardsCount}</span>
       </div>
     </div>
   )
