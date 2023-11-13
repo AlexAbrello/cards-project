@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useCallback } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -16,6 +16,7 @@ import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useDeleteDeckMutation } from '@/services/decks'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
 import { useAppDispatch } from '@/services/store.ts'
+import { useDebounce } from '@/hooks/useDebounce'
 
 type MyDeckProps = {
   data?: DeckCardsResponse
@@ -26,34 +27,23 @@ type MyDeckProps = {
 
 export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentPage }) => {
   const [deleteDeck] = useDeleteDeckMutation()
-  const [searchName, setName] = useState('')
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
-
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearchByName(searchName)
-      setCurrentPage(1)
-    }, 700) // Задержка в 300 миллисекунд
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [searchName])
-
 
   const onDeleteHandler = (id: string) => {
     deleteDeck({ id })
     navigate('/')
   }
 
+  const onSearchHandler = useCallback(useDebounce((e: ChangeEvent<HTMLInputElement>) => {
+    setSearchByName(e.target.value)
+    setCurrentPage(1)
+  }, 700), [dispatch])
 
 
   return (
@@ -88,7 +78,7 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
       {data ? (
         <>
           <TextField
-            onChange={e => setName(e.currentTarget.value)}
+            onChange={onSearchHandler}
             type={'search'}
             placeholder={'input search'}
             label={'Search by Card Name'}
