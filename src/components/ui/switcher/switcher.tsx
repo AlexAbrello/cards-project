@@ -34,7 +34,7 @@ export const TabsComponent: FC<TabsProps> = ({ disabled, children }) => {
   return (
     <Tabs.Root
       className={s.tabsRoot}
-      defaultValue={authorId ? 'My Decks' : 'All Decks'}
+      value={authorId ? 'My Decks' : 'All Decks'}
       onValueChange={onChangeTabsHandler}
     >
       <Tabs.List className={s.tabsList}>
