@@ -85,7 +85,7 @@ function PrivateRoutes() {
   const dispatch = useAppDispatch()
   const setUserId = (id: string) => dispatch(authSlice.actions.setUserId(id))
 
-  const isAuthenticated = data 
+  const isAuthenticated = data && data?.success !== false
 
   if (isAuthenticated) {
     setUserId(data.id)
