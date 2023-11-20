@@ -19,7 +19,7 @@ export const Layout = () => {
           <Logo />
         </div>
         {data?.name ? (
-          <DropdownComponent trigger={<Avatar name={data.name} src={data.avatar} />}>
+          <DropdownComponent trigger={<button><Avatar name={data.name} src={data.avatar} /></button>}>
             <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => navigate('/profile')}>
               <div style={{ marginRight: '10px' }}>
                 <ProfileIcon />

@@ -18,6 +18,7 @@ import { useMeQuery } from '@/services/auth/auth-api.ts'
 import { authSlice } from '@/services/auth/auth.slice.ts'
 import { useAppDispatch } from '@/services/store.ts'
 import { Profile } from './pages/profile-page/profile-page'
+import { useEffect } from 'react'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -87,9 +88,11 @@ function PrivateRoutes() {
 
   const isAuthenticated = data && data?.success !== false
 
-  if (isAuthenticated) {
-    setUserId(data.id)
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      setUserId(data.id);
+    }
+  }, [isAuthenticated, data])
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

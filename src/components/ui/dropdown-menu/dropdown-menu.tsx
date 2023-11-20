@@ -6,6 +6,7 @@ import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu'
 import s from './dropdown-menu.module.scss'
 
 import { Typography } from '@/components/ui/typography'
+import React from 'react'
 
 type DropdownProps = {
   children: ReactNode
@@ -15,8 +16,8 @@ type DropdownProps = {
 export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-        <button>{trigger}</button>
+      <DropdownMenu.Trigger asChild>
+        {trigger}
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
@@ -24,12 +25,12 @@ export const DropdownComponent: FC<DropdownProps> = ({ trigger, children }) => {
           {Array.isArray(children) &&
             children?.map((el, index) => {
               return (
-                <>
-                  <DropdownMenu.Item className={s.dropdownMenuItem} key={index}>
+                <React.Fragment key={index}>
+                  <DropdownMenu.Item className={s.dropdownMenuItem}>
                     <Typography.Caption>{el}</Typography.Caption>
                   </DropdownMenu.Item>
                   <DropdownMenuSeparator className={s.dropdownMenuSeparator} />
-                </>
+                </React.Fragment>
               )
             })}
           <DropdownMenu.Arrow className={s.dropdownMenuArrow} />

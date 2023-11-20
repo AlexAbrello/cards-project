@@ -30,7 +30,7 @@ export const DialogComponent: FC<DialogProps> = ({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger className={s.dialogTrigger} asChild>
-        <button>{trigger}</button>
+        {trigger}
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className={s.dialogOverlay} />

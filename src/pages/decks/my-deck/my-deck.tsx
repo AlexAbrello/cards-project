@@ -55,7 +55,7 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
             <div style={{ display: 'flex' }}>
               <Typography.H2>{deckData.name}</Typography.H2>
               <div style={{ marginLeft: '10px' }}>
-                <DropdownComponent trigger={<ContextMenu />}>
+                <DropdownComponent trigger={<button><ContextMenu /></button>}>
                   <div>
                     <Button to={`/deck/${deckData.id}/learn`} variant={'link'}>
                       <Typography.Caption>Learn</Typography.Caption>
