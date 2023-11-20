@@ -3,7 +3,7 @@ import { baseApi } from '@/services/base-api.ts'
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      me: builder.query<MeResponse | null  | { success: boolean }, void>({
+      me: builder.query<MeResponse | null, void>({
         async queryFn(_name, _api, _extraOptions, baseQuery) {
           const result = await baseQuery({
             url: `v1/auth/me`,
@@ -12,7 +12,7 @@ const authApi = baseApi.injectEndpoints({
 
           if (result.error) {
             // but refetch on another error
-            return { data: { success: false } }
+            return { data: null }
           }
 
           return { data: result.data } as { data: MeResponse }
