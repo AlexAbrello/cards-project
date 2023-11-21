@@ -1,4 +1,3 @@
-import { Write } from "@/assets/icons/write"
 import { Avatar, Button, Card, ControlledTextField } from "@/components/ui"
 import { errorOptions, successOptions } from "@/components/ui/notifications/options"
 import { Typography } from "@/components/ui/typography"
@@ -8,6 +7,8 @@ import { ChangeEvent, FC, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import { z } from "zod"
+import s from './edit-info.module.scss'
+import { Write } from "@/assets/icons/write"
 
 type EditInfoProps = {
    data: MeResponse
@@ -68,7 +69,6 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
 
    const onEditHandler = (dataForm: EditNameForm) => {
 
-      console.log(dataForm.avatar)
       editInfo({
          avatar: dataForm.avatar ? dataForm.avatar[0] : data.avatar,
          email: data.email,
@@ -93,17 +93,21 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
    return (
       <Card>
          <div style={{ height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography.H2>Edit Personal Information</Typography.H2>
-            <Button variant={"tertiary"} onClick={onBackHandler}>
-               <Typography.Caption>Back</Typography.Caption>
-            </Button>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+               <Typography.H2>Edit Personal Information</Typography.H2>
+               <Button variant={"secondary"} onClick={onBackHandler} className={s.backButton}>
+                  <Typography.Caption>Back</Typography.Caption>
+               </Button>
+            </div>
             {avatarPreview
                ? <Avatar src={avatarPreview} size={100} />
                : <Avatar src={data.avatar} size={100} />
             }
-            <input type='file' {...register('avatar')} onChange={handleImageChange} />
-            <Write />
             <form onSubmit={handleSubmit(onEditHandler)}>
+               <div className={s.inputFile}>
+                  <input type='file' {...register('avatar')} onChange={handleImageChange} />
+                  <Write />
+               </div>
                <ControlledTextField
                   defaultValue={data.name}
                   name={'name'}
@@ -111,7 +115,7 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
                   label={'Name'}
                   type={'text'}
                   errorMessage={errors?.name?.message} />
-               <Button variant={'primary'} fullWidth={true} type={'submit'}>
+               <Button variant={'primary'} fullWidth={true} type={'submit'} className={s.submitButton}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                      <Typography.Caption>Save Changes</Typography.Caption>
                   </div>

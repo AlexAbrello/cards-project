@@ -66,9 +66,7 @@ const authApi = baseApi.injectEndpoints({
           const formData = new FormData()
 
           args.avatar && formData.append('avatar', args.avatar)
-          formData.append('name', args.name)
-          formData.append('email', args.email)
-
+          
           return {
             url: 'v1/auth/me',
             method: 'PATCH',
