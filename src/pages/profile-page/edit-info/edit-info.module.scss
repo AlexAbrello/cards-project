@@ -9,7 +9,7 @@
    background-color: var(--color-dark-300);
    border-radius: 4px;
    transition: background-color 0.2s;
-   top: -25%;
+   top: -20px;
    left: 60%;
    &:hover {
       background-color: var(--color-dark-100);
@@ -26,11 +26,15 @@
  .submitButton {
    padding: 6px 0;
    margin-top: 20px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
  }
 
  form {
    width: 100%;
+ }
+
+ .wrapper {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
  }

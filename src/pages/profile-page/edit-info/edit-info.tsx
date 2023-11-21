@@ -25,7 +25,6 @@ type EditNameForm = z.infer<typeof editNameShema>
 export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
 
    const [avatarPreview, setAvatarPreview] = useState('')
-   const [avatarPreviewError, setAvatarPreviewError] = useState('')
 
    const [editInfo] = useEditPersonalInfoMutation()
 
@@ -50,20 +49,19 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
       const allowedTypes = ['image/jpeg', 'image/png']
 
       if (!allowedTypes.includes(file.type)) {
-         avatar && setAvatarPreviewError('Only JPEG and PNG images are allowed.')
+         avatar && toast.error('Only JPEG and PNG images are allowed.', errorOptions)
 
          return
       }
       const maxSizeInBytes = 1024 * 1024
 
       if (file.size > maxSizeInBytes) {
-         avatar && setAvatarPreviewError('The image size should not exceed 1MB.')
+         avatar && toast.error('The image size should not exceed 1MB.', errorOptions)
 
          return
       }
 
       avatar && setAvatarPreview(URL.createObjectURL(file))
-      setAvatarPreviewError('')
 
    }
 
@@ -92,7 +90,7 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
 
    return (
       <Card>
-         <div style={{ height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                <Typography.H2>Edit Personal Information</Typography.H2>
                <Button variant={"secondary"} onClick={onBackHandler} className={s.backButton}>
