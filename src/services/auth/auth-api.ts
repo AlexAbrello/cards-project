@@ -60,11 +60,29 @@ const authApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Me'],
       }),
+      editPersonalInfo: builder.mutation<MeResponse, EditArgs>({
+        query: (args) => {
+
+          const formData = new FormData()
+
+          args.avatar && formData.append('avatar', args.avatar)
+          formData.append('name', args.name)
+          formData.append('email', args.email)
+
+          return {
+            url: 'v1/auth/me',
+            method: 'PATCH',
+            body: formData,
+            formData: true,
+          }
+        },
+        invalidatesTags: ['Me'],
+      })
     }
   },
 })
 
-export const { useLoginMutation, useMeQuery, useRegistrationMutation, useLogoutMutation } = authApi
+export const { useLoginMutation, useMeQuery, useRegistrationMutation, useLogoutMutation, useEditPersonalInfoMutation } = authApi
 
 export type MeResponse = {
   avatar: string
@@ -103,4 +121,10 @@ type RegistrationRequest = {
   email: string
   subject: string
   sendConfirmationEmail: boolean
+}
+
+type EditArgs = {
+  avatar: string
+  name: string
+  email: string
 }

@@ -1,10 +1,12 @@
 import { Write } from "@/assets/icons/write"
 import { Avatar, Button, Card, ControlledTextField } from "@/components/ui"
+import { errorOptions, successOptions } from "@/components/ui/notifications/options"
 import { Typography } from "@/components/ui/typography"
-import { MeResponse } from "@/services/auth/auth-api"
+import { MeResponse, useEditPersonalInfoMutation } from "@/services/auth/auth-api"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ChangeEvent, FC, useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 import { z } from "zod"
 
 type EditInfoProps = {
@@ -24,10 +26,13 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
    const [avatarPreview, setAvatarPreview] = useState('')
    const [avatarPreviewError, setAvatarPreviewError] = useState('')
 
+   const [editInfo] = useEditPersonalInfoMutation()
+
    const {
       register,
       control,
       handleSubmit,
+      reset,
       formState: { errors },
    } = useForm<EditNameForm>({
       resolver: zodResolver(editNameShema),
@@ -61,11 +66,29 @@ export const EditInfo: FC<EditInfoProps> = ({ data, callBack }) => {
 
    }
 
-   const onEditHandler = (data: EditNameForm) => {
-      console.log(data)
+   const onEditHandler = (dataForm: EditNameForm) => {
+
+      console.log(dataForm.avatar)
+      editInfo({
+         avatar: dataForm.avatar ? dataForm.avatar[0] : data.avatar,
+         email: data.email,
+         name: dataForm.name || data.name
+      })
+         .unwrap()
+         .then(() => {
+            toast.success(`Your personal info edited successfully`, successOptions)
+            callBack()
+         })
+         .catch(() => {
+            toast.error('Something went wrong, try again', errorOptions)
+            callBack()
+         })
    }
 
-   const onBackHandler = () => callBack()
+   const onBackHandler = () => {
+      callBack()
+      reset()
+   }
 
    return (
       <Card>
