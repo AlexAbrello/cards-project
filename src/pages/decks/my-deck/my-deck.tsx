@@ -1,7 +1,5 @@
 import { ChangeEvent, FC, useCallback } from 'react'
 
-import { useNavigate } from 'react-router-dom'
-
 import s from './my-deck.module.scss'
 
 import { ContextMenu } from '@/assets/icons/context-menu.tsx'
@@ -17,6 +15,8 @@ import { useDeleteDeckMutation } from '@/services/decks'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
 import { useAppDispatch } from '@/services/store.ts'
 import { useDebounce } from '@/hooks/useDebounce'
+import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card'
+import { DeleteButton } from '@/components/ui/modals/delete-button/delete-button'
 
 type MyDeckProps = {
   data?: DeckCardsResponse
@@ -26,25 +26,21 @@ type MyDeckProps = {
 }
 
 export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentPage }) => {
+
   const [deleteDeck] = useDeleteDeckMutation()
 
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+
+  const description = 'Do you really want to delete this deck and all cards into?'
 
   const setSearchByName = (name: string) => dispatch(cardsSlice.actions.setSearchByName(name))
   const setCurrentPage = (value: number) => dispatch(cardsSlice.actions.setCurrentPage(value))
   const setItemsPerPage = (value: number) => dispatch(cardsSlice.actions.setItemsPerPage(value))
 
-  const onDeleteHandler = (id: string) => {
-    deleteDeck({ id })
-    navigate('/')
-  }
-
   const onSearchHandler = useCallback(useDebounce((e: ChangeEvent<HTMLInputElement>) => {
     setSearchByName(e.target.value)
     setCurrentPage(1)
   }, 700), [dispatch])
-
 
   return (
     <div className={s.wrapper}>
@@ -56,18 +52,11 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
               <Typography.H2>{deckData.name}</Typography.H2>
               <div style={{ marginLeft: '10px' }}>
                 <DropdownComponent trigger={<button><ContextMenu /></button>}>
-                  <div>
-                    <Button to={`/deck/${deckData.id}/learn`} variant={'link'}>
-                      <Typography.Caption>Learn</Typography.Caption>
-                    </Button>
-                  </div>
-                  <div>
-                    <Typography.Caption>Edit</Typography.Caption>
-                    {/*<EditDeckComponent id={deckData.id} />*/}
-                  </div>
-                  <div onClick={() => onDeleteHandler(deckData.id)}>
-                    <Typography.Caption>Delete</Typography.Caption>
-                  </div>
+                  <Button to={`/deck/${deckData.id}/learn`} variant={'link'}>
+                    <Typography.Caption>Learn</Typography.Caption>
+                  </Button>
+                  <EditCardComponent id={deckData.id} />
+                  <DeleteButton id={deckData.id} description={description} callBack={deleteDeck} goHome={true} />
                 </DropdownComponent>
               </div>
             </div>

@@ -10,16 +10,18 @@ import { useGetDeckCardsQuery } from '@/services/cards'
 import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetDeckByIdQuery } from '@/services/decks'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
+import { useMeQuery } from '@/services/auth/auth-api'
 
 export const Deck = () => {
   const { id } = useParams()
+  const { data: userIdificate } = useMeQuery()
 
   const dispatch = useAppDispatch()
 
   const itemsPerPage = useAppSelector(state => state.cardsSlice.itemsPerPage)
   const currentPage = useAppSelector(state => state.cardsSlice.currentPage)
   const searchByName = useAppSelector(state => state.cardsSlice.searchByName)
-  const userId = useAppSelector(state => state.authSlice.userId)
+  const userId = userIdificate?.id || ''
 
   const setDeckId = (id: string) => dispatch(cardsSlice.actions.setDeckId(id))
 

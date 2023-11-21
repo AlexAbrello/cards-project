@@ -85,7 +85,7 @@ export const EditCardComponent: FC<CreateCardProps> = ({ id }) => {
           </Button>
         </div>
       </form>
-      <DialogClose onClick={closeDialogHandler}>
+      <DialogClose onClick={closeDialogHandler} asChild>
         <Button variant={'secondary'} type={'button'}>
           <Typography.Subtitle2>Cancel</Typography.Subtitle2>
         </Button>

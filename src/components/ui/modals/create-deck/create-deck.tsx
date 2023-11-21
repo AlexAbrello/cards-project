@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { errorOptions, successOptions } from '../../notifications/options'
 
+
 const createDeckSchema = z.object({
   name: z.string({ required_error: 'Введите имя для колоды' }).nonempty('Enter deck name'),
   isPrivate: z.boolean().default(false),
@@ -85,7 +86,7 @@ export const CreateDeckComponent = () => {
           </Button>
         </div>
       </form>
-      <DialogClose onClick={closeDialogHandler}>
+      <DialogClose onClick={closeDialogHandler} asChild>
         <Button variant={'secondary'} type={'button'}>
           <Typography.Subtitle2>Cancel</Typography.Subtitle2>
         </Button>

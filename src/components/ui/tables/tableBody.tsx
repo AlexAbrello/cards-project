@@ -7,16 +7,19 @@ import s from '@/components/ui/tables/decks-tables/decks-table.module.scss'
 import { Typography } from '@/components/ui/typography'
 import { useDeleteDeckMutation } from '@/services/decks'
 import { Deck } from '@/services/decks/types.ts'
-import { useAppSelector } from '@/services/store.ts'
 import { DeleteButton } from '../modals/delete-button/delete-button'
+import { useMeQuery } from '@/services/auth/auth-api'
 
 type DecksProps = {
   data: Deck[]
 }
 
 export const TableBody: FC<DecksProps> = ({ data }) => {
+
   const [deleteDeck] = useDeleteDeckMutation()
-  const userId = useAppSelector(state => state.authSlice.userId)
+  const { data: userIndificator } = useMeQuery()
+  
+  const userId = userIndificator?.id
 
   const description = 'Do you really want to delete this deck and all cards into?'
 

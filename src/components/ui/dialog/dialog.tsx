@@ -29,23 +29,17 @@ export const DialogComponent: FC<DialogProps> = ({
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger className={s.dialogTrigger} asChild>
-        {trigger}
-      </Dialog.Trigger>
+      <Dialog.Trigger className={s.dialogTrigger} asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className={s.dialogOverlay} />
         <Dialog.Content className={s.dialogContent}>
-          <Dialog.Title className={s.dialogTitle}>
-            <Typography.H2>{title}</Typography.H2>
-          </Dialog.Title>
-          <Dialog.Description className={s.dialogDescription}>
-            <Typography.Subtitle1>{description}</Typography.Subtitle1>
-          </Dialog.Description>
+          <Dialog.Title className={s.dialogTitle}>{title}</Dialog.Title>
+          <Dialog.Description className={s.dialogDescription}>{description}</Dialog.Description>
           {children}
-          <Dialog.Close onClick={callBack}>
-            <button className={s.iconButton} aria-label="Close">
+          <Dialog.Close onClick={callBack} asChild>
+            <span className={s.iconButton} aria-label="Close">
               <CloseIcon />
-            </button>
+            </span>
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>

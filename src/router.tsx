@@ -81,6 +81,7 @@ export const Router = () => {
   )
 }
 function PrivateRoutes() {
+
   const { data } = useMeQuery()
 
   const isAuthenticated = !!data 
