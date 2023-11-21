@@ -25,7 +25,7 @@ export const SliderComponent = () => {
     setCurrentPage(1)
   }, 700
   ), [minCardsCount, maxCardsCount])
-
+  
   return (
     <div className={s.wrapper}>
       <div className={s.valueWrapper}>
@@ -34,7 +34,7 @@ export const SliderComponent = () => {
       <Slider.Root
         className={s.sliderRoot}
         value={[minCardsCount, maxCardsCount]}
-        max={52}
+        max={61}
         step={1}
         onValueChange={changeValueHandler}
       >

@@ -7,7 +7,7 @@ export const SignInPage = () => {
   const [signIn] = useLoginMutation()
   const { data } = useMeQuery()
 
-  if (data && data?.success !== false) return <Navigate to={'/'} />
+  if (!!data) return <Navigate to={'/'} />
 
   return <SignIn onSubmit={signIn} />
 }

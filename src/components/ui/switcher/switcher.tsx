@@ -6,6 +6,7 @@ import s from './switcher.module.scss'
 
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useAppDispatch, useAppSelector } from '@/services/store.ts'
+import { useMeQuery } from '@/services/auth/auth-api'
 
 type TabsProps = {
   variant?: 'primary'
@@ -14,9 +15,14 @@ type TabsProps = {
 }
 
 export const TabsComponent: FC<TabsProps> = ({ disabled, children }) => {
+
+  const {data} = useMeQuery()
+
   const dispatch = useAppDispatch()
-  const userId = useAppSelector(state => state.authSlice.userId)
+
+  const userId = data && data.id || ''
   const authorId = useAppSelector(state => state.deckSlice.authorId)
+  
   const setCurrentPage = (value: number) => {
     dispatch(decksSlice.actions.setCurrentPage(value))
   }

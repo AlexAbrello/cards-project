@@ -5,7 +5,7 @@ const initialState = {
   currentPage: 1,
   searchByName: '',
   minCardsCount: 0,
-  maxCardsCount: 52,
+  maxCardsCount: 61,
   authorId: '',
 }
 

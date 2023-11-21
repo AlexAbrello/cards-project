@@ -16,6 +16,7 @@ export type TextFieldProps = {
   type?: 'text' | 'search' | 'password' | 'file'
   placeholder?: string
   label?: string
+  defaultValue?: string
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
 } & ComponentProps<'input'>
 
@@ -27,6 +28,7 @@ export const TextField: FC<TextFieldProps> = ({
   placeholder,
   label,
   disabled,
+  defaultValue,
   ...rest
 }) => {
   const showError = !!errorMessage && errorMessage.length > 0
@@ -68,6 +70,7 @@ export const TextField: FC<TextFieldProps> = ({
             placeholder={placeholder}
             className={`${showError && s.error} ${classNames.inputSearch}`}
             disabled={disabled}
+            defaultValue={defaultValue}
             {...rest}
           />
           {type === 'password' ? (

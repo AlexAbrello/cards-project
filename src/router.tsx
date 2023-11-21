@@ -83,17 +83,7 @@ export const Router = () => {
 function PrivateRoutes() {
   const { data } = useMeQuery()
 
-  const dispatch = useAppDispatch()
-  const setUserId = (id: string) => dispatch(authSlice.actions.setUserId(id))
-
-  // const isAuthenticated = data && data?.success !== false
   const isAuthenticated = !!data 
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      setUserId(data.id);
-    }
-  }, [isAuthenticated, data])
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

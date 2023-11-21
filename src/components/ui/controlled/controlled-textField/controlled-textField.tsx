@@ -28,6 +28,7 @@ export const ControlledTextField = <T extends FieldValues>({
       {...{
         onChange,
         id: name,
+        defaultValue,
         ...TextFieldProps,
       }}
       errorMessage={error?.message}

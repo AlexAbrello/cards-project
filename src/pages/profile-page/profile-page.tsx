@@ -1,32 +1,22 @@
-import { LogOut } from "@/assets/icons/log-out"
-import { Avatar, Button, Card } from "@/components/ui"
-import { Typography } from "@/components/ui/typography"
-import { useLogoutMutation, useMeQuery } from "@/services/auth/auth-api"
+import { useMeQuery } from "@/services/auth/auth-api"
+import { useState } from "react"
+import { EditInfo } from "./edit-info/edit-info"
+import { PersonalInfo } from "./personal-info/personal-info"
+
 
 export const Profile = () => {
 
+   const [showInput, setShowInput] = useState(false)
+
    const { data } = useMeQuery()
-   const [logOut] = useLogoutMutation()
+
+   const onChangeHandler = () => setShowInput(!showInput)
 
    return (
       <>
-         {data &&
-            <Card>
-               <div style={{ height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography.H2>Personal Information</Typography.H2>
-                  <Avatar src={data.avatar} size={100}/>
-                  <Typography.Body1>{data.name}</Typography.Body1>
-                  <Typography.Caption>{data.email}</Typography.Caption>
-                  <Button variant={'secondary'} onClick={logOut}>
-                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div style={{ marginRight: '10px' }}>
-                           <LogOut />
-                        </div>
-                        <Typography.Caption>Log Out</Typography.Caption>
-                     </div>
-                  </Button>
-               </div>
-            </Card>}
+         {data && showInput
+            ? <EditInfo data={data} callBack={onChangeHandler} />
+            : <PersonalInfo data={data} callBack={onChangeHandler} />}
       </>
 
    )
