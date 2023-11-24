@@ -15,8 +15,8 @@ import { useDeleteDeckMutation } from '@/services/decks'
 import { DeckCardsResponse, GetDeckByIdResponse } from '@/services/decks/types.ts'
 import { useAppDispatch } from '@/services/store.ts'
 import { useDebounce } from '@/hooks/useDebounce'
-import { EditCardComponent } from '@/components/ui/modals/edit-card/edit-card'
 import { DeleteButton } from '@/components/ui/modals/delete-button/delete-button'
+import { EditDeckComponent } from '@/components/ui/modals/edit-deck'
 
 type MyDeckProps = {
   data?: DeckCardsResponse
@@ -55,7 +55,7 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
                   <Button to={`/deck/${deckData.id}/learn`} variant={'link'}>
                     <Typography.Caption>Learn</Typography.Caption>
                   </Button>
-                  <EditCardComponent id={deckData.id} />
+                  <EditDeckComponent id={deckData.id} />
                   <DeleteButton id={deckData.id} description={description} callBack={deleteDeck} goHome={true} />
                 </DropdownComponent>
               </div>
