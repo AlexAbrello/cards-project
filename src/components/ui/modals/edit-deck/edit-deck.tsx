@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, ReactNode, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogClose } from '@radix-ui/react-dialog'
@@ -21,9 +21,10 @@ export type CreateDeckForm = z.infer<typeof createDeckSchema>
 
 type EditDeckProps = {
   id: string
+  trigger: ReactNode
 }
 
-export const EditDeckComponent: FC<EditDeckProps> = ({ id }) => {
+export const EditDeckComponent: FC<EditDeckProps> = ({ id, trigger }) => {
   const [edit] = useEditDeckMutation()
   const [open, setOpen] = useState<boolean>(false)
   const {
@@ -50,19 +51,7 @@ export const EditDeckComponent: FC<EditDeckProps> = ({ id }) => {
       open={open}
       setOpen={setOpen}
       callBack={closeDialogHandler}
-      trigger={
-        <Button variant={'secondary'} style={{ marginLeft: '5px' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Write />
-          </div>
-        </Button>
-      }
+      trigger={trigger}
       title={'Edit Deck'}
     >
       <form onSubmit={handleSubmit(EditDeck)}>

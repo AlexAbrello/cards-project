@@ -1,8 +1,7 @@
-import { DeleteIcon } from "@/assets/icons/delete-icon"
 import { Button, DialogComponent } from "../.."
 import { Typography } from "../../typography"
 import { DialogClose } from "@radix-ui/react-dialog"
-import { FC, useState } from "react"
+import { FC, ReactNode, useState } from "react"
 import { toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { errorOptions, successOptions } from "../../notifications/options"
@@ -14,16 +13,17 @@ type DeleteButtonProps = {
    id: string
    description: string
    goHome?: boolean
+   trigger: ReactNode
    callBack: MutationTrigger<MutationDefinition<{ id: string; }, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, "Decks" | "Me" | "Cards", void, "baseApi">>
 }
 
-export const DeleteButton: FC<DeleteButtonProps> = ({ id, description, callBack, goHome }) => {
+export const DeleteButton: FC<DeleteButtonProps> = ({ id, description, callBack, goHome, trigger }) => {
 
    const [open, setOpen] = useState<boolean>(false)
    const navigate = useNavigate()
 
    const deleteHandler = () => {
-      callBack({id: id})
+      callBack({ id: id })
          .unwrap()
          .then(() => {
             toast.success(`Successfully`, successOptions)
@@ -33,26 +33,14 @@ export const DeleteButton: FC<DeleteButtonProps> = ({ id, description, callBack,
             toast.error('Something went wrong, try again', errorOptions)
          })
       setOpen(false)
-      
+
    }
    return (
       <DialogComponent
          open={open}
          setOpen={setOpen}
          title={'Delete'}
-         trigger={
-            <Button variant={'secondary'} style={{marginLeft: '5px'}}>
-               <div
-                  style={{
-                     display: 'flex',
-                     alignItems: 'center',
-                     justifyContent: 'center',
-                  }}
-               >
-                  <DeleteIcon />
-               </div>
-            </Button>
-         }
+         trigger={trigger}
       >
          <Typography.Body2>{description}</Typography.Body2>
          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>

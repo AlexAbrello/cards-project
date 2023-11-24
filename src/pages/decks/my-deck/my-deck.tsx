@@ -55,8 +55,12 @@ export const MyDeck: FC<MyDeckProps> = ({ deckData, data, itemsPerPage, currentP
                   <Button to={`/deck/${deckData.id}/learn`} variant={'link'}>
                     <Typography.Caption>Learn</Typography.Caption>
                   </Button>
-                  <EditDeckComponent id={deckData.id} />
-                  <DeleteButton id={deckData.id} description={description} callBack={deleteDeck} goHome={true} />
+                  <EditDeckComponent id={deckData.id} trigger={<Typography.Caption>Edit</Typography.Caption>} />
+                  <DeleteButton id={deckData.id}
+                    description={description}
+                    callBack={deleteDeck}
+                    goHome={true}
+                    trigger={<Typography.Caption>Delete</Typography.Caption>} />
                 </DropdownComponent>
               </div>
             </div>
