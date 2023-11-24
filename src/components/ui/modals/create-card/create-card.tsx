@@ -62,7 +62,7 @@ export const CreateCardComponent: FC<CreateCardProps> = ({ id }) => {
     })
       .unwrap()
       .then(data => {
-        toast.success(`Card ${data.question} id created successfully`, successOptions)
+        toast.success(`Card ${data.question} is created successfully`, successOptions)
       })
       .catch(() => {
         toast.error('Something went wrong, try again', errorOptions)
