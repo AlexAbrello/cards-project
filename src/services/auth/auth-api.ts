@@ -27,6 +27,7 @@ const authApi = baseApi.injectEndpoints({
             body: data,
           }
         },
+        transformErrorResponse: (response: any) => console.log(response),
         invalidatesTags: ['Me'],
       }),
       registration: builder.mutation<RegistrationResponse, RegistrationRequest>({
@@ -66,7 +67,7 @@ const authApi = baseApi.injectEndpoints({
           const formData = new FormData()
 
           args.avatar && formData.append('avatar', args.avatar)
-          
+
           return {
             url: 'v1/auth/me',
             method: 'PATCH',
@@ -79,6 +80,7 @@ const authApi = baseApi.injectEndpoints({
     }
   },
 })
+
 
 export const { useLoginMutation, useMeQuery, useRegistrationMutation, useLogoutMutation, useEditPersonalInfoMutation } = authApi
 

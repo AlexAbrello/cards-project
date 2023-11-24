@@ -15,10 +15,7 @@ import { Decks } from '@/pages/decks/decks.tsx'
 import { Learn } from '@/pages/learn'
 import { PageNotFound } from '@/pages/not-found/not-found.tsx'
 import { useMeQuery } from '@/services/auth/auth-api.ts'
-import { authSlice } from '@/services/auth/auth.slice.ts'
-import { useAppDispatch } from '@/services/store.ts'
 import { Profile } from './pages/profile-page/profile-page'
-import { useEffect } from 'react'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -85,6 +82,7 @@ function PrivateRoutes() {
   const { data } = useMeQuery()
 
   const isAuthenticated = !!data 
+
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
