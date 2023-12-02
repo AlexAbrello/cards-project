@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react'
+// import type { Meta, StoryObj } from '@storybook/react'
 
-import { CheckEmail } from '@/components/auth/check-email-form/check-email-form.tsx'
+// import { CheckEmail } from '@/components/auth/check-email-form/check-email-form.tsx'
 
-const meta = {
-  title: 'Auth/CheckEmail',
-  component: CheckEmail,
-  tags: ['autodocs'],
-} satisfies Meta<typeof CheckEmail>
+// const meta = {
+//   title: 'Auth/CheckEmail',
+//   component: CheckEmail,
+//   tags: ['autodocs'],
+// } satisfies Meta<typeof CheckEmail>
 
-export default meta
-type Story = StoryObj<typeof meta>
+// export default meta
+// type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {}
+// export const Primary: Story = {}

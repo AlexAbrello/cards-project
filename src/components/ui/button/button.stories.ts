@@ -39,14 +39,14 @@ export const Tertiary: Story = {
     disabled: false,
   },
 }
-export const Link: Story = {
-  args: {
-    variant: 'link',
-    children: 'Link that looks like a button',
-    as: 'a',
-    href: 'https://www.google.com/',
-  },
-}
+// export const Link: Story = {
+//   args: {
+//     variant: 'link',
+//     children: 'Link that looks like a button',
+//     as: 'a',
+//     href: 'https://www.google.com/',
+//   },
+// }
 
 export const FullWidth: Story = {
   args: {
