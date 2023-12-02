@@ -7,7 +7,6 @@ import { z } from 'zod'
 
 import s from './edit-deck.module.scss'
 
-import { Write } from '@/assets/icons/write.tsx'
 import { Button, ControlledCheckbox, ControlledTextField, DialogComponent } from '@/components/ui'
 import { Typography } from '@/components/ui/typography'
 import { useEditDeckMutation } from '@/services/decks'

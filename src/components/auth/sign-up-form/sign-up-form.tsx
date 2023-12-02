@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 

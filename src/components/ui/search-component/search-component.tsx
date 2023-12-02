@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useCallback, } from 'react'
 
 import { TextField } from '@/components/ui'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
-import { useAppDispatch, useAppSelector } from '@/services/store.ts'
+import { useAppDispatch } from '@/services/store.ts'
 import { useDebounce } from '@/hooks/useDebounce'
 
 type SearchComponentProps = {

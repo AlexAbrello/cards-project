@@ -5,7 +5,6 @@ import * as Dialog from '@radix-ui/react-dialog'
 import s from './dialog.module.scss'
 
 import { CloseIcon } from '@/assets/icons/close-icon.tsx'
-import { Typography } from '@/components/ui/typography'
 
 type DialogProps = {
   trigger: ReactNode
