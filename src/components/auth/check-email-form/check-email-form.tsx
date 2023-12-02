@@ -16,7 +16,7 @@ export const CheckEmail: FC<CheckEmailProps> = ({ email = 'example@mail.com' }) 
       <Typography.Body2 style={{ color: '#4C4C4C', textAlign: 'center' }}>
         We’ve sent an Email with instructions to {email}
       </Typography.Body2>
-      <Button as={'a'} href="#" fullWidth={true}>
+      <Button to={'/login'} fullWidth={true}>
         <Typography.Subtitle2>Back to Sign In</Typography.Subtitle2>
       </Button>
     </Card>
