@@ -58,7 +58,7 @@ export const DecksTable = () => {
                   <div>20</div>
                   <div>30</div>
                 </SelectComponent>
-                <span> elements on page</span>
+                <span> elements on page </span>
               </div>
             </div>
           </>
